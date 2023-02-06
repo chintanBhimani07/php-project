@@ -15,5 +15,14 @@ if($action == 'login_application_user'){
     }
 }
 
+if($action == 'save_employee'){
+    $new_employee = $task->employee_add();
+    if($new_employee){
+        echo $new_employee;
+    }
+}
+
+
+
 
 ?>

@@ -3,9 +3,9 @@ include './config/db.config.php';
 
 session_start();
 // session_destroy();
-if (!isset($_SESSION['login_id'])) {
-    header('location:./user-login.php');
-}
+// if (!isset($_SESSION['login_id'])) {
+//     header('location:./user-login.php');
+// }
 $page = (isset($_GET['page']) ? $_GET['page'] : 'home');
 $_SESSION['title'] = $page;
 

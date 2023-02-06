@@ -3,7 +3,7 @@
 $host="localhost";
 $username="root";
 $password="";
-$database="project-v1";
+$database="php-master";
 
 $con = new mysqli($host,$username,$password,$database)or die("Could not connect to mysql".mysqli_error($conn));
 

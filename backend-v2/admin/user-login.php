@@ -8,7 +8,6 @@ include "./config/db.config.php";
 if (isset($_SESSION['login_id'])) {
     header("location: ./index.php?page=home");
 }
-
 ?>
 
 <?php include './head.components.php' ?>
@@ -48,7 +47,6 @@ if (isset($_SESSION['login_id'])) {
 </style>
 
 <body class="text-center">
-
     <main class="form-signin w-100 m-auto">
         <form action="" id="login">
             <img class="mb-4" src="./assets/img/login.png" alt="Img" width="150" height="150">
@@ -94,7 +92,7 @@ if (isset($_SESSION['login_id'])) {
                     } else {
                         console.log(resp);
                         $('#form-field').prepend(`
-              <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              <div class="alert alert-danger fade show" role="alert">
               <strong>Username and Password</strong> are incorrect.
               </div>
               `);
