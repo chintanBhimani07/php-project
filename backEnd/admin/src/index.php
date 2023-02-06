@@ -19,6 +19,7 @@ include './head.components.php'
   } else {
     include $page . '.php';
   }
+
   include './footer.components.php'
   ?>
 </body>
