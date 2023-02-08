@@ -10,7 +10,7 @@ $page = (isset($_GET['page']) ? $_GET['page'] : 'home');
 $_SESSION['title'] = $page;
 
 include './head.components.php';
-include 'layout-top.components.php';
+include './layout-top.components.php';
 
 if (!file_exists($page . '.php')) {
     include '404.php';
@@ -18,7 +18,7 @@ if (!file_exists($page . '.php')) {
     include $page . '.php';
 }
 
-include 'layout-bottom.components.php';
+include './layout-bottom.components.php';
 
-include 'bottom.components.php';
+include './bottom.components.php';
 ?>

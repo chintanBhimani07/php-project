@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <label for="emp_mob" class="col-form-label mr-1">Mobile No.</label><span class="text-danger">*</span>
-                                <input type="tel" class="form-control" id="emp_mob" name="emp_mob">
+                                <input type="tel" class="form-control" id="emp_mob" name="emp_mob" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group">
@@ -95,7 +95,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="emp_profile_pic" class="col-form-label mr-1">Profile Picture</label><span class="text-danger">*</span>
+                            <label for="emp_profile_pic" class="col-form-label mr-1">Profile Picture</label>
                             <input type="file" class="custom-file" id="emp_profile_pic" name="emp_profile_pic" autocomplete="off" onchange="preview()">
                             <img id="thumb" src="" width="100px" />
                         </div>

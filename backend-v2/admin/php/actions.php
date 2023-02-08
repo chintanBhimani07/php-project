@@ -22,6 +22,19 @@ if($action == 'save_employee'){
     }
 }
 
+if($action == 'delete_employee'){
+    $delete_employee = $task->employee_delete();
+    if($delete_employee){
+        echo $delete_employee;
+    }
+}
+
+if($action == 'edit_employee'){
+    $edit_employee = $task->employee_edit();
+    if($edit_employee){
+        echo $edit_employee;
+    }
+}
 
 
 
