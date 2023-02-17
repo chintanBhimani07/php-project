@@ -2,7 +2,7 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">New Employee</h1>
-        <a href="./index.php?page=employee-list" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-list fa-sm text-white mr-2"></i>Employee</a>
+        <a href="./index.php?page=employee-dashboard" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-list fa-sm text-white mr-2"></i>Employee</a>
     </div>
 
     <div class="row add-employee-form">
@@ -104,7 +104,7 @@
                                 <button class="btn btn-primary btn-user btn-block">Submit Details</button>
                             </div>
                             <div class="col-sm-6">
-                                <a href="./index.php?page=employee-list" class="btn btn-warning btn-user btn-block text-dark">Back to Employees List</a>
+                                <a href="./index.php?page=employee-dashboard" class="btn btn-warning btn-user btn-block text-dark">Back to Employees List</a>
                             </div>
                         </div>
 

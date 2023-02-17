@@ -6,7 +6,7 @@ while ($row = $qry->fetch_assoc()) { ?>
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Employee Update</h1>
-            <a href="./index.php?page=employee-list" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-list fa-sm text-white mr-2"></i>Employee</a>
+            <a href="./index.php?page=employee-dashboard" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-list fa-sm text-white mr-2"></i>Employee</a>
         </div>
 
         <div class="row add-employee-form">
@@ -111,7 +111,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                                     <button class="btn btn-primary btn-user btn-block">Submit Details</button>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="./index.php?page=employee-list" class="btn btn-warning btn-user btn-block text-dark">Back to Employees List</a>
+                                    <a href="./index.php?page=employee-dashboard" class="btn btn-warning btn-user btn-block text-dark">Back to Employees List</a>
                                 </div>
                             </div>
 
@@ -148,7 +148,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                     `);
-                        window.location = './index.php?action=employee-list'
+                        window.location = './index.php?action=employee-dashboard'
                     } else {
                         $('#add-employee-form').append(`
                         <div class="alert alert-danger fade show" role="alert">

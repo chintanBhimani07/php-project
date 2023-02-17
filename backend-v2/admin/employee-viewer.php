@@ -6,7 +6,7 @@ while ($row = $qry->fetch_assoc()) { ?>
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800"><?php echo $row['emp_first_name'] . " " . $row['emp_last_name']; ?></h1>
-            <a href="./index.php?page=employee-list" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-list fa-sm text-white mr-2"></i>Employee</a>
+            <a href="./index.php?page=employee-dashboard" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-list fa-sm text-white mr-2"></i>Employee</a>
         </div>
 
         <div class="row">

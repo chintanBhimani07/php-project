@@ -1,7 +1,7 @@
 <div id="wrapper">
     <!-- sidebar -->
-    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="main_dashboard">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="./index.php?page=home">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fa-solid fa-building-columns"></i>
             </div>
@@ -18,48 +18,47 @@
             Interface
         </div> -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#employee_dashboard" aria-expanded="true" aria-controls="employee_controls">
                 <i class="fas fa-fw fa-users-gear"></i>
                 <span>Employee</span>
             </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="employee_dashboard" class="collapse" aria-labelledby="employee_lable" data-parent="#main_dashboard">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="./index.php?page=employee-list">All Employees</a>
+                    <a class="collapse-item" href="./index.php?page=employee-dashboard">All Employees</a>
                     <a class="collapse-item" href="./index.php?page=employee-new">New Employee</a>
                 </div>
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#project_dashboard" aria-expanded="true" aria-controls="project_controls">
                 <i class="fa-solid fa-list-check"></i>
                 <span>Projects</span>
             </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div id="project_dashboard" class="collapse" aria-labelledby="project_lable" data-parent="#main_dashboard">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Custom Utilities:</h6>
-                    <a class="collapse-item" href="utilities-color.html">Colors</a>
-                    <a class="collapse-item" href="utilities-border.html">Borders</a>
-                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                    <a class="collapse-item" href="utilities-other.html">Other</a>
                 </div>
             </div>
         </li>
         <hr class="sidebar-divider">
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#work_collect_dashboard" aria-expanded="true" aria-controls="work_collect_controls">
                 <i class="fa-brands fa-stack-exchange"></i>
                 <span>Work Collector</span>
             </a>
-            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div id="work_collect_dashboard" class="collapse" aria-labelledby="work_collect_lable" data-parent="#main_dashboard">
                 <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Login Screens:</h6>
-                    <a class="collapse-item" href="login.html">Login</a>
-                    <a class="collapse-item" href="register.html">Register</a>
-                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                    <div class="collapse-divider"></div>
-                    <h6 class="collapse-header">Other Pages:</h6>
-                    <a class="collapse-item" href="404.html">404 Page</a>
-                    <a class="collapse-item" href="blank.html">Blank Page</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#department_dashboard" aria-expanded="true" aria-controls="department_controls">
+                <i class="fa-solid fa-list-check"></i>
+                <span>Departments</span>
+            </a>
+            <div id="department_dashboard" class="collapse" aria-labelledby="department_lable" data-parent="#main_dashboard">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="./index.php?page=department-dashboard">Dashboard</a>
+                    <a class="collapse-item" href="./index.php?page=department-new">Add Department</a>
                 </div>
             </div>
         </li>

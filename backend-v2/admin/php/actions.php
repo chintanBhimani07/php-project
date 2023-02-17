@@ -36,6 +36,13 @@ if($action == 'edit_employee'){
     }
 }
 
+if($action == 'save_department'){
+    $edit_department = $task->department_add();
+    if($edit_department){
+        echo $edit_department;
+    }
+}
+
 
 
 ?>

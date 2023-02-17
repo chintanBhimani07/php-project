@@ -118,4 +118,27 @@ class Controller
             return $query;
         }
     }
+
+    public function department_add(){
+        extract($_POST);
+        $id = $this->guidV4();
+        $data = "department_id='$id'";
+        foreach ($_POST as $k => $v) {
+            if (!in_array($k, array('department_id', 'password')) && !is_numeric($k)) {
+                if ($v != '0000-00-00' || !empty($v)) {
+                    $data .= ", $k='$v' ";
+                }
+            }
+        }
+        $checkRowExists = $this->db->query("SELECT * FROM departments where department_name ='$department_name' ")->num_rows;
+        if ($checkRowExists > 0) {
+            return 2;
+        } else {
+            // $save = $this->db->query("INSERT INTO employees SET emp_id='$id', emp_first_name='$emp_first_name', emp_last_name='$emp_last_name', emp_description='$emp_description', emp_gender='$emp_gender', emp_dob='$emp_dob', emp_mob=$emp_mob, emp_email='$emp_email', emp_address='$emp_address', emp_department='$emp_department', emp_designation='$emp_designation', emp_hod_name='$emp_hod_name', emp_joining_date='$emp_joining_date', emp_confirmation_date='$emp_confirmation_date', emp_leaving_date='$emp_leaving_date', emp_working_hours='$emp_working_hours', emp_profile_pic='$fname'");
+            $query = $this->db->query("INSERT INTO departments SET $data");
+        }
+        if ($query) {
+            return $query;
+        }
+    }
 }
