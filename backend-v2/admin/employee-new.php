@@ -57,20 +57,31 @@
                         <div class="form-group">
                             <label for="emp_department" class="col-form-label mr-1">Department</label><span class="text-danger">*</span>
                             <select class="form-control custom-select" id="emp_department" name="emp_department">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Other">Other</option>
+                                <option value="Admin">Admin</option>
+                                <option value="IT">IT</option>
+                                <option value="MDO">MDO</option>
+                                <option value="Architecture">Architecture</option>
+                                <option value="Engineer">Engineer</option>
+                                <option value="Interior">Interior</option>
+                                <option value="Finance">Finance</option>
                             </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="emp_hod_name" class="col-form-label mr-1">Hade Of Department</label><span class="text-danger">*</span>
-                            <input type="text" class="form-control" id="emp_hod_name" name="emp_hod_name" autocomplete="off" >
                         </div>
                         <div class="form-group">
                             <label for="emp_designation" class="col-form-label mr-1">Designation</label><span class="text-danger">*</span>
                             <select class="form-control custom-select" id="emp_designation" name="emp_designation">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
+                                <option value="Administrator">Administrator</option>
+                                <option value="HOD">HOD</option>
+                                <option value="Junior Developer">Junior Developer</option>
+                                <option value="Junior Architecture">Junior Interior</option>
+                                <option value="Junior Interior">Junior Architecture</option>
+                                <option value="Senior Developer">Senior Developer</option>
+                                <option value="Senior Architecture">Senior Architecture</option>
+                                <option value="Senior Interior">Senior Interior</option>
+                                <option value="Engineer">Engineer</option>
+                                <option value="Driver">Driver</option>
+                                <option value="Staff">Staff</option>
+                                <option value="Intern">Intern</option>
+                                <option value="MDO Staff">MDO Staff</option>
                                 <option value="Other">Other</option>
                             </select>
                         </div>
@@ -116,7 +127,6 @@
 </div>
 
 <script>
-    
     function preview() {
         thumb.src = URL.createObjectURL(event.target.files[0]);
     }
@@ -132,23 +142,12 @@
                 method: 'POST',
                 type: 'POST',
                 success: function(resp) {
-                    console.log(resp);
                     if (resp == 1) {
-                        $('#add-employee-form').append(`
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Data Updated Successfully</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    `);
                         setTimeout(() => {
                             location.reload();
                         }, 3000);
                     } else {
-                        $('#add-employee-form').append(`
-                        <div class="alert alert-danger fade show" role="alert">
-                            <strong>Data Updated Unsuccessfully</strong>
-                        </div>
-                    `);
+                        console.log(resp);
                     }
                 }
             })

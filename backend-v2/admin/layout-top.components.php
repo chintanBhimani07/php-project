@@ -59,6 +59,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="./index.php?page=department-dashboard">Dashboard</a>
                     <a class="collapse-item" href="./index.php?page=department-new">Add Department</a>
+                    <a class="collapse-item" href="./index.php?page=hod-dashboard">Head Of Department</a>
                 </div>
             </div>
         </li>

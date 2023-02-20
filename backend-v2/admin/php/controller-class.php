@@ -63,6 +63,15 @@ class Controller
                 }
             }
         }
+        if ($emp_designation != 'HOD') {
+            $qry = $this->db->query("SELECT emp_hod_name FROM employees WHERE emp_designation='HOD';");
+            while ($row = $qry->fetch_assoc()) {
+                $hod = $row['emp_hod_name'];
+                $data .= ", emp_hod_name='$hod' ";
+            }
+        } else {
+            $data .= ", emp_hod_name='' ";
+        }
         $checkRowExists = $this->db->query("SELECT * FROM employees where emp_email ='$emp_email' ")->num_rows;
         if ($checkRowExists > 0) {
             return 2;
@@ -87,6 +96,15 @@ class Controller
         extract($_POST);
         $query = $this->db->query("DELETE FROM employees where emp_id ='$emp_id'");
         if ($query) {
+            $deletePic = $this->db->query("SELECT emp_profile_pic FROM employees WHERE emp_id = '$emp_id'");
+            while ($row = $deletePic->fetch_assoc()) {
+                $fileName = $row['emp_profile_pic'];
+                if (file_exists('../assets/uploads/' . $fileName)) {
+                    unlink('../assets/uploads/' . $fileName);
+                }
+            }
+
+            $deleteHod = $this->db->query("DELETE FROM hod WHERE emp_id='$emp_id'");
             return 1;
         }
     }
@@ -96,18 +114,27 @@ class Controller
         extract($_POST);
         $data = "";
         foreach ($_POST as $k => $v) {
-            if (!in_array($k, array('emp_id', 'password','oldFile')) && !is_numeric($k)) {
+            if (!in_array($k, array('emp_id', 'password', 'oldFile')) && !is_numeric($k)) {
                 if ($v != '0000-00-00' || !empty($v)) {
                     $data .= ", $k='$v' ";
                 }
             }
         }
+        if ($emp_designation != 'HOD') {
+            $qry = $this->db->query("SELECT emp_hod_name FROM employees WHERE emp_designation='HOD';");
+            while ($row = $qry->fetch_assoc()) {
+                $hod = $row['emp_hod_name'];
+                $data .= ", emp_hod_name='$hod' ";
+            }
+        } else {
+            $data .= ", emp_hod_name='' ";
+        }
         if (isset($_FILES['emp_profile_pic']) && $_FILES['emp_profile_pic']['tmp_name'] != '') {
             $fname = strtotime(date('y-m-d H:i')) . '_' . $_FILES['emp_profile_pic']['name'];
             $data .= ", emp_profile_pic='$fname'";
             $move = move_uploaded_file($_FILES['emp_profile_pic']['tmp_name'], '../assets/uploads/' . $fname);
-            if(file_exists('../assets/uploads/'.$oldFile)){
-                unlink('../assets/uploads/'.$oldFile);
+            if (file_exists('../assets/uploads/' . $oldFile)) {
+                unlink('../assets/uploads/' . $oldFile);
             }
         } else {
             $fname = 'default_user.jpg';
@@ -119,7 +146,8 @@ class Controller
         }
     }
 
-    public function department_add(){
+    public function department_add()
+    {
         extract($_POST);
         $id = $this->guidV4();
         $data = "department_id='$id'";
@@ -130,6 +158,7 @@ class Controller
                 }
             }
         }
+
         $checkRowExists = $this->db->query("SELECT * FROM departments where department_name ='$department_name' ")->num_rows;
         if ($checkRowExists > 0) {
             return 2;
@@ -139,6 +168,53 @@ class Controller
         }
         if ($query) {
             return $query;
+        }
+    }
+
+    public function department_delete()
+    {
+        extract($_POST);
+        $query = $this->db->query("DELETE FROM departments where department_id ='$department_id'");
+        if ($query) {
+            return 1;
+        }
+    }
+
+
+    public function hod_add()
+    {
+        extract($_POST);
+        $id = $this->guidV4();
+        $data = "hod_id='$id'";
+
+        $qry = $this->db->query("SELECT emp_first_name,emp_last_name FROM employees WHERE emp_id='$hod_name';");
+        while ($row = $qry->fetch_assoc()) {
+            $first = $row['emp_first_name'];
+            $last = $row['emp_last_name'];
+            $data .= ", hod_first_name='$first' ";
+            $data .= ", hod_last_name='$last' ";
+        }
+        $data .= ", department_id='$department_name' ";
+        $data .= ", emp_id='$hod_name' ";
+
+        $checkRowExists = $this->db->query("SELECT * FROM hod where hod_id ='$hod_name' ")->num_rows;
+        if ($checkRowExists > 0) {
+            return 2;
+        } else {
+            // $save = $this->db->query("INSERT INTO employees SET emp_id='$id', emp_first_name='$emp_first_name', emp_last_name='$emp_last_name', emp_description='$emp_description', emp_gender='$emp_gender', emp_dob='$emp_dob', emp_mob=$emp_mob, emp_email='$emp_email', emp_address='$emp_address', emp_department='$emp_department', emp_designation='$emp_designation', emp_hod_name='$emp_hod_name', emp_joining_date='$emp_joining_date', emp_confirmation_date='$emp_confirmation_date', emp_leaving_date='$emp_leaving_date', emp_working_hours='$emp_working_hours', emp_profile_pic='$fname'");
+            $query = $this->db->query("INSERT INTO hod SET $data");
+        }
+        if ($query) {
+            return $query;
+        }
+    }
+
+    public function hod_delete()
+    {
+        extract($_POST);
+        $query = $this->db->query("DELETE FROM hod where hod_id ='$hod_id   '");
+        if ($query) {
+            return 1;
         }
     }
 }

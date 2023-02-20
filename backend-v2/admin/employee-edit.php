@@ -8,7 +8,6 @@ while ($row = $qry->fetch_assoc()) { ?>
             <h1 class="h3 mb-0 text-gray-800">Employee Update</h1>
             <a href="./index.php?page=employee-dashboard" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-list fa-sm text-white mr-2"></i>Employee</a>
         </div>
-
         <div class="row add-employee-form">
             <div class="col-xl-12 col-lg-7">
                 <div class="card shadow mb-4">
@@ -62,20 +61,31 @@ while ($row = $qry->fetch_assoc()) { ?>
                             <div class="form-group">
                                 <label for="emp_department" class="col-form-label mr-1">Department</label><span class="text-danger">*</span>
                                 <select class="form-control custom-select" id="emp_department" name="emp_department">
-                                    <option value="Male" <?php echo ($row['emp_department'] == 'Male') ? 'selected' : '' ?>>Male</option>
-                                    <option value="Female" <?php echo ($row['emp_department'] == 'Female') ? 'selected' : '' ?>>Female</option>
-                                    <option value="Other" <?php echo ($row['emp_department'] == 'Other') ? 'selected' : '' ?>>Other</option>
+                                    <option value="0">Select Department</option>
+                                    <?php
+                                    $index = 1;
+                                    $q = $con->query("SELECT department_name FROM departments GROUP BY department_name");
+                                    while ($r = $q->fetch_assoc()) { ?>
+                                        <option value="<?php echo $r['department_name'] ?>" <?php echo ($row['emp_department'] == $r['department_name']) ? 'selected' : '' ?>><?php echo $r['department_name']; ?></option>
+                                    <?php } ?>
                                 </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="emp_hod_name" class="col-form-label mr-1">Hade Of Department</label><span class="text-danger">*</span>
-                                <input type="text" class="form-control" id="emp_hod_name" name="emp_hod_name" autocomplete="off" value="<?php echo $row['emp_hod_name'] ?>">
                             </div>
                             <div class="form-group">
                                 <label for="emp_designation" class="col-form-label mr-1">Designation</label><span class="text-danger">*</span>
                                 <select class="form-control custom-select" id="emp_designation" name="emp_designation">
-                                    <option value="Male" <?php echo ($row['emp_designation'] == 'Male') ? 'selected' : '' ?>>Male</option>
-                                    <option value="Female" <?php echo ($row['emp_designation'] == 'Female') ? 'selected' : '' ?>>Female</option>
+                                    <option value="Administrator" <?php echo ($row['emp_designation'] == 'Administrator') ? 'selected' : '' ?>>Administrator</option>
+                                    <option value="HOD" <?php echo ($row['emp_designation'] == 'HOD') ? 'selected' : '' ?>>HOD</option>
+                                    <option value="Junior Developer" <?php echo ($row['emp_designation'] == 'Junior Developer') ? 'selected' : '' ?>>Junior Developer</option>
+                                    <option value="Junior Architecture" <?php echo ($row['emp_designation'] == 'Junior Architecture') ? 'selected' : '' ?>>Junior Architecture</option>
+                                    <option value="Junior Interior" <?php echo ($row['emp_designation'] == 'Junior Interior') ? 'selected' : '' ?>>Junior Interior</option>
+                                    <option value="Senior Developer" <?php echo ($row['emp_designation'] == 'Senior Developer') ? 'selected' : '' ?>>Senior Developer</option>
+                                    <option value="Senior Architecture" <?php echo ($row['emp_designation'] == 'Senior Architecture') ? 'selected' : '' ?>>Senior Architecture</option>
+                                    <option value="Senior Interior" <?php echo ($row['emp_designation'] == 'Senior Interior') ? 'selected' : '' ?>>Senior Interior</option>
+                                    <option value="Engineer" <?php echo ($row['emp_designation'] == 'Engineer') ? 'selected' : '' ?>>Engineer</option>
+                                    <option value="Driver" <?php echo ($row['emp_designation'] == 'Driver') ? 'selected' : '' ?>>Driver</option>
+                                    <option value="Staff" <?php echo ($row['emp_designation'] == 'Staff') ? 'selected' : '' ?>>Staff</option>
+                                    <option value="Intern" <?php echo ($row['emp_designation'] == 'Intern') ? 'selected' : '' ?>>Intern</option>
+                                    <option value="MDO Staff" <?php echo ($row['emp_designation'] == 'MDO Staff') ? 'selected' : '' ?>>MDO Staff</option>
                                     <option value="Other" <?php echo ($row['emp_designation'] == 'Other') ? 'selected' : '' ?>>Other</option>
                                 </select>
                             </div>
@@ -140,21 +150,14 @@ while ($row = $qry->fetch_assoc()) { ?>
                 method: 'POST',
                 type: 'POST',
                 success: function(resp) {
-                    console.log(resp);
                     if (resp == 1) {
-                        $('#add-employee-form').append(`
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Data Updated Successfully</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    `);
-                        window.location = './index.php?action=employee-dashboard'
+                        setTimeout(() => {
+                            // location.reload();
+                            window.location = './index.php?page=employee-dashboard';
+                        }, 3000);
                     } else {
-                        $('#add-employee-form').append(`
-                        <div class="alert alert-danger fade show" role="alert">
-                            <strong>Data Updated Unsuccessfully</strong>
-                        </div>
-                    `);
+                        console.log(resp);
+
                     }
                 }
             })

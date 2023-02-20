@@ -43,6 +43,27 @@ if($action == 'save_department'){
     }
 }
 
+if($action == 'delete_department'){
+    $delete_department = $task->department_delete();
+    if($delete_department){
+        echo $delete_department;
+    }
+}
+
+if($action == 'save_hod'){
+    $save_hod = $task->hod_add();
+    if($save_hod){
+        echo $save_hod;
+    }
+}
+
+if($action == 'delete_hod'){
+    $delete_hod = $task->hod_delete();
+    if($delete_hod){
+        echo $delete_hod;
+    }
+}
+
 
 
 ?>
