@@ -154,7 +154,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                         setTimeout(() => {
                             // location.reload();
                             window.location = './index.php?page=employee-dashboard';
-                        }, 3000);
+                        }, 1000);
                     } else {
                         console.log(resp);
 

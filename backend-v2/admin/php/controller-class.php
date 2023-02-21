@@ -31,7 +31,7 @@ class Controller
         $data[8] = chr(ord($data[8]) & 0x3f | 0x80);
 
         // Output the 36 character UUID.
-        return vsprintf('%s%s-%s-%s-%s-%s%s%s', str_split(bin2hex($data), 4));
+        return vsprintf('%s%s%s%s%s%s%s%s', str_split(bin2hex($data), 4));
     }
 
 
@@ -51,43 +51,132 @@ class Controller
         }
     }
 
-    public function employee_add()
+    public function user_save($para)
     {
         extract($_POST);
-        $id = $this->guidV4();
-        $data = "emp_id='$id'";
+        $user_data = '';
+        if ($para == 'insert') {
+            $userId = $this->guidV4();
+            $user_data = "user_id='$userId'";
+        } else if ($para == 'update') {
+            $user_data = "user_id='$user_id'";
+        }
         foreach ($_POST as $k => $v) {
-            if (!in_array($k, array('emp_id', 'password')) && !is_numeric($k)) {
+            if (!in_array($k, array('user_id', 'user_password','emp_id')) && !is_numeric($k)) {
+                $user_data .= ", $k='$v' ";
+            }
+        }
+        if (!empty($user_password)) {
+            $empId = $this->db->query("SELECT emp_id FROM employees WHERE emp_email='$user_email';");
+            while($r = $empId->fetch_assoc()){
+                $id = $r['emp_id'];
+                $user_data .= ", emp_id='$id' ";
+            }
+			$user_data .= ", user_password=md5('$user_password') ";
+		}
+
+        if ($para == 'insert') {
+            $checkUserExists = $this->db->query("SELECT user_email FROM users where user_email ='$user_email' ")->num_rows;
+            if ($checkUserExists == 0) {
+                $insertuser = $this->db->query("INSERT INTO users SET $user_data");
+                if($insertuser){
+                    return $insertuser;
+                }
+            }
+        }
+    }
+
+    public function user_delete(){
+        extract($_POST);
+        $qry=$this->db->query("DELETE FROM users WHERE user_id='$user_id'");
+        if($qry){
+            return $qry;
+        }
+    }
+
+    public function employee_add($para)
+    {
+        extract($_POST);
+        $emp_data = '';
+        if ($para == 'insert') {
+            $empId = $this->guidV4();
+            $emp_data = "emp_id='$empId'";
+        } else if ($para == 'update') {
+            $emp_data = "emp_id='$emp_id'";
+        }
+        foreach ($_POST as $k => $v) {
+            if (!in_array($k, array('oldFile', 'password')) && !is_numeric($k)) {
                 if ($v != '0000-00-00' || !empty($v)) {
-                    $data .= ", $k='$v' ";
+                    $emp_data .= ", $k='$v' ";
                 }
             }
         }
         if ($emp_designation != 'HOD') {
-            $qry = $this->db->query("SELECT emp_hod_name FROM employees WHERE emp_designation='HOD';");
-            while ($row = $qry->fetch_assoc()) {
-                $hod = $row['emp_hod_name'];
-                $data .= ", emp_hod_name='$hod' ";
+            $getHod = $this->db->query("SELECT hod_first_name,hod_last_name FROM hod WHERE department_name='$emp_department';");
+            while ($row = $getHod->fetch_assoc()) {
+                $hod = $row['hod_first_name'] . " " . $row['hod_last_name'];
+                $emp_data .= ", emp_hod_name='$hod' ";
             }
         } else {
-            $data .= ", emp_hod_name='' ";
+            $emp_data .= ", emp_hod_name='' ";
         }
-        $checkRowExists = $this->db->query("SELECT * FROM employees where emp_email ='$emp_email' ")->num_rows;
-        if ($checkRowExists > 0) {
-            return 2;
-        } else {
+        if ($para == 'insert') {
+            $checkEmpExists = $this->db->query("SELECT * FROM employees where emp_email ='$emp_email' ")->num_rows;
+            if ($checkEmpExists == 0) {
+                if (isset($_FILES['emp_profile_pic']) && $_FILES['emp_profile_pic']['tmp_name'] != '') {
+                    $fname = strtotime(date('y-m-d H:i')) . '_' . $_FILES['emp_profile_pic']['name'];
+                    $emp_data .= ", emp_profile_pic='$fname'";
+                    $move = move_uploaded_file($_FILES['emp_profile_pic']['tmp_name'], '../assets/uploads/' . $fname);
+                } else {
+                    $fname = 'default_user.jpg';
+                }
+                // $save = $this->db->query("INSERT INTO employees SET emp_id='$id', emp_first_name='$emp_first_name', emp_last_name='$emp_last_name', emp_description='$emp_description', emp_gender='$emp_gender', emp_dob='$emp_dob', emp_mob=$emp_mob, emp_email='$emp_email', emp_address='$emp_address', emp_department='$emp_department', emp_designation='$emp_designation', emp_hod_name='$emp_hod_name', emp_joining_date='$emp_joining_date', emp_confirmation_date='$emp_confirmation_date', emp_leaving_date='$emp_leaving_date', emp_working_hours='$emp_working_hours', emp_profile_pic='$fname'");
+                $insertEmp = $this->db->query("INSERT INTO employees SET $emp_data");
+                if ($insertEmp) {
+                    $hodId = $this->guidV4();
+                    if ($emp_designation == 'HOD') {
+                        $addHod = $this->db->query("INSERT INTO hod SET hod_id='$hodId', hod_first_name='$emp_first_name', hod_last_name='$emp_last_name', department_name='$emp_department', emp_id='$empId' ");
+                        if ($addHod) {
+                            return $insertEmp;
+                        }
+                    } else {
+                        return 1;
+                    }
+                } else {
+                    return 2;
+                }
+            }
+        }
+        if ($para == 'update') {
             if (isset($_FILES['emp_profile_pic']) && $_FILES['emp_profile_pic']['tmp_name'] != '') {
                 $fname = strtotime(date('y-m-d H:i')) . '_' . $_FILES['emp_profile_pic']['name'];
-                $data .= ", emp_profile_pic='$fname'";
+                if (file_exists('../assets/uploads/' . $oldFile)) {
+                    unlink('../assets/uploads/' . $oldFile);
+                }
                 $move = move_uploaded_file($_FILES['emp_profile_pic']['tmp_name'], '../assets/uploads/' . $fname);
+                $emp_data .= ", emp_profile_pic='$fname'";
             } else {
                 $fname = 'default_user.jpg';
             }
-            // $save = $this->db->query("INSERT INTO employees SET emp_id='$id', emp_first_name='$emp_first_name', emp_last_name='$emp_last_name', emp_description='$emp_description', emp_gender='$emp_gender', emp_dob='$emp_dob', emp_mob=$emp_mob, emp_email='$emp_email', emp_address='$emp_address', emp_department='$emp_department', emp_designation='$emp_designation', emp_hod_name='$emp_hod_name', emp_joining_date='$emp_joining_date', emp_confirmation_date='$emp_confirmation_date', emp_leaving_date='$emp_leaving_date', emp_working_hours='$emp_working_hours', emp_profile_pic='$fname'");
-            $query = $this->db->query("INSERT INTO employees SET $data");
-        }
-        if ($query) {
-            return $query;
+            // $updateEmp = $this->db->query("UPDATE employees SET emp_first_name='$emp_first_name', emp_last_name='$emp_last_name', emp_description='$emp_description', emp_gender='$emp_gender', emp_dob='$emp_dob', emp_mob=$emp_mob, emp_email='$emp_email', emp_address='$emp_address', emp_department='$emp_department', emp_designation='$emp_designation', emp_hod_name='$emp_hod_name', emp_joining_date='$emp_joining_date', emp_confirmation_date='$emp_confirmation_date', emp_leaving_date='$emp_leaving_date', emp_working_hours='$emp_working_hours', emp_profile_pic='$fname' WHERE emp_id='$emp_id'");
+            $updateEmp = $this->db->query("UPDATE employees SET $emp_data WHERE emp_id='$emp_id'");
+            if ($updateEmp) {
+                $hodId = $this->guidV4();
+                if ($emp_designation == 'HOD') {
+                    $addHod = $this->db->query("INSERT INTO hod SET hod_id='$hodId', hod_first_name='$emp_first_name', hod_last_name='$emp_last_name', department_name='$emp_department', emp_id='$emp_id' ");
+                    if ($addHod) {
+                        return $updateEmp;
+                    }
+                } else {
+                    $deleteHod = $this->db->query("DELETE FROM hod WHERE emp_id='$emp_id' ");
+                    if ($deleteHod) {
+                        return $updateEmp;
+                    }
+                    // return 2;
+                }
+            } else {
+                return $updateEmp;
+            }
         }
     }
 
@@ -103,118 +192,55 @@ class Controller
                     unlink('../assets/uploads/' . $fileName);
                 }
             }
-
             $deleteHod = $this->db->query("DELETE FROM hod WHERE emp_id='$emp_id'");
             return 1;
         }
     }
 
-    public function employee_edit()
+    public function client_add($para)
     {
         extract($_POST);
-        $data = "";
+        $client_data = '';
+        if ($para == 'insert') {
+            $clientId = $this->guidV4();
+            $client_data = "client_id='$clientId'";
+        } else if ($para == 'update') {
+            $client_data = "client_id='$client_id'";
+        }
         foreach ($_POST as $k => $v) {
-            if (!in_array($k, array('emp_id', 'password', 'oldFile')) && !is_numeric($k)) {
+            if (!in_array($k, array('password')) && !is_numeric($k)) {
                 if ($v != '0000-00-00' || !empty($v)) {
-                    $data .= ", $k='$v' ";
-                }
-            }
-        }
-        if ($emp_designation != 'HOD') {
-            $qry = $this->db->query("SELECT emp_hod_name FROM employees WHERE emp_designation='HOD';");
-            while ($row = $qry->fetch_assoc()) {
-                $hod = $row['emp_hod_name'];
-                $data .= ", emp_hod_name='$hod' ";
-            }
-        } else {
-            $data .= ", emp_hod_name='' ";
-        }
-        if (isset($_FILES['emp_profile_pic']) && $_FILES['emp_profile_pic']['tmp_name'] != '') {
-            $fname = strtotime(date('y-m-d H:i')) . '_' . $_FILES['emp_profile_pic']['name'];
-            $data .= ", emp_profile_pic='$fname'";
-            $move = move_uploaded_file($_FILES['emp_profile_pic']['tmp_name'], '../assets/uploads/' . $fname);
-            if (file_exists('../assets/uploads/' . $oldFile)) {
-                unlink('../assets/uploads/' . $oldFile);
-            }
-        } else {
-            $fname = 'default_user.jpg';
-        }
-        $query = $this->db->query("UPDATE employees SET emp_first_name='$emp_first_name', emp_last_name='$emp_last_name', emp_description='$emp_description', emp_gender='$emp_gender', emp_dob='$emp_dob', emp_mob=$emp_mob, emp_email='$emp_email', emp_address='$emp_address', emp_department='$emp_department', emp_designation='$emp_designation', emp_hod_name='$emp_hod_name', emp_joining_date='$emp_joining_date', emp_confirmation_date='$emp_confirmation_date', emp_leaving_date='$emp_leaving_date', emp_working_hours='$emp_working_hours', emp_profile_pic='$fname' WHERE emp_id='$emp_id'");
-        // $query = $this->db->query("UPDATE employees SET emp_first_name='$emp_first_name' WHERE emp_id='$emp_id'");
-        if ($query) {
-            return $query;
-        }
-    }
-
-    public function department_add()
-    {
-        extract($_POST);
-        $id = $this->guidV4();
-        $data = "department_id='$id'";
-        foreach ($_POST as $k => $v) {
-            if (!in_array($k, array('department_id', 'password')) && !is_numeric($k)) {
-                if ($v != '0000-00-00' || !empty($v)) {
-                    $data .= ", $k='$v' ";
+                    $client_data .= ", $k='$v' ";
                 }
             }
         }
 
-        $checkRowExists = $this->db->query("SELECT * FROM departments where department_name ='$department_name' ")->num_rows;
-        if ($checkRowExists > 0) {
-            return 2;
-        } else {
-            // $save = $this->db->query("INSERT INTO employees SET emp_id='$id', emp_first_name='$emp_first_name', emp_last_name='$emp_last_name', emp_description='$emp_description', emp_gender='$emp_gender', emp_dob='$emp_dob', emp_mob=$emp_mob, emp_email='$emp_email', emp_address='$emp_address', emp_department='$emp_department', emp_designation='$emp_designation', emp_hod_name='$emp_hod_name', emp_joining_date='$emp_joining_date', emp_confirmation_date='$emp_confirmation_date', emp_leaving_date='$emp_leaving_date', emp_working_hours='$emp_working_hours', emp_profile_pic='$fname'");
-            $query = $this->db->query("INSERT INTO departments SET $data");
+        if ($para == 'insert') {
+            $checkClientExists = $this->db->query("SELECT * FROM clients where client_email ='$client_email' ")->num_rows;
+            if ($checkClientExists == 0) {
+                $addClient = $this->db->query("INSERT INTO clients SET $client_data");
+                if ($addClient) {
+                    return $addClient;
+                } else {
+                    return $addClient;
+                }
+            } else {
+                return  $checkClientExists;
+            }
+        } else if ($para == 'update') {
+            $updateClient = $this->db->query("UPDATE clients SET $client_data WHERE client_id='$client_id'");
+            if ($updateClient) {
+                return $updateClient;
+            }
         }
+    }
+
+    public function client_delete()
+    {
+        extract($_POST);
+        $query = $this->db->query("DELETE FROM clients where client_id ='$client_id'");
         if ($query) {
             return $query;
-        }
-    }
-
-    public function department_delete()
-    {
-        extract($_POST);
-        $query = $this->db->query("DELETE FROM departments where department_id ='$department_id'");
-        if ($query) {
-            return 1;
-        }
-    }
-
-
-    public function hod_add()
-    {
-        extract($_POST);
-        $id = $this->guidV4();
-        $data = "hod_id='$id'";
-
-        $qry = $this->db->query("SELECT emp_first_name,emp_last_name FROM employees WHERE emp_id='$hod_name';");
-        while ($row = $qry->fetch_assoc()) {
-            $first = $row['emp_first_name'];
-            $last = $row['emp_last_name'];
-            $data .= ", hod_first_name='$first' ";
-            $data .= ", hod_last_name='$last' ";
-        }
-        $data .= ", department_id='$department_name' ";
-        $data .= ", emp_id='$hod_name' ";
-
-        $checkRowExists = $this->db->query("SELECT * FROM hod where hod_id ='$hod_name' ")->num_rows;
-        if ($checkRowExists > 0) {
-            return 2;
-        } else {
-            // $save = $this->db->query("INSERT INTO employees SET emp_id='$id', emp_first_name='$emp_first_name', emp_last_name='$emp_last_name', emp_description='$emp_description', emp_gender='$emp_gender', emp_dob='$emp_dob', emp_mob=$emp_mob, emp_email='$emp_email', emp_address='$emp_address', emp_department='$emp_department', emp_designation='$emp_designation', emp_hod_name='$emp_hod_name', emp_joining_date='$emp_joining_date', emp_confirmation_date='$emp_confirmation_date', emp_leaving_date='$emp_leaving_date', emp_working_hours='$emp_working_hours', emp_profile_pic='$fname'");
-            $query = $this->db->query("INSERT INTO hod SET $data");
-        }
-        if ($query) {
-            return $query;
-        }
-    }
-
-    public function hod_delete()
-    {
-        extract($_POST);
-        $query = $this->db->query("DELETE FROM hod where hod_id ='$hod_id   '");
-        if ($query) {
-            return 1;
         }
     }
 }

@@ -30,12 +30,40 @@
             </div>
         </li>
         <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user_dashboard" aria-expanded="true" aria-controls="employee_controls">
+                <i class="fas fa-fw fa-users-gear"></i>
+                <span>Application Users</span>
+            </a>
+            <div id="user_dashboard" class="collapse" aria-labelledby="employee_lable" data-parent="#main_dashboard">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="./index.php?page=user-dashboard">All User</a>
+                    <a class="collapse-item" href="./index.php?page=user-details">User Details</a>
+                    <a class="collapse-item" href="./index.php?page=user-new">New User</a>
+                </div>
+            </div>
+        </li>
+        <hr class="sidebar-divider">
+        <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#project_dashboard" aria-expanded="true" aria-controls="project_controls">
                 <i class="fa-solid fa-list-check"></i>
                 <span>Projects</span>
             </a>
             <div id="project_dashboard" class="collapse" aria-labelledby="project_lable" data-parent="#main_dashboard">
                 <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="./index.php?page=project-dashboard">Dashboard</a>
+                    <a class="collapse-item" href="./index.php?page=project-new">New Project</a>
+                </div>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#client_dashboard" aria-expanded="true" aria-controls="project_controls">
+                <i class="fa-solid fa-list-check"></i>
+                <span>Clients</span>
+            </a>
+            <div id="client_dashboard" class="collapse" aria-labelledby="project_lable" data-parent="#main_dashboard">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="./index.php?page=client-dashboard">Dashboard</a>
+                    <a class="collapse-item" href="./index.php?page=client-new">New Client</a>
                 </div>
             </div>
         </li>
@@ -51,17 +79,10 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#department_dashboard" aria-expanded="true" aria-controls="department_controls">
+            <a class="nav-link" href="./index.php?page=hod-dashboard" >
                 <i class="fa-solid fa-list-check"></i>
-                <span>Departments</span>
+                <span>Head Of Departments</span>
             </a>
-            <div id="department_dashboard" class="collapse" aria-labelledby="department_lable" data-parent="#main_dashboard">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="./index.php?page=department-dashboard">Dashboard</a>
-                    <a class="collapse-item" href="./index.php?page=department-new">Add Department</a>
-                    <a class="collapse-item" href="./index.php?page=hod-dashboard">Head Of Department</a>
-                </div>
-            </div>
         </li>
 
         <!-- Nav Item - Charts -->

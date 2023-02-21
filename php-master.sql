@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 20, 2023 at 06:27 PM
+-- Generation Time: Feb 21, 2023 at 07:19 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -24,28 +24,25 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `departments`
+-- Table structure for table `clients`
 --
 
-CREATE TABLE `departments` (
-  `department_id` text NOT NULL,
-  `department_name` varchar(100) NOT NULL,
-  `department_hod` varchar(100) DEFAULT NULL,
-  `department_employees` int(11) DEFAULT 0,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+CREATE TABLE `clients` (
+  `client_id` text NOT NULL,
+  `client_first_name` varchar(100) NOT NULL,
+  `client_last_name` varchar(100) NOT NULL,
+  `gender` varchar(20) DEFAULT NULL,
+  `client_address` varchar(100) DEFAULT NULL,
+  `client_email` varchar(100) NOT NULL,
+  `client_contact` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `departments`
+-- Dumping data for table `clients`
 --
 
-INSERT INTO `departments` (`department_id`, `department_name`, `department_hod`, `department_employees`, `created_at`) VALUES
-('584968cf-636d-4b79-9816-2f5a972e6160', 'IT', 'Chintan Bhimani', 4, '2023-02-17 16:53:10'),
-('5d47fdb5-e221-4957-8405-feaf708f3c55', 'MDO', 'Ketan Sokanli', 8, '2023-02-09 16:51:51'),
-('615e25f9-9104-4d2c-a757-6622210c03a7', 'Architecture', 'Pratiksha Chopra', 45, '2023-02-09 16:53:07'),
-('6a9a7fac-2222-484c-b07b-f639442dcaf4', 'Engineer', 'Mehul Makvana', 12, '2023-02-17 16:50:25'),
-('da07720b-2545-40cf-8206-3527b7f641b4', 'Interior', 'Rashmika Pande', 24, '2023-02-17 16:49:31'),
-('fa3e87df-0fa4-4de6-b0d6-8eaa55ccfc21', 'Finance', 'Dhruvik Vekariya', 19, '2023-02-17 16:53:49');
+INSERT INTO `clients` (`client_id`, `client_first_name`, `client_last_name`, `gender`, `client_address`, `client_email`, `client_contact`) VALUES
+('615e5f0d-8954-447d-bbfc-cb22cea62d83', 'Rahul', 'Vasoya', 'Male', 'scdassfdsfafdgf', 'rahul111@gmail.com', '123433543556');
 
 -- --------------------------------------------------------
 
@@ -78,10 +75,10 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`emp_id`, `emp_first_name`, `emp_last_name`, `emp_description`, `emp_gender`, `emp_dob`, `emp_mob`, `emp_email`, `emp_address`, `emp_department`, `emp_designation`, `emp_hod_name`, `emp_joining_date`, `emp_confirmation_date`, `emp_leaving_date`, `emp_working_hours`, `emp_profile_pic`) VALUES
-('1de7377d-6ad2-4678-8f29-5d1422ad3396', 'Akshay', 'Kaneriya', 'cvnbsibn kfborwpsn', 'Male', '2001-01-01', 2147483647, 'akshay@gmail.com', 'xcvmospdvbmbo', 'Engineer', 'HOD', '', '2023-01-01', '2023-01-01', '0000-00-00', '10:00:00', '1676911140_black-laptop.jpg'),
-('7e754019-51f8-460b-bb8d-c4870beb459a', 'Chintan', 'Bhimani', 'dsgnbetrgfmdv vbkm nergmbn fbkgnreisgmbhjowpegwhi bfinrgwbn', 'Male', '2003-03-31', 123456789, 'bhimanicaa3103@gmail.com', 'scdvnegdbn vfbnbifnsibn isvn', 'IT', 'HOD', 'Chintan Bhimani', '2009-01-01', '2009-01-01', '0000-00-00', '09:30:00', '1676910360_black-laptop.jpg'),
-('a325785f-4972-4650-b78d-dca3f02ce6c7', 'Pratiksha', 'Chopra', 'sfdgrfb fbnriwhnopn pbnprehbpwnhopbhwsop mfpbnropwhjpo mbpinrwhpfpo opfbnhrwopn', 'Female', '2002-10-07', 2147483647, 'pari@gmail.com', 'dcnbin fbnwgsopBgopb', 'Architecture', 'Senior Architecture', 'Pratiksha Chopra', '2022-01-01', '2022-01-15', '0000-00-00', '07:00:00', '1676911020_girl_profile.jpg'),
-('ce05a805-e24b-4487-ab4f-ee60bcc2bc56', 'Testing', 'User', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.', 'Male', '2003-03-31', 2147483647, 'testuser.111@gmail.com', 't has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.', 'Other', 'Female', 'Unknown User', '2023-02-06', '2023-02-06', '0000-00-00', '09:00:00', '1675957140_testing_profile.jpg');
+('0f25b176-e2ad-4f26-bb3b-3884cefad72d', 'Akshay', 'Kaneriya', 'adsafdasvgfd', 'Male', '2002-01-01', 122354254, 'akshay@gmail.com', 'fcdvfdv', 'Engineer', 'HOD', '', '2002-01-01', '2002-01-01', '0000-00-00', '09:20:00', '1676958660_Final Print Files.jpg'),
+('3b3e819d-11ad-425b-8e30-5cf08afc25fa', 'Testing', 'User', '', 'Male', '2002-01-01', 1234567890, 'test@gmail.com', '', 'Admin', 'HOD', '', '2002-01-01', '2002-02-01', '0000-00-00', '10:00:00', '1676957100_img1.jpg'),
+('8808a6c1-cf80-49f4-9cfd-6c7310f86f5d', 'Pratiksha', 'Chopra', '', 'Female', '1999-01-01', 2147483647, 'pari@gmail.com', '', 'Architecture', 'Junior Interior', '', '2022-01-01', '2022-01-01', '0000-00-00', '07:00:00', '1676957400_img4.png'),
+('e6de9027-6d88-4fa9-b32d-d2fa67f880d6', 'Chintan', 'Bhimani', 'grnboibh fpbmrotfotfotfotfotfotfotfmnrgkep\r\n[whmkortmhnjoooooooooooooorwohohohohohohohohohohohohohtmnejonjtpeohbreomnbetj', 'Male', '2003-03-31', 2147483647, 'chintan@gmail.com', 'dwfeedpgwnr rgjrphj rphj hjrpjgrew pohjtgiphrjedf', 'MDO', 'MDO Staff', '', '2002-01-01', '2002-01-01', '0000-00-00', '09:30:00', '1676957220_img9.png');
 
 -- --------------------------------------------------------
 
@@ -93,7 +90,38 @@ CREATE TABLE `hod` (
   `hod_id` text NOT NULL,
   `hod_first_name` text NOT NULL,
   `hod_last_name` text NOT NULL,
+  `department_name` varchar(100) NOT NULL,
   `emp_id` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `hod`
+--
+
+INSERT INTO `hod` (`hod_id`, `hod_first_name`, `hod_last_name`, `department_name`, `emp_id`) VALUES
+('04caf9ba-9e8d-4cba-9976-66976c8c4bd7', 'Testing', 'User', 'Admin', '3b3e819d-11ad-425b-8e30-5cf08afc25fa'),
+('cfbcfbf8-fa5e-44f6-a2fe-ef1fe38928b7', 'Akshay', 'Kaneriya', 'Engineer', '4196036b-0dcf-4ad9-825a-661e17677512');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `projects`
+--
+
+CREATE TABLE `projects` (
+  `project_id` text NOT NULL,
+  `project_name` varchar(100) NOT NULL,
+  `project_status` varchar(100) NOT NULL,
+  `project_code` varchar(100) NOT NULL,
+  `client_id` text NOT NULL,
+  `start_date` date NOT NULL,
+  `expected_end_date` date DEFAULT NULL,
+  `hod_id` text NOT NULL,
+  `nature_of_project` varchar(100) NOT NULL,
+  `reference_by` text DEFAULT NULL,
+  `project_location` varchar(100) NOT NULL,
+  `engineers_id` text NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -104,25 +132,28 @@ CREATE TABLE `hod` (
 
 CREATE TABLE `users` (
   `user_id` text NOT NULL,
-  `user_first_name` varchar(100) DEFAULT NULL,
-  `user_last_name` varchar(100) DEFAULT NULL,
   `user_email` text NOT NULL,
   `user_password` text NOT NULL,
-  `user_profile_pic` varchar(100) NOT NULL,
-  `user_access_type` int(10) NOT NULL DEFAULT 2 COMMENT '1: Admin\r\n2: Employee\r\n3: Engineer\r\n4: HOD',
-  `employee_id` text NOT NULL,
-  `data_created` date NOT NULL DEFAULT current_timestamp()
+  `emp_id` text NOT NULL,
+  `user_access_type` int(10) NOT NULL DEFAULT 2 COMMENT '1: Admin\r\n2: Employee\r\n3: Engineer\r\n4: HOD'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`user_id`, `user_email`, `user_password`, `emp_id`, `user_access_type`) VALUES
+('9928a6203e5247f3b003d6e3050e5b30', 'test@gmail.com', '0192023a7bbd73250516f069df18b500', '3b3e819d-11ad-425b-8e30-5cf08afc25fa', 1);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `departments`
+-- Indexes for table `clients`
 --
-ALTER TABLE `departments`
-  ADD PRIMARY KEY (`department_id`(255));
+ALTER TABLE `clients`
+  ADD PRIMARY KEY (`client_id`(255));
 
 --
 -- Indexes for table `employees`
@@ -135,6 +166,12 @@ ALTER TABLE `employees`
 --
 ALTER TABLE `hod`
   ADD PRIMARY KEY (`hod_id`(255));
+
+--
+-- Indexes for table `projects`
+--
+ALTER TABLE `projects`
+  ADD PRIMARY KEY (`project_id`(255));
 
 --
 -- Indexes for table `users`
