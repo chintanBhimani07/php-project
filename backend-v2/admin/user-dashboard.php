@@ -18,7 +18,7 @@
                                     <th>Sr No.</th>
                                     <th>Full Name</th>
                                     <th>Email</th>
-                                    <th>Aceess Type</th>
+                                    <th>Access Type</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -57,7 +57,7 @@
                                             ?>
                                         </td>
                                         <td class="d-flex align-items-center justify-content-center">
-                                            <a type="button" class="btn btn-warning  btn-circle editUser mx-1" href="./index.php?page=user-edit&userId=<?php echo $row['user_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                            <a type="button" class="btn btn-primary btn-circle viewEmployee mx-1" href="./index.php?page=employee-viewer&empId=<?php echo $row['emp_id'] ?>&content=user"><i class="fa-solid fa-eye"></i></a>
                                             <a type="button" class="btn btn-danger  btn-circle  mx-1" href="#" data-toggle="modal" data-target="#deleteUserModal" ><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>

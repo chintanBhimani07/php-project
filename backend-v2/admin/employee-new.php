@@ -16,17 +16,17 @@
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label for="emp_first_name" class="col-form-label mr-1">First Name</label><span class="text-danger">*</span>
-                                <input type="text" class="form-control" id="emp_first_name" name="emp_first_name" autocomplete="off" autofocus>
+                                <input type="text" class="form-control" id="emp_first_name" name="emp_first_name" autocomplete="off" autofocus required>
                             </div>
                             <div class="col-sm-6">
                                 <label for="emp_last_name" class="col-form-label mr-1">Last Name</label><span class="text-danger">*</span>
-                                <input type="text" class="form-control" id="emp_last_name" name="emp_last_name" autocomplete="off">
+                                <input type="text" class="form-control" id="emp_last_name" name="emp_last_name" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-4 mb-3 mb-sm-0">
                                 <label for="emp_gender" class="col-form-label mr-1">Gender</label><span class="text-danger">*</span>
-                                <select class="form-control custom-select" id="emp_gender" name="emp_gender">
+                                <select class="form-control custom-select" id="emp_gender" name="emp_gender" required>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Other">Other</option>
@@ -34,11 +34,11 @@
                             </div>
                             <div class="col-sm-4">
                                 <label for="emp_dob" class="col-form-label mr-1">Date Of Birth</label><span class="text-danger">*</span>
-                                <input type="date" class="form-control" id="emp_dob" name="emp_dob">
+                                <input type="date" class="form-control" id="emp_dob" name="emp_dob" required>
                             </div>
                             <div class="col-sm-4">
                                 <label for="emp_mob" class="col-form-label mr-1">Mobile No.</label><span class="text-danger">*</span>
-                                <input type="tel" class="form-control" id="emp_mob" name="emp_mob" autocomplete="off">
+                                <input type="tel" class="form-control" id="emp_mob" name="emp_mob" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -47,7 +47,7 @@
                         </div>
                         <div class="form-group">
                             <label for="emp_email" class="col-form-label mr-1">Email Address</label><span class="text-danger">*</span>
-                            <input type="email" class="form-control" id="emp_email" name="emp_email" autocomplete="off">
+                            <input type="email" class="form-control" id="emp_email" name="emp_email" autocomplete="off" required>
                         </div>
 
                         <div class="form-group">
@@ -56,7 +56,7 @@
                         </div>
                         <div class="form-group">
                             <label for="emp_department" class="col-form-label mr-1">Department</label><span class="text-danger">*</span>
-                            <select class="form-control custom-select" id="emp_department" name="emp_department">
+                            <select class="form-control custom-select" id="emp_department" name="emp_department" required>
                                 <option value="Admin">Admin</option>
                                 <option value="IT">IT</option>
                                 <option value="MDO">MDO</option>
@@ -68,7 +68,7 @@
                         </div>
                         <div class="form-group">
                             <label for="emp_designation" class="col-form-label mr-1">Designation</label><span class="text-danger">*</span>
-                            <select class="form-control custom-select" id="emp_designation" name="emp_designation">
+                            <select class="form-control custom-select" id="emp_designation" name="emp_designation" required>
                                 <option value="Administrator">Administrator</option>
                                 <option value="HOD">HOD</option>
                                 <option value="Junior Developer">Junior Developer</option>
@@ -88,7 +88,7 @@
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label for="emp_joining_date" class="col-form-label mr-1">Joining Date</label><span class="text-danger">*</span>
-                                <input type="date" class="form-control" id="emp_joining_date" name="emp_joining_date" autocomplete="off">
+                                <input type="date" class="form-control" id="emp_joining_date" name="emp_joining_date" autocomplete="off" required>
                             </div>
                             <div class="col-sm-6">
                                 <label for="emp_confirmation_date" class="col-form-label mr-1">Confirmation Date</label>
@@ -102,7 +102,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="emp_working_hours" class="col-form-label mr-1">Working Hours</label><span class="text-danger">*</span>
-                                <input type="time" class="form-control" id="emp_working_hours" name="emp_working_hours" autocomplete="off">
+                                <input type="time" class="form-control" id="emp_working_hours" name="emp_working_hours" autocomplete="off" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -145,7 +145,7 @@
                     if (resp == 1) {
                         setTimeout(() => {
                             location.reload();
-                        }, 3000);
+                        }, 1000);
                     } else {
                         console.log(resp);
                     }

@@ -38,10 +38,10 @@ class Controller
     public function login_application_user()
     {
         extract($_POST);
-        $query = $this->db->query("SELECT * FROM users where email = '" . $email . "' and password = '" . md5($password) . "'  ");
+        $query = $this->db->query("SELECT * FROM users where user_email = '" . $user_email . "' and user_password = '" . md5($user_password) . "'  ");
         if ($query->num_rows > 0) {
-            foreach ($query->fetch_array() as $key => $val) {
-                if ($key != 'password' && !is_numeric($key)) {
+            foreach ($query->fetch_assoc() as $key => $val) {
+                if ($key != 'user_password' && !is_numeric($key)) {
                     $_SESSION['login_' . $key] = $val;
                 }
             }
@@ -72,15 +72,15 @@ class Controller
                 $id = $r['emp_id'];
                 $user_data .= ", emp_id='$id' ";
             }
-			$user_data .= ", user_password=md5('$user_password') ";
+			$user_data .= ", user_password=md5('$user_password')";
 		}
 
         if ($para == 'insert') {
             $checkUserExists = $this->db->query("SELECT user_email FROM users where user_email ='$user_email' ")->num_rows;
             if ($checkUserExists == 0) {
-                $insertuser = $this->db->query("INSERT INTO users SET $user_data");
-                if($insertuser){
-                    return $insertuser;
+                $insertUser = $this->db->query("INSERT INTO users SET $user_data");
+                if($insertUser){
+                    return $insertUser;
                 }
             }
         }
@@ -91,6 +91,23 @@ class Controller
         $qry=$this->db->query("DELETE FROM users WHERE user_id='$user_id'");
         if($qry){
             return $qry;
+        }
+    }
+
+    public function change_password(){
+        extract($_POST);
+        $qry=$this->db->query("SELECT user_password FROM users WHERE user_id='$user_id'");
+        while($row = $qry->fetch_assoc()){
+            if($row['user_password'] == md5($user_old_password)){
+                $updatePassword=$this->db->query("UPDATE users SET user_password=md5('$user_password') WHERE user_id='$user_id';");
+                if($updatePassword){
+                    return 1;
+                }else{
+                    return 3;
+                }
+            }else{
+                return 2;
+            }
         }
     }
 

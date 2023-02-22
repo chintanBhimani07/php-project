@@ -20,17 +20,17 @@ while ($row = $qry->fetch_assoc()) { ?>
                                 <input type="hidden" class="form-control" id="emp_id" name="emp_id" value="<?php echo $row['emp_id'] ?>" autocomplete="off">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label for="emp_first_name" class="col-form-label mr-1">First Name</label><span class="text-danger">*</span>
-                                    <input type="text" class="form-control" id="emp_first_name" name="emp_first_name" value="<?php echo $row['emp_first_name'] ?>" autocomplete="off" autofocus>
+                                    <input type="text" class="form-control" id="emp_first_name" name="emp_first_name" value="<?php echo $row['emp_first_name'] ?>" autocomplete="off" autofocus required>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="emp_last_name" class="col-form-label mr-1">Last Name</label><span class="text-danger">*</span>
-                                    <input type="text" class="form-control" id="emp_last_name" name="emp_last_name" value="<?php echo $row['emp_last_name'] ?>" autocomplete="off">
+                                    <input type="text" class="form-control" id="emp_last_name" name="emp_last_name" value="<?php echo $row['emp_last_name'] ?>" autocomplete="off" required>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-4 mb-3 mb-sm-0">
                                     <label for="emp_gender" class="col-form-label mr-1">Gender</label><span class="text-danger">*</span>
-                                    <select class="form-control custom-select" id="emp_gender" name="emp_gender">
+                                    <select class="form-control custom-select" id="emp_gender" name="emp_gender" required>
                                         <option value="Male" <?php echo ($row['emp_gender'] == 'Male') ? 'selected' : '' ?>>Male</option>
                                         <option value="Female" <?php echo ($row['emp_gender'] == 'Female') ? 'selected' : '' ?>>Female</option>
                                         <option value="Other" <?php echo ($row['emp_gender'] == 'Other') ? 'selected' : '' ?>>Other</option>
@@ -38,11 +38,11 @@ while ($row = $qry->fetch_assoc()) { ?>
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="emp_dob" class="col-form-label mr-1">Date Of Birth</label><span class="text-danger">*</span>
-                                    <input type="date" class="form-control" id="emp_dob" name="emp_dob" value="<?php echo $row['emp_dob'] ?>">
+                                    <input type="date" class="form-control" id="emp_dob" name="emp_dob" value="<?php echo $row['emp_dob'] ?>" required>
                                 </div>
                                 <div class="col-sm-4">
                                     <label for="emp_mob" class="col-form-label mr-1">Mobile No.</label><span class="text-danger">*</span>
-                                    <input type="tel" class="form-control" id="emp_mob" name="emp_mob" autocomplete="off" value="<?php echo $row['emp_mob'] ?>">
+                                    <input type="tel" class="form-control" id="emp_mob" name="emp_mob" autocomplete="off" value="<?php echo $row['emp_mob'] ?>" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -51,7 +51,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                             </div>
                             <div class="form-group">
                                 <label for="emp_email" class="col-form-label mr-1">Email Address</label><span class="text-danger">*</span>
-                                <input type="email" class="form-control" id="emp_email" name="emp_email" autocomplete="off" value="<?php echo $row['emp_email'] ?>">
+                                <input type="email" class="form-control" id="emp_email" name="emp_email" autocomplete="off" value="<?php echo $row['emp_email'] ?>" required>
                             </div>
 
                             <div class="form-group">
@@ -60,19 +60,19 @@ while ($row = $qry->fetch_assoc()) { ?>
                             </div>
                             <div class="form-group">
                                 <label for="emp_department" class="col-form-label mr-1">Department</label><span class="text-danger">*</span>
-                                <select class="form-control custom-select" id="emp_department" name="emp_department">
-                                    <option value="0">Select Department</option>
-                                    <?php
-                                    $index = 1;
-                                    $q = $con->query("SELECT department_name FROM departments GROUP BY department_name");
-                                    while ($r = $q->fetch_assoc()) { ?>
-                                        <option value="<?php echo $r['department_name'] ?>" <?php echo ($row['emp_department'] == $r['department_name']) ? 'selected' : '' ?>><?php echo $r['department_name']; ?></option>
-                                    <?php } ?>
-                                </select>
+                                <select class="form-control custom-select" id="emp_department" name="emp_department" required>
+                                <option value="Admin"  <?php echo ($row['emp_department'] == 'Admin') ? 'selected' : '' ?>>Admin</option>
+                                <option value="IT" <?php echo ($row['emp_department'] == 'IT') ? 'selected' : '' ?>>IT</option>
+                                <option value="MDO" <?php echo ($row['emp_department'] == 'MDO') ? 'selected' : '' ?>>MDO</option>
+                                <option value="Architecture" <?php echo ($row['emp_department'] == 'Architecture') ? 'selected' : '' ?>>Architecture</option>
+                                <option value="Engineer" <?php echo ($row['emp_department'] == 'Engineer') ? 'selected' : '' ?>>Engineer</option>
+                                <option value="Interior" <?php echo ($row['emp_department'] == 'Interior') ? 'selected' : '' ?>>Interior</option>
+                                <option value="Finance" <?php echo ($row['emp_department'] == 'Finance') ? 'selected' : '' ?>>Finance</option>
+                            </select>
                             </div>
                             <div class="form-group">
                                 <label for="emp_designation" class="col-form-label mr-1">Designation</label><span class="text-danger">*</span>
-                                <select class="form-control custom-select" id="emp_designation" name="emp_designation">
+                                <select class="form-control custom-select" id="emp_designation" name="emp_designation" required>
                                     <option value="Administrator" <?php echo ($row['emp_designation'] == 'Administrator') ? 'selected' : '' ?>>Administrator</option>
                                     <option value="HOD" <?php echo ($row['emp_designation'] == 'HOD') ? 'selected' : '' ?>>HOD</option>
                                     <option value="Junior Developer" <?php echo ($row['emp_designation'] == 'Junior Developer') ? 'selected' : '' ?>>Junior Developer</option>
@@ -92,7 +92,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <label for="emp_joining_date" class="col-form-label mr-1">Joining Date</label><span class="text-danger">*</span>
-                                    <input type="date" class="form-control" id="emp_joining_date" name="emp_joining_date" autocomplete="off" value="<?php echo $row['emp_joining_date'] ?>">
+                                    <input type="date" class="form-control" id="emp_joining_date" name="emp_joining_date" autocomplete="off" value="<?php echo $row['emp_joining_date'] ?>" required>
 
                                 </div>
                                 <div class="col-sm-6">
@@ -107,7 +107,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                                 </div>
                                 <div class="col-sm-6">
                                     <label for="emp_working_hours" class="col-form-label mr-1">Working Hours</label><span class="text-danger">*</span>
-                                    <input type="time" class="form-control" id="emp_working_hours" name="emp_working_hours" autocomplete="off" value="<?php echo $row['emp_working_hours'] ?>">
+                                    <input type="time" class="form-control" id="emp_working_hours" name="emp_working_hours" autocomplete="off" value="<?php echo $row['emp_working_hours'] ?>" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -152,7 +152,6 @@ while ($row = $qry->fetch_assoc()) { ?>
                 success: function(resp) {
                     if (resp == 1) {
                         setTimeout(() => {
-                            // location.reload();
                             window.location = './index.php?page=employee-dashboard';
                         }, 1000);
                     } else {

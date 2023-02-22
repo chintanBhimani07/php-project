@@ -30,6 +30,15 @@ if($action == 'delete_user'){
     }
 }
 
+if($action == 'change_password'){
+    $change_password = $task->change_password();
+    if($change_password){
+        echo $change_password;
+    }
+}
+
+
+
 if($action == 'save_employee'){
     $para="insert";
     $save_employee = $task->employee_add($para);

@@ -121,7 +121,7 @@
                                         <td><?php echo $row['emp_leaving_date'] ?></td>
                                         <td><?php echo $row['emp_department'] ?></td>
                                         <td class="d-flex align-items-center justify-content-center">
-                                            <a type="button" class="btn btn-primary btn-circle viewEmployee mx-1" href="./index.php?page=employee-viewer&empId=<?php echo $row['emp_id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                            <a type="button" class="btn btn-primary btn-circle viewEmployee mx-1" href="./index.php?page=employee-viewer&empId=<?php echo $row['emp_id'] ?>&content=employee"><i class="fa-solid fa-eye"></i></a>
                                             <a type="button" class="btn btn-warning  btn-circle editEmployee mx-1" href="./index.php?page=employee-edit&empId=<?php echo $row['emp_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
                                             <a type="button" class="btn btn-danger  btn-circle  mx-1" href="#" data-toggle="modal" data-target="#deleteEmployeeModal" ><i class="fa-solid fa-trash"></i></a>
                                         </td>
@@ -166,18 +166,12 @@
                     emp_id: id
                 },
                 success: function(resp) {
-                    console.log(resp);
                     if (resp == 1) {
-                        $('.tableComponent').prepend(`
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Data Deleted Successfully</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    `);
                         setTimeout(function() {
                             location.reload()
-                        }, 2000)
-
+                        }, 1000);
+                    }else{
+                        console.log(resp);
                     }
                 }
             });

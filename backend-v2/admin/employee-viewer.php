@@ -1,6 +1,7 @@
 <?php
 $i = 1;
 $id = $_GET['empId'];
+$content = $_GET['content'];
 $qry = $con->query("SELECT * FROM  employees WHERE emp_id ='$id'");
 while ($row = $qry->fetch_assoc()) { ?>
     <div class="container-fluid">
@@ -8,9 +9,16 @@ while ($row = $qry->fetch_assoc()) { ?>
             <h1 class="h3 mb-0 text-gray-800">
                 <?php echo $row['emp_first_name'] . " " . $row['emp_last_name']; ?>
             </h1>
-            <a href="./index.php?page=employee-dashboard"
-                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                    class="fas fa-list fa-sm text-white mr-2"></i>Employee</a>
+            <?php
+            if ($content == 'employee') { ?>
+                <a href="./index.php?page=employee-dashboard"
+                    class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        class="fas fa-list fa-sm text-white mr-2"></i>Employee</a>
+            <?php } else if ($content == 'user' && isset($_GET['isProfile'])==true) { ?>
+            <?php } else { ?>
+                    <a href="./index.php?page=user-dashboard" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                            class="fas fa-list fa-sm text-white mr-2"></i>Users</a>
+            <?php } ?>
         </div>
 
         <div class="row">
