@@ -40,7 +40,7 @@
                                 <button class="btn btn-primary btn-user btn-block">Submit Details</button>
                             </div>
                             <div class="col-sm-6">
-                                <a href="./index.php?page=user-dashboard" class="btn btn-warning btn-user btn-block text-dark">Back to Employees List</a>
+                                <a href="./index.php?page=user-dashboard" class="btn btn-warning btn-user btn-block text-dark">Back to User List</a>
                             </div>
                         </div>
 

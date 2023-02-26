@@ -16,6 +16,10 @@ while ($row = $qry->fetch_assoc()) { ?>
                     </div>
                     <div class="card-body">
                         <form id="edit_employee_form">
+                        <div class="form-group">
+                            <label for="emp_code" class="col-form-label mr-1">Employee Code</label><span class="text-danger">*</span>
+                            <input type="number" class="form-control" id="emp_code" name="emp_code" value="<?php echo $row['emp_code'] ?>" autocomplete="off" autofocus required disabled>
+                        </div>
                             <div class="form-group row">
                                 <input type="hidden" class="form-control" id="emp_id" name="emp_id" value="<?php echo $row['emp_id'] ?>" autocomplete="off">
                                 <div class="col-sm-6 mb-3 mb-sm-0">

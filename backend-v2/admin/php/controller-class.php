@@ -138,7 +138,7 @@ class Controller
             $emp_data .= ", emp_hod_name='' ";
         }
         if ($para == 'insert') {
-            $checkEmpExists = $this->db->query("SELECT * FROM employees where emp_email ='$emp_email' ")->num_rows;
+            $checkEmpExists = $this->db->query("SELECT * FROM employees WHERE emp_email ='$emp_email' OR emp_code = '$emp_code'")->num_rows;
             if ($checkEmpExists == 0) {
                 if (isset($_FILES['emp_profile_pic']) && $_FILES['emp_profile_pic']['tmp_name'] != '') {
                     $fname = strtotime(date('y-m-d H:i')) . '_' . $_FILES['emp_profile_pic']['name'];

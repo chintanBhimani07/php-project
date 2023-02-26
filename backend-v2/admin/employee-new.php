@@ -13,10 +13,14 @@
                 </div>
                 <div class="card-body">
                     <form id="new_employee_form">
+                        <div class="form-group">
+                            <label for="emp_code" class="col-form-label mr-1">Employee Code</label><span class="text-danger">*</span>
+                            <input type="number" class="form-control" id="emp_code" name="emp_code" autocomplete="off" autofocus required>
+                        </div>
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label for="emp_first_name" class="col-form-label mr-1">First Name</label><span class="text-danger">*</span>
-                                <input type="text" class="form-control" id="emp_first_name" name="emp_first_name" autocomplete="off" autofocus required>
+                                <input type="text" class="form-control" id="emp_first_name" name="emp_first_name" autocomplete="off" required>
                             </div>
                             <div class="col-sm-6">
                                 <label for="emp_last_name" class="col-form-label mr-1">Last Name</label><span class="text-danger">*</span>
@@ -49,7 +53,6 @@
                             <label for="emp_email" class="col-form-label mr-1">Email Address</label><span class="text-danger">*</span>
                             <input type="email" class="form-control" id="emp_email" name="emp_email" autocomplete="off" required>
                         </div>
-
                         <div class="form-group">
                             <label for="emp_address" class="col-form-label mr-1">Resident Address</label>
                             <textarea type="text" class="form-control" id="emp_address" name="emp_address" autocomplete="off"></textarea>

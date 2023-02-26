@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 22, 2023 at 01:48 PM
+-- Generation Time: Feb 26, 2023 at 03:04 PM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -54,6 +54,7 @@ CREATE TABLE `employees` (
   `emp_id` text NOT NULL,
   `emp_first_name` varchar(100) NOT NULL,
   `emp_last_name` varchar(100) NOT NULL,
+  `emp_code` bigint(20) NOT NULL,
   `emp_description` text DEFAULT NULL,
   `emp_gender` varchar(10) NOT NULL,
   `emp_dob` date NOT NULL,
@@ -74,12 +75,13 @@ CREATE TABLE `employees` (
 -- Dumping data for table `employees`
 --
 
-INSERT INTO `employees` (`emp_id`, `emp_first_name`, `emp_last_name`, `emp_description`, `emp_gender`, `emp_dob`, `emp_mob`, `emp_email`, `emp_address`, `emp_department`, `emp_designation`, `emp_hod_name`, `emp_joining_date`, `emp_confirmation_date`, `emp_leaving_date`, `emp_working_hours`, `emp_profile_pic`) VALUES
-('3b3e819d-11ad-425b-8e30-5cf08afc25fa', 'Testing', 'User', '', 'Male', '2002-01-01', 1234567890, 'test@gmail.com', '', 'Admin', 'HOD', '', '2002-01-01', '2002-02-01', '0000-00-00', '10:00:00', '1676957100_img1.jpg'),
-('3e866ce7b9c34d8da798a4ff9ed83b56', 'Jasmin', 'Bhanderi', 'dascasvgfDSB hetehrenw haewgnrpewj mhpormhfjrfhbtnettt', 'Female', '2002-01-01', 2147483647, 'janki@gmail.com', 'sdfcsafdeswgfv', 'Interior', 'Intern', 'Jasmin Bhanderi', '2022-01-01', '2022-01-01', '0000-00-00', '09:00:00', '1677046260_pexels-pixabay-460672.jpg'),
-('8808a6c1-cf80-49f4-9cfd-6c7310f86f5d', 'Pratiksha', 'Chopra', '', 'Female', '1999-01-01', 2147483647, 'pari@gmail.com', '', 'Architecture', 'Junior Interior', '', '2022-01-01', '2022-01-01', '0000-00-00', '07:00:00', '1676957400_img4.png'),
-('a80bd20e57ad4ac5a4ea2722a23904ff', 'Janki', 'Bhatt', 'swdfkegw rghmoewyhtmjoe  ,mrwgkmews', 'Female', '2003-03-31', 123243545, 'jay001@gmail.com', 'scdsafvmdpo', 'Finance', 'Intern', '', '2002-01-01', '2002-01-01', '2022-03-31', '10:00:00', '1677045840_img3.jpg'),
-('e6de9027-6d88-4fa9-b32d-d2fa67f880d6', 'Chintan', 'Bhimani', 'grnboibh fpbmrotfotfotfotfotfotfotfmnrgkep\r\n[whmkortmhnjoooooooooooooorwohohohohohohohohohohohohohtmnejonjtpeohbreomnbetj', 'Male', '2003-03-31', 2147483647, 'chintan@gmail.com', 'dwfeedpgwnr rgjrphj rphj hjrpjgrew pohjtgiphrjedf', 'MDO', 'MDO Staff', '', '2002-01-01', '2002-01-01', '0000-00-00', '09:30:00', '1676957220_img9.png');
+INSERT INTO `employees` (`emp_id`, `emp_first_name`, `emp_last_name`, `emp_code`, `emp_description`, `emp_gender`, `emp_dob`, `emp_mob`, `emp_email`, `emp_address`, `emp_department`, `emp_designation`, `emp_hod_name`, `emp_joining_date`, `emp_confirmation_date`, `emp_leaving_date`, `emp_working_hours`, `emp_profile_pic`) VALUES
+('0fa48220c45d450392a8111060b78562', 'Priyanka', 'Aahir', 1, 'sckdsgsidgnbisfvmobpf', 'Male', '2000-01-01', 1234564323, 'priyanka@gmail.com', 'kcvbpdasfbospdv daovdaopmvkb sdkbmisgjpsdzvmskbvbk ', 'Architecture', 'Junior Interior', '', '2003-01-01', '2003-01-01', '0000-00-00', '10:00:00', '1677417300_girl_profile.jpg'),
+('3b3e819d-11ad-425b-8e30-5cf08afc25fa', 'Testing', 'User', 0, '', 'Male', '2002-01-01', 1234567890, 'test@gmail.com', '', 'Admin', 'HOD', '', '2002-01-01', '2002-02-01', '0000-00-00', '10:00:00', '1676957100_img1.jpg'),
+('3e866ce7b9c34d8da798a4ff9ed83b56', 'Jasmin', 'Bhanderi', 0, 'dascasvgfDSB hetehrenw haewgnrpewj mhpormhfjrfhbtnettt', 'Female', '2002-01-01', 2147483647, 'janki@gmail.com', 'sdfcsafdeswgfv', 'Interior', 'Intern', 'Jasmin Bhanderi', '2022-01-01', '0000-00-00', '0000-00-00', '09:00:00', '1677046260_pexels-pixabay-460672.jpg'),
+('8808a6c1-cf80-49f4-9cfd-6c7310f86f5d', 'Pratiksha', 'Chopra', 0, '', 'Female', '1999-01-01', 2147483647, 'pari@gmail.com', '', 'Architecture', 'Junior Interior', '', '2022-01-01', '2022-01-01', '0000-00-00', '07:00:00', '1676957400_img4.png'),
+('a80bd20e57ad4ac5a4ea2722a23904ff', 'Janki', 'Bhatt', 0, 'swdfkegw rghmoewyhtmjoe  ,mrwgkmews', 'Female', '2003-03-31', 123243545, 'jay001@gmail.com', 'scdsafvmdpo', 'Finance', 'Intern', '', '2002-01-01', '2002-01-01', '2022-03-31', '10:00:00', '1677045840_img3.jpg'),
+('e6de9027-6d88-4fa9-b32d-d2fa67f880d6', 'Chintan', 'Bhimani', 0, 'grnboibh fpbmrotfotfotfotfotfotfotfmnrgkep\r\n[whmkortmhnjoooooooooooooorwohohohohohohohohohohohohohtmnejonjtpeohbreomnbetj', 'Male', '2003-03-31', 2147483647, 'chintan@gmail.com', 'dwfeedpgwnr rgjrphj rphj hjrpjgrew pohjtgiphrjedf', 'MDO', 'MDO Staff', '', '2002-01-01', '2002-01-01', '0000-00-00', '09:30:00', '1676957220_img9.png');
 
 -- --------------------------------------------------------
 
