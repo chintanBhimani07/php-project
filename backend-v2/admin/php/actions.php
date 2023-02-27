@@ -85,3 +85,31 @@ if($action == 'delete_client'){
         echo $delete_client;
     }
 }
+
+if($action == 'save_exp'){
+    $para="insert";
+    $save_exp = $task->exp_add($para);
+    if($save_exp){
+        echo $save_exp;
+    }
+}
+
+if($action == 'edit_exp'){
+    $para="update";
+    $edit_exp = $task->exp_add($para);
+    if($edit_exp){
+        echo $edit_exp;
+    }
+}
+
+if($action == 'delete_exp'){
+    $para="update";
+    $delete_exp = $task->exp_delete();
+    if($delete_exp){
+        echo $delete_exp;
+    }
+}
+
+
+
+

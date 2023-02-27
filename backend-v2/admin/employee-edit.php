@@ -1,5 +1,4 @@
 <?php
-$i = 1;
 $empId = $_GET['empId'];
 $qry = $con->query("SELECT * FROM  employees WHERE emp_id='$empId';");
 while ($row = $qry->fetch_assoc()) { ?>
@@ -156,7 +155,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                 success: function(resp) {
                     if (resp == 1) {
                         setTimeout(() => {
-                            window.location = './index.php?page=employee-dashboard';
+                            window.location = './index.php?page=expenses-dashboard';
                         }, 1000);
                     } else {
                         console.log(resp);

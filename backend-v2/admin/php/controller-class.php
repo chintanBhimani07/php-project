@@ -62,50 +62,63 @@ class Controller
             $user_data = "user_id='$user_id'";
         }
         foreach ($_POST as $k => $v) {
-            if (!in_array($k, array('user_id', 'user_password','emp_id')) && !is_numeric($k)) {
+            if (!in_array($k, array('user_id', 'user_password', 'emp_id')) && !is_numeric($k)) {
                 $user_data .= ", $k='$v' ";
             }
         }
+        $userFirstName = $this->db->query("SELECT emp_first_name,emp_last_name FROM employees WHERE emp_email='$user_email'");
+        while ($r = $userFirstName->fetch_assoc()) {
+            $fname = $r['emp_first_name'];
+            $lname = $r['emp_last_name'];
+            $user_data .= ", user_first_name='$fname'";
+            $user_data .= ", user_last_name='$lname'";
+        }
+
+
         if (!empty($user_password)) {
             $empId = $this->db->query("SELECT emp_id FROM employees WHERE emp_email='$user_email';");
-            while($r = $empId->fetch_assoc()){
+            while ($r = $empId->fetch_assoc()) {
                 $id = $r['emp_id'];
                 $user_data .= ", emp_id='$id' ";
             }
-			$user_data .= ", user_password=md5('$user_password')";
-		}
+            $user_data .= ", user_password=md5('$user_password')";
+        }
 
         if ($para == 'insert') {
             $checkUserExists = $this->db->query("SELECT user_email FROM users where user_email ='$user_email' ")->num_rows;
             if ($checkUserExists == 0) {
                 $insertUser = $this->db->query("INSERT INTO users SET $user_data");
-                if($insertUser){
+                if ($insertUser) {
                     return $insertUser;
                 }
+            }else{
+                return 2;
             }
         }
     }
 
-    public function user_delete(){
+    public function user_delete()
+    {
         extract($_POST);
-        $qry=$this->db->query("DELETE FROM users WHERE user_id='$user_id'");
-        if($qry){
+        $qry = $this->db->query("DELETE FROM users WHERE user_id='$user_id'");
+        if ($qry) {
             return $qry;
         }
     }
 
-    public function change_password(){
+    public function change_password()
+    {
         extract($_POST);
-        $qry=$this->db->query("SELECT user_password FROM users WHERE user_id='$user_id'");
-        while($row = $qry->fetch_assoc()){
-            if($row['user_password'] == md5($user_old_password)){
-                $updatePassword=$this->db->query("UPDATE users SET user_password=md5('$user_password') WHERE user_id='$user_id';");
-                if($updatePassword){
+        $qry = $this->db->query("SELECT user_password FROM users WHERE user_id='$user_id'");
+        while ($row = $qry->fetch_assoc()) {
+            if ($row['user_password'] == md5($user_old_password)) {
+                $updatePassword = $this->db->query("UPDATE users SET user_password=md5('$user_password') WHERE user_id='$user_id';");
+                if ($updatePassword) {
                     return 1;
-                }else{
+                } else {
                     return 3;
                 }
-            }else{
+            } else {
                 return 2;
             }
         }
@@ -122,7 +135,7 @@ class Controller
             $emp_data = "emp_id='$emp_id'";
         }
         foreach ($_POST as $k => $v) {
-            if (!in_array($k, array('oldFile', 'password')) && !is_numeric($k)) {
+            if (!in_array($k, array('oldFile', 'password', 'emp_id')) && !is_numeric($k)) {
                 if ($v != '0000-00-00' || !empty($v)) {
                     $emp_data .= ", $k='$v' ";
                 }
@@ -235,6 +248,7 @@ class Controller
         if ($para == 'insert') {
             $checkClientExists = $this->db->query("SELECT * FROM clients where client_email ='$client_email' ")->num_rows;
             if ($checkClientExists == 0) {
+
                 $addClient = $this->db->query("INSERT INTO clients SET $client_data");
                 if ($addClient) {
                     return $addClient;
@@ -242,7 +256,7 @@ class Controller
                     return $addClient;
                 }
             } else {
-                return  $checkClientExists;
+                return 2;
             }
         } else if ($para == 'update') {
             $updateClient = $this->db->query("UPDATE clients SET $client_data WHERE client_id='$client_id'");
@@ -258,6 +272,83 @@ class Controller
         $query = $this->db->query("DELETE FROM clients where client_id ='$client_id'");
         if ($query) {
             return $query;
+        }
+    }
+
+
+    public function exp_add($para)
+    {
+        extract($_POST);
+        $exp_data = '';
+        if ($para == 'insert') {
+            $expId = $this->guidV4();
+            $exp_data = "exp_id='$expId'";
+        } else if ($para == 'update') {
+            $exp_data = "exp_id='$exp_id'";
+        }
+        foreach ($_POST as $k => $v) {
+            if (!in_array($k, array('password', 'exp_id', 'oldFile'))) {
+                if ($v != '0000-00-00' || !empty($v)) {
+                    $exp_data .= ", $k='$v' ";
+                }
+            }
+        }
+
+        if ($para == 'insert') {
+            $checkExpExists = $this->db->query("SELECT * FROM expenses WHERE exp_name ='$exp_name' AND exp_amount =$exp_amount ")->num_rows;
+            if ($checkExpExists == 0) {
+                if (isset($_FILES['exp_bill_photo']) && $_FILES['exp_bill_photo']['tmp_name'] != '') {
+                    $fname = strtotime(date('y-m-d H:i')) . '_' . $_FILES['exp_bill_photo']['name'];
+                    $exp_data .= ", exp_bill_photo='$fname'";
+                    $move = move_uploaded_file($_FILES['exp_bill_photo']['tmp_name'], '../assets/Expenses/' . $fname);
+                } else {
+                    $fname = 'default_user.jpg';
+                }
+                $addExp = $this->db->query("INSERT INTO expenses SET $exp_data");
+                if ($addExp) {
+                    return $addExp;
+                } else {
+                    return $addExp;
+                }
+            } else {
+                return 2;
+            }
+        }
+
+        if ($para == 'update') {
+            if (isset($_FILES['exp_bill_photo']) && $_FILES['exp_bill_photo']['tmp_name'] != '') {
+                $fname = strtotime(date('y-m-d H:i')) . '_' . $_FILES['exp_bill_photo']['name'];
+                if (file_exists('../assets/Expenses/' . $oldFile)) {
+                    unlink('../assets/Expenses/' . $oldFile);
+                }
+                $move = move_uploaded_file($_FILES['exp_bill_photo']['tmp_name'], '../assets/Expenses/' . $fname);
+                $exp_data .= ", exp_bill_photo='$fname'";
+            } else {
+                $fname = 'default_user.jpg';
+            }
+            // $updateEmp = $this->db->query("UPDATE employees SET emp_first_name='$emp_first_name', emp_last_name='$emp_last_name', emp_description='$emp_description', emp_gender='$emp_gender', emp_dob='$emp_dob', emp_mob=$emp_mob, emp_email='$emp_email', emp_address='$emp_address', emp_department='$emp_department', emp_designation='$emp_designation', emp_hod_name='$emp_hod_name', emp_joining_date='$emp_joining_date', emp_confirmation_date='$emp_confirmation_date', emp_leaving_date='$emp_leaving_date', emp_working_hours='$emp_working_hours', emp_profile_pic='$fname' WHERE emp_id='$emp_id'");
+            $updateExp = $this->db->query("UPDATE expenses SET $exp_data WHERE exp_id='$exp_id'");
+            if ($updateExp) {
+                return $updateExp;
+            } else {
+                return 2;
+            }
+        }
+    }
+
+    public function exp_delete()
+    {
+        extract($_POST);
+        $query = $this->db->query("DELETE FROM expenses where exp_id ='$exp_id'");
+        if ($query) {
+            $deletePic = $this->db->query("SELECT exp_bill_photo FROM expenses WHERE exp_id = '$exp_id'");
+            while ($row = $deletePic->fetch_assoc()) {
+                $fileName = $row['exp_bill_photo'];
+                if (file_exists('../assets/Expenses/' . $fileName)) {
+                    unlink('../assets/Expenses/' . $fileName);
+                }
+            }
+            return 1;
         }
     }
 }

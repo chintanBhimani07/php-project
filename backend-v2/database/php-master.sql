@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 26, 2023 at 03:04 PM
+-- Generation Time: Feb 27, 2023 at 06:34 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -86,6 +86,28 @@ INSERT INTO `employees` (`emp_id`, `emp_first_name`, `emp_last_name`, `emp_code`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `expenses`
+--
+
+CREATE TABLE `expenses` (
+  `exp_id` text NOT NULL,
+  `exp_name` text NOT NULL,
+  `exp_amount` double NOT NULL,
+  `exp_date` date NOT NULL,
+  `exp_bill_photo` text NOT NULL,
+  `exp_createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `expenses`
+--
+
+INSERT INTO `expenses` (`exp_id`, `exp_name`, `exp_amount`, `exp_date`, `exp_bill_photo`, `exp_createdAt`) VALUES
+('f0592e606c574442b41b1c577be6243d', 'food', 100.43, '2023-02-27', '1677475200_download.jpg', '2023-02-27 05:20:16');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hod`
 --
 
@@ -123,7 +145,8 @@ CREATE TABLE `projects` (
   `nature_of_project` varchar(100) NOT NULL,
   `reference_by` text DEFAULT NULL,
   `project_location` varchar(100) NOT NULL,
-  `engineers_id` text NOT NULL,
+  `engineers_id` text DEFAULT NULL,
+  `users_id` text DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -138,6 +161,8 @@ CREATE TABLE `users` (
   `user_email` text NOT NULL,
   `user_password` text NOT NULL,
   `emp_id` text NOT NULL,
+  `user_first_name` varchar(100) NOT NULL,
+  `user_last_name` varchar(100) NOT NULL,
   `user_access_type` int(10) NOT NULL DEFAULT 2 COMMENT '1: Admin\r\n2: Employee\r\n3: Engineer\r\n4: HOD'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -145,8 +170,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_email`, `user_password`, `emp_id`, `user_access_type`) VALUES
-('21710fd4918043958c773d741e759780', 'test@gmail.com', '09d1d20bd495912ed5307a08510440d6', '3b3e819d-11ad-425b-8e30-5cf08afc25fa', 1);
+INSERT INTO `users` (`user_id`, `user_email`, `user_password`, `emp_id`, `user_first_name`, `user_last_name`, `user_access_type`) VALUES
+('09e924b940f0431cb526c2df3fda99b0', 'pari@gmail.com', '52fb34b6224e8004c18424cdf9021999', '8808a6c1-cf80-49f4-9cfd-6c7310f86f5d', 'Pratiksha', 'Chopra', 2),
+('21710fd4918043958c773d741e759780', 'test@gmail.com', '09d1d20bd495912ed5307a08510440d6', '3b3e819d-11ad-425b-8e30-5cf08afc25fa', '', '', 1);
 
 --
 -- Indexes for dumped tables
@@ -163,6 +189,12 @@ ALTER TABLE `clients`
 --
 ALTER TABLE `employees`
   ADD PRIMARY KEY (`emp_id`(255));
+
+--
+-- Indexes for table `expenses`
+--
+ALTER TABLE `expenses`
+  ADD PRIMARY KEY (`exp_id`(255));
 
 --
 -- Indexes for table `hod`

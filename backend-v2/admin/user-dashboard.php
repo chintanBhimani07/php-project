@@ -32,33 +32,27 @@
                                             <?php echo $i++ ?>
                                         </th>
                                         <td>
-                                            <?php
-                                            $empId = $row['emp_id'];
-                                            $q = $con->query("SELECT emp_first_name,emp_last_name FROM employees WHERE emp_id='$empId'");
-                                            while ($r = $q->fetch_assoc()) {
-                                                echo $r['emp_first_name'] . " " . $r['emp_last_name'];
-                                            }
-                                            ?>
+                                            <?php echo $row['user_first_name'] . " " . $row['user_last_name']; ?>
                                         </td>
                                         <td>
                                             <?php echo $row['user_email'] ?>
                                         </td>
                                         <td>
                                             <?php
-                                            if($row['user_access_type'] == 1){
+                                            if ($row['user_access_type'] == 1) {
                                                 echo "Admin";
-                                            }else if($row['user_access_type'] == 2){
+                                            } else if ($row['user_access_type'] == 2) {
                                                 echo "Employee";
-                                            }else if($row['user_access_type'] == 3){
+                                            } else if ($row['user_access_type'] == 3) {
                                                 echo "HOD";
-                                            }else{
+                                            } else {
                                                 echo "Engineer";
                                             }
                                             ?>
                                         </td>
                                         <td class="d-flex align-items-center justify-content-center">
                                             <a type="button" class="btn btn-primary btn-circle viewEmployee mx-1" href="./index.php?page=employee-viewer&empId=<?php echo $row['emp_id'] ?>&content=user"><i class="fa-solid fa-eye"></i></a>
-                                            <a type="button" class="btn btn-danger  btn-circle  mx-1" href="#" data-toggle="modal" data-target="#deleteUserModal" ><i class="fa-solid fa-trash"></i></a>
+                                            <a type="button" class="btn btn-danger  btn-circle  mx-1" href="#" data-toggle="modal" data-target="#deleteUserModal"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">

@@ -34,7 +34,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user_dashboard"
                 aria-expanded="true" aria-controls="employee_controls">
-                <i class="fas fa-fw fa-users-gear"></i>
+                <i class="fa-solid fa-person-circle-check"></i>
                 <span>Application Users</span>
             </a>
             <div id="user_dashboard" class="collapse" aria-labelledby="employee_lable" data-parent="#main_dashboard">
@@ -61,7 +61,7 @@
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#client_dashboard"
                 aria-expanded="true" aria-controls="project_controls">
-                <i class="fa-solid fa-list-check"></i>
+                <i class="fa-solid fa-user-plus"></i>
                 <span>Clients</span>
             </a>
             <div id="client_dashboard" class="collapse" aria-labelledby="project_lable" data-parent="#main_dashboard">
@@ -71,11 +71,10 @@
                 </div>
             </div>
         </li>
-        <hr class="sidebar-divider">
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#work_collect_dashboard"
                 aria-expanded="true" aria-controls="work_collect_controls">
-                <i class="fa-brands fa-stack-exchange"></i>
+                <i class="fa-solid fa-briefcase"></i>
                 <span>Work Collector</span>
             </a>
             <div id="work_collect_dashboard" class="collapse" aria-labelledby="work_collect_lable"
@@ -84,14 +83,20 @@
                 </div>
             </div>
         </li>
+        <hr class="sidebar-divider">
         <li class="nav-item">
             <a class="nav-link" href="./index.php?page=hod-dashboard">
-                <i class="fa-solid fa-list-check"></i>
+                <i class="fa-solid fa-building-user"></i>
                 <span>Head Of Departments</span>
             </a>
         </li>
-
-        <!-- Divider -->
+        <hr class="sidebar-divider">
+        <li class="nav-item">
+            <a class="nav-link" href="./index.php?page=expenses-dashboard">
+                <i class="fa-solid fa-wallet"></i>
+                <span>Expenses</span>
+            </a>
+        </li>
         <hr class="sidebar-divider d-none d-md-block">
 
         <!-- Sidebar Toggler (Sidebar) -->
@@ -99,7 +104,7 @@
             <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
     </ul>
-    
+
     <div id="content-wrapper" class="d-flex flex-column">
         <div id="content">
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
@@ -139,17 +144,18 @@
                                 } ?>
                             </h6>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="./index.php?page=employee-viewer&empId=<?php echo $_SESSION['login_emp_id'] ?>&content=user&isProfile=true">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            <a class="dropdown-item"
+                                href="./index.php?page=employee-viewer&empId=<?php echo $_SESSION['login_emp_id'] ?>&content=user&isProfile=true">
+                                <i class="fa-solid fa-user mr-2"></i>
                                 Profile
                             </a>
                             <a class="dropdown-item" href="./index.php?page=user-change-password">
-                                <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <i class="fa-solid fa-unlock mr-2"></i>
                                 Change Password
                             </a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="./user-logout.php">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                <i class="fa-solid fa-right-from-bracket mr-2"></i>
                                 Logout
                             </a>
                         </div>
