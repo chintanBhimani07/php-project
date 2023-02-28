@@ -69,6 +69,7 @@
                                     <th>Joining Date</th>
                                     <th>Leaving Date</th>
                                     <th>Department</th>
+                                    <th>Designation</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -89,29 +90,13 @@
                                             }
                                             ?></td>
                                         <td><?php echo $row['emp_department'] ?></td>
+                                        <td><?php echo $row['emp_designation'] ?></td>
                                         <td class="d-flex align-items-center justify-content-center">
                                             <a type="button" class="btn btn-primary btn-circle viewEmployee mx-1" href="./index.php?page=employee-viewer&empId=<?php echo $row['emp_id'] ?>&content=employee"><i class="fa-solid fa-eye"></i></a>
                                             <a type="button" class="btn btn-warning  btn-circle editEmployee mx-1" href="./index.php?page=employee-edit&empId=<?php echo $row['emp_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
-                                            <a type="button" class="btn btn-danger  btn-circle  mx-1" href="#" data-toggle="modal" data-target="#deleteEmployeeModal"><i class="fa-solid fa-trash"></i></a>
+                                            <a type="button" class="btn btn-danger  btn-circle  deleteEmployee mx-1" href="#" data-id="<?php echo $row['emp_id'] ?>"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure want to delete?</h5>
-                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true"></span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">This field Permanently Deleted.</div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                                    <button class="btn btn-danger deleteEmployee" data-dismiss="modal" id="<?php echo $row['emp_id'] ?>">Delete</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 <?php } ?>
                             </tbody>
                         </table>
@@ -127,7 +112,7 @@
     $(document).ready(function() {
         $('.deleteEmployee').click(function() {
             console.log('click');
-            let id = $(this).attr('id');
+            let id = $(this).data('id');
             $.ajax({
                 url: './php/actions.php?action=delete_employee',
                 method: 'POST',

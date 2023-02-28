@@ -44,9 +44,9 @@
                                             } else if ($row['user_access_type'] == 2) {
                                                 echo "Employee";
                                             } else if ($row['user_access_type'] == 3) {
-                                                echo "HOD";
-                                            } else {
                                                 echo "Engineer";
+                                            } else {
+                                                echo "HOD";
                                             }
                                             ?>
                                         </td>

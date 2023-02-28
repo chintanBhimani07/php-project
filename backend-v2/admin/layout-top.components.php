@@ -119,10 +119,10 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <?php
                             $userEmail = $_SESSION['login_user_email'];
-                            $qry = $con->query("SELECT emp_first_name, emp_last_name, emp_profile_pic FROM employees WHERE emp_email='$userEmail'");
+                            $qry = $con->query("SELECT emp_profile_pic FROM employees WHERE emp_email='$userEmail'");
                             while ($row = $qry->fetch_assoc()) { ?>
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    <?php echo $row['emp_first_name'] . " " . $row['emp_last_name'] ?>
+                                    <?php echo $_SESSION['login_user_first_name'] . " " . $_SESSION['login_user_last_name'] ?>
                                 </span>
                                 <img class="img-profile rounded-circle"
                                     src="./assets/uploads/<?php echo $row['emp_profile_pic']; ?>">

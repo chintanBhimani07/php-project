@@ -155,7 +155,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                 success: function(resp) {
                     if (resp == 1) {
                         setTimeout(() => {
-                            window.location = './index.php?page=expenses-dashboard';
+                            window.location = './index.php?page=employee-dashboard';
                         }, 1000);
                     } else {
                         console.log(resp);

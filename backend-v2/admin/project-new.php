@@ -57,7 +57,7 @@
                             <select class="form-control custom-select" id="hod_id" name="hod_id" required>
                                 <option value="">Select HOD</option>
                                 <?php
-                                $qry = $con->query("SELECT hod_id,hod_first_name,hod_last_name FROM hod;");
+                                $qry = $con->query("SELECT hod_id,hod_first_name,hod_last_name FROM hod ORDER BY hod_first_name ASC;");
                                 while ($r = $qry->fetch_assoc()) { ?>
                                     <option value="<?php echo $r['hod_id'] ?>"><?php echo $r['hod_first_name'] . " " . $r['hod_last_name'] ?></option>
                                 <?php } ?>
@@ -78,18 +78,6 @@
                             <label for="reference_by" class="col-form-label mr-1">Reference From</label>
                             <input type="text" class="form-control" id="reference_by" name="reference_by" autocomplete="off" required>
                         </div>
-                        <div class="form-group">
-                            <label for="emp_department" class="col-form-label mr-1">Department</label><span class="text-danger">*</span>
-                            <select class="form-control custom-select" id="emp_department" name="emp_department" required>
-                                <option value="Admin">Admin</option>
-                                <option value="IT">IT</option>
-                                <option value="MDO">MDO</option>
-                                <option value="Architecture">Architecture</option>
-                                <option value="Engineer">Engineer</option>
-                                <option value="Interior">Interior</option>
-                                <option value="Finance">Finance</option>
-                            </select>
-                        </div>
                         <div class="form-group ">
                             <label for="project_location" class="col-form-label mr-1">Project Location</label><span class="text-danger">*</span>
                             <textarea type="text" class="form-control" id="project_location" name="project_location" autocomplete="off" required></textarea>
@@ -100,12 +88,12 @@
                                 <select class="form-control custom-select" id="engineers_id" name="engineers_id" required>
                                     <option value="">Select Engineers</option>
                                     <?php
-                                    // $qry = $con->query("SELECT engineer_id,engineer_first_name,engineer_last_name FROM engineer;");
-                                    // while ($r = $qry->fetch_assoc()) { 
+                                    $qry = $con->query("SELECT user_id,user_first_name,user_last_name FROM users WHERE user_access_type=3 ORDER BY user_first_name ASC ;");
+                                    while ($r = $qry->fetch_assoc()) {
                                     ?>
-                                    <!-- <option value="<?php echo $r['engineer_id'] ?>"><?php echo $r['engineer_first_name'] . " " . $r['engineer_last_name'] ?></option> -->
+                                        <option value="<?php echo $r['user_id'] ?>"><?php echo $r['user_first_name'] . " " . $r['user_last_name'] ?></option>
                                     <?php
-                                    //  }
+                                    }
                                     ?>
                                 </select>
                             </div>
@@ -114,12 +102,12 @@
                                 <select class="form-control custom-select" id="users_id" name="users_id" required>
                                     <option value="">Select Users</option>
                                     <?php
-                                    // $qry = $con->query("SELECT user_id,user_first_name,user_last_name FROM users;");
-                                    // while ($r = $qry->fetch_assoc()) { 
+                                    $qry = $con->query("SELECT user_id,user_first_name,user_last_name FROM users WHERE user_access_type=2 ORDER BY user_first_name ASC;");
+                                    while ($r = $qry->fetch_assoc()) {
                                     ?>
-                                    <!-- <option value="<?php echo $r['user_id'] ?>"><?php echo $r['user_first_name'] . " " . $r['user_last_name'] ?></option> -->
+                                        <option value="<?php echo $r['user_id'] ?>"><?php echo $r['user_first_name'] . " " . $r['user_last_name'] ?></option>
                                     <?php
-                                    //  }
+                                    }
                                     ?>
                                 </select>
                             </div>

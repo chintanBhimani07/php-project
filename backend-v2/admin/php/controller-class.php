@@ -182,6 +182,8 @@ class Controller
                 $fname = strtotime(date('y-m-d H:i')) . '_' . $_FILES['emp_profile_pic']['name'];
                 if (file_exists('../assets/uploads/' . $oldFile)) {
                     unlink('../assets/uploads/' . $oldFile);
+                }else{
+                
                 }
                 $move = move_uploaded_file($_FILES['emp_profile_pic']['tmp_name'], '../assets/uploads/' . $fname);
                 $emp_data .= ", emp_profile_pic='$fname'";
@@ -223,7 +225,9 @@ class Controller
                 }
             }
             $deleteHod = $this->db->query("DELETE FROM hod WHERE emp_id='$emp_id'");
-            return 1;
+            if($deleteHod){
+                return 1;
+            }
         }
     }
 

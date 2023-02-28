@@ -12,13 +12,13 @@
                 <div class="card-body">
                     <form id="new_user_form">
                         <div class="form-group ">
-                            <label for="user_email" class="col-form-label mr-1">Email Address</label><span class="text-danger">*</span>
+                            <label for="user_email" class="col-form-label mr-1">Employee Name</label><span class="text-danger">*</span>
                             <select class="form-control custom-select" id="user_email" name="user_email" autofocus required>
-                                <option value="0">Select Email</option>
+                                <option value="0">Select Name</option>
                                 <?php
-                                $qry = $con->query("SELECT emp_email FROM employees;");
+                                $qry = $con->query("SELECT emp_email,emp_first_name,emp_last_name FROM employees ORDER BY emp_first_name ASC;");
                                 while ($row = $qry->fetch_assoc()) { ?>
-                                    <option value="<?php echo $row['emp_email'] ?>"><?php echo $row['emp_email'] ?></option>
+                                    <option value="<?php echo $row['emp_email'] ?>"><?php echo $row['emp_first_name']." ".$row['emp_last_name'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
@@ -31,8 +31,8 @@
                             <select class="form-control custom-select" id="user_access_type" name="user_access_type" required>
                                 <option value="2">Employee</option>
                                 <option value="1">Admin</option>
-                                <option value="4">MDO</option>
                                 <option value="3">Engineer</option> 
+                                <option value="4">HOD</option>
                             </select>   
                         </div>
                         <div class="form-group row">
