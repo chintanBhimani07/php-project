@@ -18,13 +18,11 @@
             Interface
         </div> -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#employee_dashboard"
-                aria-expanded="true" aria-controls="employee_controls">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#employee_dashboard" aria-expanded="true" aria-controls="employee_controls">
                 <i class="fas fa-fw fa-users-gear"></i>
                 <span>Employee</span>
             </a>
-            <div id="employee_dashboard" class="collapse" aria-labelledby="employee_lable"
-                data-parent="#main_dashboard">
+            <div id="employee_dashboard" class="collapse" aria-labelledby="employee_lable" data-parent="#main_dashboard">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <a class="collapse-item" href="./index.php?page=employee-dashboard">All Employees</a>
                     <a class="collapse-item" href="./index.php?page=employee-new">New Employee</a>
@@ -32,8 +30,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user_dashboard"
-                aria-expanded="true" aria-controls="employee_controls">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user_dashboard" aria-expanded="true" aria-controls="employee_controls">
                 <i class="fa-solid fa-person-circle-check"></i>
                 <span>Application Users</span>
             </a>
@@ -46,8 +43,7 @@
         </li>
         <hr class="sidebar-divider">
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#project_dashboard"
-                aria-expanded="true" aria-controls="project_controls">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#project_dashboard" aria-expanded="true" aria-controls="project_controls">
                 <i class="fa-solid fa-list-check"></i>
                 <span>Projects</span>
             </a>
@@ -59,8 +55,7 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#client_dashboard"
-                aria-expanded="true" aria-controls="project_controls">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#client_dashboard" aria-expanded="true" aria-controls="project_controls">
                 <i class="fa-solid fa-user-plus"></i>
                 <span>Clients</span>
             </a>
@@ -72,16 +67,16 @@
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#work_collect_dashboard"
-                aria-expanded="true" aria-controls="work_collect_controls">
+            <a class="nav-link" href="./index.php?page=task-dashboard">
                 <i class="fa-solid fa-briefcase"></i>
                 <span>Work Collector</span>
             </a>
-            <div id="work_collect_dashboard" class="collapse" aria-labelledby="work_collect_lable"
-                data-parent="#main_dashboard">
-                <div class="bg-white py-2 collapse-inner rounded">
-                </div>
-            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="./index.php?page=project-report">
+                <i class="fa-solid fa-flag"></i>
+                <span>Project Progress Report</span>
+            </a>
         </li>
         <hr class="sidebar-divider">
         <li class="nav-item">
@@ -115,8 +110,7 @@
                 <ul class="navbar-nav ml-auto">
                     <div class="topbar-divider d-none d-sm-block"></div>
                     <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <?php
                             $userEmail = $_SESSION['login_user_email'];
                             $qry = $con->query("SELECT emp_profile_pic FROM employees WHERE emp_email='$userEmail'");
@@ -124,14 +118,11 @@
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <?php echo $_SESSION['login_user_first_name'] . " " . $_SESSION['login_user_last_name'] ?>
                                 </span>
-                                <img class="img-profile rounded-circle"
-                                    src="./assets/uploads/<?php echo $row['emp_profile_pic']; ?>">
+                                <img class="img-profile rounded-circle" src="./assets/uploads/<?php echo $row['emp_profile_pic']; ?>">
                             <?php } ?>
-
                         </a>
                         <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                            aria-labelledby="userDropdown">
+                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                             <h6 class="text-center font-weight-bolder">
                                 <?php if ($_SESSION['login_user_access_type'] == 1) {
                                     echo 'Administrator';
@@ -144,8 +135,7 @@
                                 } ?>
                             </h6>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item"
-                                href="./index.php?page=employee-viewer&empId=<?php echo $_SESSION['login_emp_id'] ?>&content=user&isProfile=true">
+                            <a class="dropdown-item" href="./index.php?page=employee-viewer&empId=<?php echo $_SESSION['login_emp_id'] ?>&content=user&isProfile=true">
                                 <i class="fa-solid fa-user mr-2"></i>
                                 Profile
                             </a>

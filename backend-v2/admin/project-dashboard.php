@@ -27,7 +27,7 @@
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Running</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php echo $con->query("SELECT * FROM projects WHERE project_status='running';")->num_rows . ' ' . 'Projects'; ?>
+                                <?php echo $con->query("SELECT * FROM projects WHERE project_status='Running';")->num_rows . ' ' . 'Projects'; ?>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Completed</div>
                             <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                <?php echo $con->query("SELECT * FROM projects WHERE project_status='completed';")->num_rows . ' ' . 'Projects'; ?>
+                                <?php echo $con->query("SELECT * FROM projects WHERE project_status='Complete';")->num_rows . ' ' . 'Projects'; ?>
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Pending</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php echo $con->query("SELECT * FROM projects WHERE project_status='pending';")->num_rows . ' ' . 'Projects'; ?>
+                                <?php echo $con->query("SELECT * FROM projects WHERE project_status='Hold';")->num_rows . ' ' . 'Projects'; ?>
                             </div>
                         </div>
                     </div>
@@ -127,29 +127,11 @@
                                             <?php echo $row['project_status'] ?>
                                         </td>
                                         <td class="d-flex align-items-center justify-content-center">
-                                            <a type="button" class="btn btn-primary btn-circle viewEmployee mx-1" href="./index.php?page=project-viewer&projectId=<?php echo $row['project_id'] ?>"><i class="fa-solid fa-eye"></i></a>
-                                            <a type="button" class="btn btn-warning  btn-circle editEmployee mx-1" href="./index.php?page=project-edit&projectId=<?php echo $row['project_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
-                                            <a type="button" class="btn btn-danger  btn-circle  mx-1" href="#" data-toggle="modal" data-target="#deleteProjectModal"><i class="fa-solid fa-trash"></i></a>
+                                            <a type="button" class="btn btn-primary btn-circle mx-1" href="./index.php?page=project-viewer&projectId=<?php echo $row['project_id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                            <a type="button" class="btn btn-warning  btn-circle mx-1" href="./index.php?page=project-edit&projectId=<?php echo $row['project_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                            <a type="button" class="btn btn-danger  btn-circle deleteProject  mx-1" href="#" data-id="<?php echo $row['project_id'] ?>"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="deleteProjectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure want to
-                                                        delete?</h5>
-                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true"></span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">This field Permanently Deleted.</div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                                    <button class="btn btn-danger deleteProject" data-dismiss="modal" id="<?php echo $row['project_id'] ?>">Delete</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 <?php } ?>
                             </tbody>
                         </table>

@@ -60,6 +60,7 @@ if (isset($_SESSION['login_user_id'])) {
     $(document).ready(function () {
         $('#user_login').submit(function (e) {
             e.preventDefault();
+            $('.show').hide();
             $.ajax({
                 url: './php/actions.php?action=login_application_user',
                 data: new FormData($(this)[0]),

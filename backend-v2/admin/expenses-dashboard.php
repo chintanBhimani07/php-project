@@ -66,27 +66,10 @@
                                         <td><?php echo $row['exp_amount'] ?> <i class="fa-solid fa-indian-rupee-sign"></i></td>
                                         <td><?php echo $row['exp_date'] ?></td>
                                         <td class="d-flex align-items-center justify-content-center">
-                                            <a type="button" class="btn btn-warning  btn-circle editEmployee mx-1" href="./index.php?page=expenses-edit&expId=<?php echo $row['exp_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
-                                            <a type="button" class="btn btn-danger  btn-circle  mx-1" href="#" data-toggle="modal" data-target="#deleteEmployeeModal"><i class="fa-solid fa-trash"></i></a>
+                                            <a type="button" class="btn btn-warning  btn-circle mx-1" href="./index.php?page=expenses-edit&expId=<?php echo $row['exp_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                            <a type="button" class="btn btn-danger  btn-circle deleteExp mx-1" href="#" data-id="<?php echo $row['exp_id'] ?>"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure want to delete?</h5>
-                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true"></span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">This field Permanently Deleted.</div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                                    <button class="btn btn-danger deleteExp" data-dismiss="modal" id="<?php echo $row['exp_id'] ?>">Delete</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 <?php } ?>
                             </tbody>
                         </table>

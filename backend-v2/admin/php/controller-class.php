@@ -91,7 +91,7 @@ class Controller
                 if ($insertUser) {
                     return $insertUser;
                 }
-            }else{
+            } else {
                 return 2;
             }
         }
@@ -182,8 +182,7 @@ class Controller
                 $fname = strtotime(date('y-m-d H:i')) . '_' . $_FILES['emp_profile_pic']['name'];
                 if (file_exists('../assets/uploads/' . $oldFile)) {
                     unlink('../assets/uploads/' . $oldFile);
-                }else{
-                
+                } else {
                 }
                 $move = move_uploaded_file($_FILES['emp_profile_pic']['tmp_name'], '../assets/uploads/' . $fname);
                 $emp_data .= ", emp_profile_pic='$fname'";
@@ -215,7 +214,7 @@ class Controller
     public function employee_delete()
     {
         extract($_POST);
-        $query = $this->db->query("DELETE FROM employees where emp_id ='$emp_id'");
+        $query = $this->db->query("DELETE FROM employees WHERE emp_id=$emp_id");
         if ($query) {
             $deletePic = $this->db->query("SELECT emp_profile_pic FROM employees WHERE emp_id = '$emp_id'");
             while ($row = $deletePic->fetch_assoc()) {
@@ -225,7 +224,7 @@ class Controller
                 }
             }
             $deleteHod = $this->db->query("DELETE FROM hod WHERE emp_id='$emp_id'");
-            if($deleteHod){
+            if ($deleteHod) {
                 return 1;
             }
         }
@@ -273,8 +272,10 @@ class Controller
     public function client_delete()
     {
         extract($_POST);
-        $query = $this->db->query("DELETE FROM clients where client_id ='$client_id'");
+        $query =  $this->db->query("DELETE FROM clients WHERE client_id='$client_id'");
         if ($query) {
+            return 1;
+        }else{
             return $query;
         }
     }
@@ -353,6 +354,140 @@ class Controller
                 }
             }
             return 1;
+        }
+    }
+
+
+    public function project_add($para)
+    {
+        extract($_POST);
+        $project_data = '';
+        if ($para == 'insert') {
+            $projectId = $this->guidV4();
+            $project_data = "project_id ='$projectId'";
+        } else if ($para == 'update') {
+            $project_data = "project_id ='$project_id '";
+        }
+        foreach ($_POST as $k => $v) {
+            if (!in_array($k, array('password', 'project_id', 'users_id', 'engineers_id')) && !is_numeric($k)) {
+                if ($v != '0000-00-00' || !empty($v)) {
+                    $project_data .= ", $k='$v' ";
+                }
+            }
+        }
+        if (isset($engineers_id)) {
+            $project_data .= ", engineers_id='" . implode(',', $engineers_id) . "' ";
+        }
+        if (isset($users_id)) {
+            $project_data .= ", users_id='" . implode(',', $users_id) . "' ";
+        }
+
+        if ($para == 'insert') {
+            $checkProjectExists = $this->db->query("SELECT project_name, project_code FROM projects WHERE project_name='$project_name' OR project_code='$project_code'")->num_rows;
+            if ($checkProjectExists == 0) {
+                $insertProject = $this->db->query("INSERT INTO projects SET $project_data;");
+                if ($insertProject) {
+                    return 1;
+                } else {
+                    return 2;
+                }
+            }
+        } else if ($para == 'update') {
+            $updateProject = $this->db->query("UPDATE projects SET $project_data WHERE project_id='$project_id'");
+            if ($updateProject) {
+                return $updateProject;
+            } else {
+                return 2;
+            }
+        }
+    }
+
+
+    public function task_add($para)
+    {
+        extract($_POST);
+        $task_data = '';
+        if ($para == 'insert') {
+            $taskId = $this->guidV4();
+            $task_data = "task_id ='$taskId'";
+        } else if ($para == 'update') {
+            $task_data = "task_id ='$task_id'";
+        }
+        foreach ($_POST as $k => $v) {
+            if (!in_array($k, array('password', 'task_id')) && !is_numeric($k)) {
+                if ($v != '0000-00-00' || !empty($v)) {
+                    $task_data .= ", $k='$v' ";
+                }
+            }
+        }
+
+        if ($para == 'insert') {
+            $checkTask = $this->db->query("SELECT * FROM task WHERE task_name='$task_name'")->num_rows;
+            if ($checkTask == 0) {
+                $insertTask = $this->db->query("INSERT INTO task SET $task_data");
+                if ($insertTask) {
+                    return 1;
+                } else {
+                    return 2;
+                }
+            }
+        }
+        if($para == 'update'){
+            $updateTask = $this->db->query("UPDATE task SET $task_data WHERE task_id='$task_id'");
+            if ($updateTask) {
+                return $updateTask;
+            } else {
+                return 2;
+            }
+        }
+    }
+
+    public function task_delete()
+    {
+        extract($_POST);
+        $query = $this->db->query("DELETE FROM task where task_id ='$task_id'");
+        if ($query) {
+            return $query;
+        }
+    }
+
+
+    public function productivity_add($para){
+        extract($_POST);
+        $pro_data = '';
+        if ($para == 'insert') {
+            $proId = $this->guidV4();
+            $pro_data = "productivity_id  ='$proId'";
+        } else if ($para == 'update') {
+            $pro_data = "productivity_id  ='$productivity_id'";
+        }
+        foreach ($_POST as $k => $v) {
+            if (!in_array($k, array('password', 'productivity_id','time_rendered')) && !is_numeric($k)) {
+                if ($v != '0000-00-00' || !empty($v)) {
+                    $pro_data .= ", $k='$v' ";
+                }
+            }
+        }
+        $duration = abs(strtotime("2023-01-01 " . $end_time)) - abs(strtotime("2023-01-01 " . $start_time));
+        $pro_data .= ", time_rendered  ='$duration'";
+        if ($para == 'insert') {
+            $checkPro = $this->db->query("SELECT * FROM productivity WHERE productivity_subject='$productivity_subject'")->num_rows;
+            if ($checkPro  == 0) {
+                $insertPro = $this->db->query("INSERT INTO productivity SET $pro_data");
+                if ($insertPro) {
+                    return 1;
+                } else {
+                    return 2;
+                }
+            }
+        }
+        if($para == 'update'){
+            $updatePro = $this->db->query("UPDATE productivity SET $pro_data WHERE productivity_id='$productivity_id'");
+            if ($updatePro) {
+                return $updatePro;
+            } else {
+                return 2;
+            }
         }
     }
 }

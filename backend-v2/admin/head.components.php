@@ -20,6 +20,7 @@
     <link href="./assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="./assets/css/sb-admin-2.min.css" rel="stylesheet">
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script src="./assets/js/sb-admin-2.min.js"></script>
     <script src="./assets/vendor/jquery/jquery.min.js"></script>
     <script src="./assets/vendor/jquery-easing/jquery.easing.min.js"></script>

@@ -92,9 +92,9 @@
                                         <td><?php echo $row['emp_department'] ?></td>
                                         <td><?php echo $row['emp_designation'] ?></td>
                                         <td class="d-flex align-items-center justify-content-center">
-                                            <a type="button" class="btn btn-primary btn-circle viewEmployee mx-1" href="./index.php?page=employee-viewer&empId=<?php echo $row['emp_id'] ?>&content=employee"><i class="fa-solid fa-eye"></i></a>
-                                            <a type="button" class="btn btn-warning  btn-circle editEmployee mx-1" href="./index.php?page=employee-edit&empId=<?php echo $row['emp_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
-                                            <a type="button" class="btn btn-danger  btn-circle  deleteEmployee mx-1" href="#" data-id="<?php echo $row['emp_id'] ?>"><i class="fa-solid fa-trash"></i></a>
+                                            <a type="button" class="btn btn-primary btn-circle mx-1" href="./index.php?page=employee-viewer&empId=<?php echo $row['emp_id'] ?>&content=employee"><i class="fa-solid fa-eye"></i></a>
+                                            <a type="button" class="btn btn-warning  btn-circle mx-1" href="./index.php?page=employee-edit&empId=<?php echo $row['emp_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                            <a type="button" class="deleteEmployee btn btn-danger btn-circle mx-1" href="javascript:void(0)" data-id="<?php echo $row['emp_id'] ?>"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -120,6 +120,7 @@
                     emp_id: id
                 },
                 success: function(resp) {
+                    console.log(resp);
                     if (resp == 1) {
                         setTimeout(function() {
                             location.reload()
@@ -127,6 +128,9 @@
                     } else {
                         console.log(resp);
                     }
+                },
+                error:function(resp){
+                    console.log(resp);
                 }
             });
         });

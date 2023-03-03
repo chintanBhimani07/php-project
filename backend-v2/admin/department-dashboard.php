@@ -11,9 +11,8 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Departments</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php
-                                echo ($con->query("SELECT * FROM  departments;")->num_rows);
-                            ?></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                <?php echo ($con->query("SELECT * FROM  departments;")->num_rows); ?></div>
                         </div>
                     </div>
                 </div>
@@ -49,28 +48,11 @@
                                         <td><?php echo $row['department_hod'] ?></td>
                                         <td><?php echo $row['department_employees'] ?></td>
                                         <td class="d-flex align-items-center justify-content-center">
-                                            <a type="button" class="btn btn-primary btn-circle viewEmployee mx-1" href="./index.php?page=department-viewer&empId=<?php echo $row['department_id'] ?>"><i class="fa-solid fa-eye"></i></a>
-                                            <a type="button" class="btn btn-warning  btn-circle editEmployee mx-1" href="./index.php?page=department-edit&empId=<?php echo $row['department_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
-                                            <a type="button" class="btn btn-danger  btn-circle  mx-1" href="#" data-toggle="modal" data-target="#deleteDepartmentModal" ><i class="fa-solid fa-trash"></i></a>
+                                            <a type="button" class="btn btn-primary btn-circle mx-1" href="./index.php?page=department-viewer&empId=<?php echo $row['department_id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                            <a type="button" class="btn btn-warning  btn-circle mx-1" href="./index.php?page=department-edit&empId=<?php echo $row['department_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                            <a type="button" class="btn btn-danger  btn-circle deleteDepartment  mx-1" href="#" data-id="<?php echo $row['department_id']; ?>"><i class="fa-solid fa-trash"></i></a>
                                         </td>
                                     </tr>
-                                    <div class="modal fade" id="deleteDepartmentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure want to delete?</h5>
-                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true"></span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">This field Permanently Deleted.</div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                                    <button class="btn btn-danger deleteDepartment" data-dismiss="modal" id="<?php echo $row['department_id'] ?>">Delete</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 <?php } ?>
                             </tbody>
                         </table>
@@ -80,7 +62,6 @@
         </div>
     </div>
 </div>
-
 
 <script>
     $(document).ready(function() {
@@ -96,16 +77,11 @@
                 success: function(resp) {
                     console.log(resp);
                     if (resp == 1) {
-                        $('.tableComponent').prepend(`
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    <strong>Data Deleted Successfully</strong>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                    `);
                         setTimeout(function() {
                             location.reload()
-                        }, 2000)
-
+                        },1000)
+                    }else{
+                        console.log(resp);
                     }
                 }
             });

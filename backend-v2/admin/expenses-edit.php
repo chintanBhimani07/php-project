@@ -87,7 +87,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                 success: function (resp) {
                     if (resp == 1) {
                         setTimeout(() => {
-                            location.reload();
+                            window.location = './index.php?page=expenses-dashboard';
                         }, 1000);
                     } else {
                         console.log(resp);
