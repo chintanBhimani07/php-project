@@ -10,8 +10,9 @@ if (isset($_SESSION['login_user_id'])) {
 }
 ?>
 
-<?php include './head.components.php' ?>
-
+<?php
+include './head.components.php'
+?>
 <style>
     html,
     body {
@@ -32,6 +33,20 @@ if (isset($_SESSION['login_user_id'])) {
     .form-signin .form-floating:focus-within {
         z-index: 2;
     }
+
+    .error {
+        color: #ff0000 !important;
+        position: relative !important;
+        line-height: 1 !important;
+        font-size: 1rem !important;
+        width: 100% !important;
+        text-align: left !important;
+    }
+
+    .form-control.error {
+        border: 1px solid #ff0000;
+        color: #5a5c69 !important
+    }
 </style>
 
 <body class="text-center">
@@ -40,49 +55,74 @@ if (isset($_SESSION['login_user_id'])) {
         <h1 class="h3 mb-3 fw-bold ">Login Here</h1>
         <form id="user_login" class="my-5">
             <div class="form-group">
-                <input type="email" class="form-control mb-3" id="user_email" name="user_email"
-                    placeholder="name@example.com" autocomplete="off" autofocus required>
+                <input type="email" class="form-control " id="user_email" name="user_email" placeholder="name@example.com" autocomplete="off" autofocus>
             </div>
             <div class="form-group ">
-                <input type="password" class="form-control mb-5" id="user_password" name="user_password"
-                    placeholder="Enter Password" autocomplete="off" required>
+                <input type="password" class="form-control " id="user_password" name="user_password" placeholder="Enter Password" autocomplete="off">
             </div>
             <div class="form-group ">
-                <button class="btn btn-primary btn-user btn-block" type="submit">Log In</button>
+                <button class="btn btn-primary btn-user btn-block" id="loginBtn" type="submit">Log In</button>
             </div>
         </form>
     </main>
-
     <?php include './bottom.components.php' ?>
 
 </body>
 <script>
-    $(document).ready(function () {
-        $('#user_login').submit(function (e) {
-            e.preventDefault();
-            $('.show').hide();
-            $.ajax({
-                url: './php/actions.php?action=login_application_user',
-                data: new FormData($(this)[0]),
-                cache: false,
-                contentType: false,
-                processData: false,
-                method: 'POST',
-                type: 'POST',
-                success: function (resp) {
-                    if (resp == 1) {
+    $(document).ready(function() {
+        $('.show').hide();
+        $("#user_login").validate({
+            // Define validation rules
+            rules: {
+                user_email: "required",
+                user_password: "required",
+                user_email: {
+                    required: true,
+                    email: true,
+                },
+                user_password: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 16
+                },
+            },
+            // Specify validation error messages
+            messages: {
+                user_email: {
+                    required: "Please enter your email",
+                    email: "Please enter a valid email address",
+                },
+                emp_mob: {
+                    required: "Please provide a phone number",
+                    minlength: "Phone number must be min 6 characters long",
+                    maxlength: "Phone number must not be more than 16 characters long"
+                },
+            },
+            submitHandler: function(form) {
+                $.ajax({
+                    url: './php/actions.php?action=login_application_user',
+                    data: $("#user_login").serialize(),
+                    type: 'POST',
+                    success: function(resp) {
                         console.log(resp);
-                        window.location = './index.php';
-                    } else {
-                        console.log(resp);
-                        $('#user_login').prepend(`
-              <div class="alert alert-danger fade show" role="alert">
-              <strong>Username and Password</strong> are incorrect.
-              </div>
-              `);
+                        if (resp == 1) {
+                            setTimeout(() => {
+                                window.location = './index.php';
+                            }, 1000);
+                        } else {
+                            $("#loginBtn").prop("disabled", true);
+                            $('#user_login').prepend(`
+                                <div class="alert alert-danger fade show" role="alert" id="errorMsg">
+                                    <strong>Username and Password</strong> are incorrect.
+                                </div>`);
+                        }
+                        setTimeout(() => {
+                            $('.show').hide();
+                            $("#loginBtn").prop("disabled", false);
+                        }, 2000)
                     }
-                }
-            })
+                });
+            }
         });
     });
 </script>

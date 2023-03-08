@@ -20,16 +20,18 @@
     <link href="./assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="./assets/css/sb-admin-2.min.css" rel="stylesheet">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script> -->
     <script src="./assets/js/sb-admin-2.min.js"></script>
     <script src="./assets/vendor/jquery/jquery.min.js"></script>
     <script src="./assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.min.js"></script>
     <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     
     <script src="./assets/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="./assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
     <script src="./assets/js/demo/datatables-demo.js"></script>
-
+    <script src="./assets/js/scripts.js"></script>
     <!-- <script src="./assets/vendor/chart.js/Chart.min.js"></script>
     <script src="./assets/js/demo/chart-area-demo.js"></script>
     <script src="./assets/js/demo/chart-pie-demo.js"></script> -->

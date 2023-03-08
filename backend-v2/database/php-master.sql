@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 03, 2023 at 12:40 PM
+-- Generation Time: Mar 07, 2023 at 01:20 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -42,8 +42,9 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`client_id`, `client_first_name`, `client_last_name`, `gender`, `client_address`, `client_email`, `client_contact`) VALUES
-('029082380ee84a419aa42ec681709d1a', 'Aman', 'Koshiya', 'Female', 'This website uses a MD5 reverse dictionary containing several millions of entries, which you can use', 'aman111@gmail.com', '3442134242342'),
-('3834af95dc4b4a42b07d24f2ea3091a3', 'scsac', 'scdxsacd', 'Other', 'sdcasfcasxcf', 'client@gmail.com', '3424234');
+('029082380ee84a419aa42ec681709d1a', 'aman', 'Koshiya', '', 'This website uses a MD5 reverse dictionary containing several millions of entries, which you can use', 'aman111@gmail.com', '3442134242342'),
+('3834af95dc4b4a42b07d24f2ea3091a3', 'scsac', 'scdxsacd', 'Other', 'sdcasfcasxcf', 'client@gmail.com', '3424234'),
+('d9b4c603f33d42a9a70aa45ecadf2ef1', 'd', 'd', '', '', 'f@gmail.com', '');
 
 -- --------------------------------------------------------
 
@@ -67,7 +68,7 @@ CREATE TABLE `employees` (
   `emp_hod_name` varchar(100) NOT NULL,
   `emp_joining_date` date NOT NULL,
   `emp_confirmation_date` date DEFAULT NULL,
-  `emp_leaving_date` date DEFAULT NULL,
+  `emp_leaving_date` date DEFAULT '2001-01-01',
   `emp_working_hours` time NOT NULL,
   `emp_profile_pic` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -85,6 +86,7 @@ INSERT INTO `employees` (`emp_id`, `emp_first_name`, `emp_last_name`, `emp_code`
 ('4593bf0c87c3400b8edafbc27a4eedc1', 'Chirag', 'Jasani', 9, '', 'Male', '2000-01-01', 2147483647, 'chirag@gmail.com', '', 'IT', 'HOD', '', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677577800_download.jpg'),
 ('579b0d4bfcf04506ba2e86812c3b0f5f', 'mila', 'ghewala', 18, '', 'Female', '1999-01-01', 2147483647, 'mila@gmail.com', '', 'Engineer', 'Intern', 'Sneha Rathod', '2020-01-01', '2020-01-01', '0000-00-00', '09:30:00', '1677581040_img3.png'),
 ('712987250d844b5d9182f1e60aff37f5', 'Kiran', 'Manek', 22, '', 'Female', '2000-01-01', 2147483647, 'kiran@gmail.com', '', 'MDO', 'HOD', '', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677581700_task-management.png'),
+('75d81402ff5c420098f719ff31297d8e', 'Hemisha', 'Patel', 32, '', 'Female', '2020-01-01', 1234567890, 'hemisha@gmail.com', '', 'Architecture', 'Junior Architecture', 'Dhruvik Vekriya', '2020-01-01', '0000-00-00', '0000-00-00', '10:00:00', NULL),
 ('79e2b1667cc24cc2a33e48ca2d614c3f', 'Aalok', 'Agarval', 20, '', 'Male', '2000-01-01', 2147483647, 'aalok@gmail.com', '', 'Interior', 'HOD', '', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677581460_img3.png'),
 ('7f7cfd7815e14312867fe303ff89a015', 'Mehul', 'Panchal', 16, '', 'Male', '2000-01-01', 2147483647, 'mehul@gmail.com', '', 'Engineer', 'Engineer', 'Sneha Rathod', '2020-01-01', '2020-01-01', '0000-00-00', '09:30:00', '1677580740_Final Print Files.jpg'),
 ('843d236dcb394d1b86c8b1496b9849dd', 'Ami', 'Bhalala', 24, '', 'Female', '2000-01-01', 2147483647, 'ami@gmail.com', '', 'MDO', 'Intern', 'Kiran Manek', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677581940_img6.jpg'),
@@ -94,7 +96,7 @@ INSERT INTO `employees` (`emp_id`, `emp_first_name`, `emp_last_name`, `emp_code`
 ('9c309268c57945e5a38dde5ec8d4069e', 'Rahul', 'Makvana', 5, '', 'Male', '2000-01-01', 2147483647, 'rahul111@gmail.com', '', 'MDO', 'MDO Staff', '', '2020-01-01', '2020-01-01', '0000-00-00', '09:30:00', '1677577440_img3.jpg'),
 ('9eb64d31a3a84e1992225ab85246f68f', 'Mayank', 'Virani', 15, '', 'Male', '2000-01-01', 23442132, 'mayank@gmail.com', '', 'Engineer', 'Engineer', 'Sneha Rathod', '2020-10-09', '2020-10-09', '0000-00-00', '09:30:00', '1677580680_img5.jpg'),
 ('b7ab4f5ae37c46f5abec57b293b0baaa', 'Mayuri', 'Gami', 21, '', 'Female', '2000-01-01', 2147483647, 'mayu@gmail.com', '', 'Interior', 'Intern', 'Aalok Agarval', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677581580_img4.png'),
-('be683a4f979d4c74a9816f7d98ef9a3a', 'Chintan', 'Bhimani', 3, 'facilisi nullam vehicula ipsum a. Nibh tellus molestie nunc non blandit massa enim. Vitae aliquet nec ullamcorper sit amet. Diam quis enim lobortis scelerisque fermentum dui faucibus in. Purus faucibus ornare suspendisse sed nisi lacus sed viverra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames. Arcu non sodales neque sodales ut etiam.', 'Male', '2003-03-31', 2147483647, 'chintan@gmail.com', 'que aliquam vestibulum morbi blandit cursus. Purus in massa tempor nec feugiat nisl pretium. Nunc vel risus commodo viverra maecenas accumsan lacus vel.', 'IT', 'Junior Developer', '', '2022-01-01', '2022-01-01', '0000-00-00', '10:00:00', '1677577200_img1.jpg'),
+('be683a4f979d4c74a9816f7d98ef9a3a', 'Chintan', 'Bhimani', 3, 'facilisi nullam vehicula ipsum a. Nibh tellus molestie nunc non blandit massa enim. Vitae aliquet nec ullamcorper sit amet. Diam quis enim lobortis scelerisque fermentum dui faucibus in. Purus faucibus ornare suspendisse sed nisi lacus sed viverra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames. Arcu non sodales neque sodales ut etiam.', 'Male', '2003-03-31', 2147483647, 'chintan@gmail.com', 'que aliquam vestibulum morbi blandit cursus. Purus in massa tempor nec feugiat nisl pretium. Nunc vel risus commodo viverra maecenas accumsan lacus vel.', 'IT', 'Junior Developer', 'Chirag Jasani', '2022-01-01', '2022-01-01', '2023-03-17', '10:00:00', '1677577200_img1.jpg'),
 ('c3a2ab11f5a24d63922a505e556ca730', 'Itisha', 'Padsala', 14, '', 'Female', '2000-01-09', 55684654, 'padsala@gmail.com', '', 'Engineer', 'Engineer', 'Sneha Rathod', '2020-01-01', '2020-01-01', '0000-00-00', '09:03:00', '1677580440_img2.jpg'),
 ('cf6813320082414cb463ffd8aa34a55c', 'Nensi', 'Patel', 12, '', 'Female', '2000-01-01', 2147483647, 'nensi@gmail.com', '', 'Architecture', 'Junior Architecture', 'Dhruvik Vekriya', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677578460_img4.png'),
 ('f1a92584b86745bfb89a9dbdba251082', 'Sneha', 'Rathod', 13, '', 'Female', '2000-01-01', 2147483647, 'sneha@gmail.com', '', 'Engineer', 'HOD', '', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677578640_download.jpg'),
@@ -147,6 +149,57 @@ INSERT INTO `hod` (`hod_id`, `hod_first_name`, `hod_last_name`, `department_name
 ('6afb638d2f28469ca15ab50cd3e6386c', 'Dhruvik', 'Vekriya', 'Architecture', '00bcdc6a157a4f21927862a575234242'),
 ('88b6fe5892e444a485d0c117e96292bf', 'Nirali', 'Patel', 'Finance', 'f3d9c2c1b24b444fb463d506f135e7d4'),
 ('9505ea29ee8e4034b4a8530a813a5051', 'Chirag', 'Jasani', 'IT', '4593bf0c87c3400b8edafbc27a4eedc1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `leaves`
+--
+
+CREATE TABLE `leaves` (
+  `leave_id` text NOT NULL,
+  `leave_type` varchar(255) NOT NULL,
+  `from_date` date NOT NULL,
+  `to_date` date NOT NULL,
+  `posting_date` varchar(255) NOT NULL,
+  `admin_remarks` varchar(255) DEFAULT NULL,
+  `admin_remarks_date` varchar(255) DEFAULT NULL,
+  `leave_status` int(10) NOT NULL,
+  `is_read` int(10) NOT NULL,
+  `user_id` text NOT NULL,
+  `leave_description` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `leaves`
+--
+
+INSERT INTO `leaves` (`leave_id`, `leave_type`, `from_date`, `to_date`, `posting_date`, `admin_remarks`, `admin_remarks_date`, `leave_status`, `is_read`, `user_id`, `leave_description`) VALUES
+('a398859fbd354b799932306fe9b04388', '67efd3bafb2a42e89e7ba7e03b032cb6', '2023-02-04', '2023-03-01', '2023-03-06', NULL, NULL, 1, 0, 'eca99ee2ef484eea94e99d4fc81f23ec', 'sadcsafcdasfcdasfcdafdasf'),
+('acc273565bb94a65afe514a6bcd0f7a8', '67efd3bafb2a42e89e7ba7e03b032cb6', '2023-03-05', '2023-03-16', '0000-00-00', NULL, NULL, 0, 0, 'eca99ee2ef484eea94e99d4fc81f23ec', 'sdfs'),
+('b22c3eba95894a5b8514637d0e307782', 'e882e8477c144e0989a300d64a9c0f64', '2023-03-26', '2023-03-27', '2023-03-06', NULL, NULL, 2, 0, 'eca99ee2ef484eea94e99d4fc81f23ec', 'sdcasfdasfvdsafv'),
+('f4649db520fd4d318f4550042de37f76', 'e882e8477c144e0989a300d64a9c0f64', '2023-03-08', '2023-03-12', '2023-03-06 15:46:24', 'sfgfewrhewtgfdswtgfrsdegrdsfgfd', NULL, 2, 0, 'eca99ee2ef484eea94e99d4fc81f23ec', 'csxcxds dscasxdcsaxcsxczc');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `leavestype`
+--
+
+CREATE TABLE `leavestype` (
+  `leave_type_id` text NOT NULL,
+  `leave_type` varchar(255) NOT NULL,
+  `leave_description` text NOT NULL,
+  `createdAt` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `leavestype`
+--
+
+INSERT INTO `leavestype` (`leave_type_id`, `leave_type`, `leave_description`, `createdAt`) VALUES
+('67efd3bafb2a42e89e7ba7e03b032cb6', 'Festival', 'Create a CSS class that will display the popup when its display property is set to block. Add styles to the class to position the popup in the center of the screen and add a border, box shadow', '2023-03-06 06:25:46'),
+('e882e8477c144e0989a300d64a9c0f64', 'Holy', 'box shadow, and other styles to make it look like a modal.', '2023-03-06 06:29:08');
 
 -- --------------------------------------------------------
 
@@ -222,8 +275,9 @@ CREATE TABLE `task` (
   `project_id` text NOT NULL,
   `task_name` varchar(255) NOT NULL,
   `task_description` text NOT NULL,
+  `task_assign_from` text NOT NULL,
   `task_assign_to` varchar(255) NOT NULL,
-  `task_status` int(10) NOT NULL,
+  `task_status` int(10) NOT NULL COMMENT '0: Pending,\r\n1: On Progress,\r\n2: Complete,\r\n3: Hold',
   `createdAt` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -231,11 +285,12 @@ CREATE TABLE `task` (
 -- Dumping data for table `task`
 --
 
-INSERT INTO `task` (`task_id`, `project_id`, `task_name`, `task_description`, `task_assign_to`, `task_status`, `createdAt`) VALUES
-('0d56f3fe5f5b4e22980f8d74adbca299', '64e8b426e6524f4da497aec90f62880f', 'Floor Work', 'DFGDRE FBMFDNMDGVDRFBH MFB DSFCASWFGVEPADFKWGQPOEM OBGKAP[DEGM MFAEOFEWDRKFQWPM FMBDEOFKEWPRFKEGBVMO MOFGEOFKEDGFV', '6808dc7cce0346bab87a2eb6b8b647ba', 3, '2023-03-03 10:09:48'),
-('659e0b8902bd4601b20ab3379bff82d0', '64e8b426e6524f4da497aec90f62880f', 'new Form', 'Create New with all features', '544a98699fbd4919ba6c98c3f72927ae', 3, '2023-03-03 09:19:22'),
-('acba0842fd494c32994d9ca3f14a283d', '64e8b426e6524f4da497aec90f62880f', 'fvgdsgvdxcbv ', 'xcdbvdcxd', 'b2acb0caf2d54195a6077bbfcbb15302', 2, '2023-03-02 09:54:09'),
-('f89e3005dbdc4aed840e09f5bfbe3cb8', '64e8b426e6524f4da497aec90f62880f', 'dfgdvfbvg', 'dsfgvdxvgfdsxz', 'd5f19b6a5c214da497de76773dca8f13', 1, '2023-03-02 09:59:42');
+INSERT INTO `task` (`task_id`, `project_id`, `task_name`, `task_description`, `task_assign_from`, `task_assign_to`, `task_status`, `createdAt`) VALUES
+('0d56f3fe5f5b4e22980f8d74adbca299', '64e8b426e6524f4da497aec90f62880f', 'Floor Work', 'DFGDRE FBMFDNMDGVDRFBH MFB DSFCASWFGVEPADFKWGQPOEM OBGKAP[DEGM MFAEOFEWDRKFQWPM FMBDEOFKEWPRFKEGBVMO MOFGEOFKEDGFV', '', '6808dc7cce0346bab87a2eb6b8b647ba', 3, '2023-03-03 10:09:48'),
+('659e0b8902bd4601b20ab3379bff82d0', '64e8b426e6524f4da497aec90f62880f', 'new Form', 'Create New with all features', '', '544a98699fbd4919ba6c98c3f72927ae', 3, '2023-03-03 09:19:22'),
+('acba0842fd494c32994d9ca3f14a283d', '64e8b426e6524f4da497aec90f62880f', 'fvgdsgvdxcbv ', 'xcdbvdcxd', '', 'b2acb0caf2d54195a6077bbfcbb15302', 2, '2023-03-07 08:00:14'),
+('b7cd2c3cf76749d8bfa3db69dccbaa62', '64e8b426e6524f4da497aec90f62880f', 'Where It is', 'FKGRDSIFN FBDGBKPRFH[KN MBFGKFDEGB', '6afb638d2f28469ca15ab50cd3e6386c', 'b2acb0caf2d54195a6077bbfcbb15302', 2, '2023-03-07 08:00:19'),
+('f89e3005dbdc4aed840e09f5bfbe3cb8', '64e8b426e6524f4da497aec90f62880f', 'dfgdvfbvg', 'dsfgvdxvgfdsxz', '', 'd5f19b6a5c214da497de76773dca8f13', 1, '2023-03-02 09:59:42');
 
 -- --------------------------------------------------------
 
@@ -278,6 +333,7 @@ INSERT INTO `users` (`user_id`, `user_email`, `user_password`, `emp_id`, `user_f
 ('ce05d9bd9fd649f983b3a87adb51c604', 'padsala@gmail.com', '90550463238bf3a7718d04f14824d829', 'c3a2ab11f5a24d63922a505e556ca730', 'Itisha', 'Padsala', 3),
 ('d57fe6189c974ff2acf1bb49c4270438', 'dhukiii30@gmail.com', '4a45894868a88b73c0b018a0e22bccbe', '00bcdc6a157a4f21927862a575234242', 'Dhruvik', 'Vekriya', 4),
 ('d5f19b6a5c214da497de76773dca8f13', 'nidhi@gmail.com', '121d62c5443a420a975bea5d88381214', '13debf485bfc470dac5b82ddc64617c3', 'Nidhi', 'Ramani', 2),
+('db3ac7e251f1424187f7cdea66bfab9f', 'hemisha@gmail.com', '85e7bcbc95cec09b30435b1c5c14952a', '75d81402ff5c420098f719ff31297d8e', 'Hemisha', 'Patel', 2),
 ('de8f6ca0819c4fa9ab3f2f2f3d851318', 'dhruvi@gmail.com', 'd13eb1f5a4340a779b57229bbfc0d957', '0bf2f38fb0694a5fbea599b85e876e8b', 'Dhruvi', 'Jasani', 2),
 ('e568b77d8dd942f98180b71de17f7ae4', 'sneha@gmail.com', '76281d4a9faf68bbce161cb21c3ce1f4', 'f1a92584b86745bfb89a9dbdba251082', 'Sneha', 'Rathod', 4),
 ('eca99ee2ef484eea94e99d4fc81f23ec', 'chintan@gmail.com', '4dc322395edd7f1a6a5a5d9d5cfe8b62', 'be683a4f979d4c74a9816f7d98ef9a3a', 'Chintan', 'Bhimani', 2);
@@ -309,6 +365,18 @@ ALTER TABLE `expenses`
 --
 ALTER TABLE `hod`
   ADD PRIMARY KEY (`hod_id`(255));
+
+--
+-- Indexes for table `leaves`
+--
+ALTER TABLE `leaves`
+  ADD PRIMARY KEY (`leave_id`(255));
+
+--
+-- Indexes for table `leavestype`
+--
+ALTER TABLE `leavestype`
+  ADD PRIMARY KEY (`leave_type_id`(255));
 
 --
 -- Indexes for table `productivity`

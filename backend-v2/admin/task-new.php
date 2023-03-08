@@ -1,12 +1,14 @@
 <?php
 $projectId = $_GET['projectId'];
+$hodId = '';
 ?>
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h5 mb-0 text-gray-600">New Task For
             <?php
-            $projectNameQry = $con->query("SELECT project_name FROM projects WHERE project_id ='$projectId'");
+            $projectNameQry = $con->query("SELECT project_name,hod_id FROM projects WHERE project_id ='$projectId'");
             while ($p = $projectNameQry->fetch_assoc()) {
+                $hodId = $p['hod_id'];
                 ?> <span class="h3 text-gray-900">
                     <?php echo $p['project_name']; ?>
                 </span>
@@ -25,6 +27,8 @@ $projectId = $_GET['projectId'];
                 </div>
                 <div class="card-body">
                     <form id="new_task_form">
+                        <input type="hidden" class="form-control" id="task_assign_from" name="task_assign_from"
+                            value="<?php echo $hodId; ?>" autocomplete="off">
                         <input type="hidden" class="form-control" id="project_id" name="project_id"
                             value="<?php echo $projectId; ?>" autocomplete="off">
                         <div class="form-group ">

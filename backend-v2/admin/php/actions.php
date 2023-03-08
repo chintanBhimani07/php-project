@@ -145,6 +145,12 @@ if ($action == 'delete_task') {
         echo $delete_task;
     }
 }
+if($action == 'work_update'){
+    $work_update = $task->task_update();
+    if($work_update){
+        echo $work_update;
+    }
+}
 
 
 // Productivity
@@ -163,3 +169,37 @@ if($action == 'edit_productivity'){
         echo $edit_productivity;
     }
 }
+
+
+
+// Leave Types 
+if($action == 'save_leaveType'){
+    $para = "insert";
+    $save_leaveType = $task->leaveType_add($para);
+    if ($save_leaveType) {
+        echo $save_leaveType;
+    }
+}
+if($action == 'edit_leaveType'){
+    $para = "update";
+    $edit_leaveType = $task->leaveType_add($para);
+    if ($edit_leaveType) {
+        echo $edit_leaveType;
+    }
+}
+
+
+// Leave 
+if($action == 'save_leave'){
+    $save_leave = $task->leave_add();
+    if ($save_leave) {
+        echo $save_leave;
+    }
+}
+if($action == 'take_leave_action'){
+    $take_leave_action = $task->leave_action();
+    if ($take_leave_action) {
+        echo $take_leave_action;
+    }
+}
+

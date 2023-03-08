@@ -1,3 +1,18 @@
+<style>
+    .error {
+        color: #ff0000 !important;
+        position: relative !important;
+        line-height: 1 !important;
+        font-size: 1rem !important;
+        width: 100% !important;
+    }
+
+    .form-control.error {
+        border: 1px solid #ff0000;
+        color: #5a5c69 !important
+    }
+</style>
+
 <div class="container-fluid">
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -15,22 +30,23 @@
                     <form id="new_employee_form" name="employeeForm">
                         <div class="form-group">
                             <label for="emp_code" class="col-form-label mr-1">Employee Code</label><span class="text-danger">*</span>
-                            <input type="number" class="form-control" id="emp_code" name="emp_code" autocomplete="off" autofocus >
+                            <input type="number" class="form-control" id="emp_code" name="emp_code" autocomplete="off" autofocus>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label for="emp_first_name" class="col-form-label mr-1">First Name</label><span class="text-danger">*</span>
-                                <input type="text" class="form-control" id="emp_first_name" name="emp_first_name" autocomplete="off" >
+                                <input type="text" class="form-control" id="emp_first_name" name="emp_first_name" autocomplete="off">
                             </div>
                             <div class="col-sm-6">
                                 <label for="emp_last_name" class="col-form-label mr-1">Last Name</label><span class="text-danger">*</span>
-                                <input type="text" class="form-control" id="emp_last_name" name="emp_last_name" autocomplete="off" >
+                                <input type="text" class="form-control" id="emp_last_name" name="emp_last_name" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-4 mb-3 mb-sm-0">
                                 <label for="emp_gender" class="col-form-label mr-1">Gender</label><span class="text-danger">*</span>
-                                <select class="form-control custom-select" id="emp_gender" name="emp_gender" >
+                                <select class="form-control custom-select" id="emp_gender" name="emp_gender">
+                                    <option value="" selected>Select Gender</option>
                                     <option value="Male">Male</option>
                                     <option value="Female">Female</option>
                                     <option value="Other">Other</option>
@@ -38,11 +54,11 @@
                             </div>
                             <div class="col-sm-4">
                                 <label for="emp_dob" class="col-form-label mr-1">Date Of Birth</label><span class="text-danger">*</span>
-                                <input type="date" class="form-control" id="emp_dob" name="emp_dob" >
+                                <input type="date" class="form-control" id="emp_dob" name="emp_dob">
                             </div>
                             <div class="col-sm-4">
                                 <label for="emp_mob" class="col-form-label mr-1">Mobile No.</label><span class="text-danger">*</span>
-                                <input type="tel" class="form-control" id="emp_mob" name="emp_mob" autocomplete="off" >
+                                <input type="tel" class="form-control" id="emp_mob" name="emp_mob" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group">
@@ -51,7 +67,7 @@
                         </div>
                         <div class="form-group">
                             <label for="emp_email" class="col-form-label mr-1">Email Address</label><span class="text-danger">*</span>
-                            <input type="email" class="form-control" id="emp_email" name="emp_email" autocomplete="off" >
+                            <input type="email" class="form-control" id="emp_email" name="emp_email" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label for="emp_address" class="col-form-label mr-1">Resident Address</label>
@@ -59,7 +75,8 @@
                         </div>
                         <div class="form-group">
                             <label for="emp_department" class="col-form-label mr-1">Department</label><span class="text-danger">*</span>
-                            <select class="form-control custom-select" id="emp_department" name="emp_department" >
+                            <select class="form-control custom-select" id="emp_department" name="emp_department">
+                                <option value="" selected>Select Department</option>
                                 <option value="Admin">Admin</option>
                                 <option value="IT">IT</option>
                                 <option value="MDO">MDO</option>
@@ -71,7 +88,8 @@
                         </div>
                         <div class="form-group">
                             <label for="emp_designation" class="col-form-label mr-1">Designation</label><span class="text-danger">*</span>
-                            <select class="form-control custom-select" id="emp_designation" name="emp_designation" >
+                            <select class="form-control custom-select" id="emp_designation" name="emp_designation">
+                                <option value="" selected>Select Designation</option>
                                 <option value="Administrator">Administrator</option>
                                 <option value="HOD">HOD</option>
                                 <option value="Junior Developer">Junior Developer</option>
@@ -91,7 +109,7 @@
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label for="emp_joining_date" class="col-form-label mr-1">Joining Date</label><span class="text-danger">*</span>
-                                <input type="date" class="form-control" id="emp_joining_date" name="emp_joining_date" autocomplete="off" >
+                                <input type="date" class="form-control" id="emp_joining_date" name="emp_joining_date" autocomplete="off">
                             </div>
                             <div class="col-sm-6">
                                 <label for="emp_confirmation_date" class="col-form-label mr-1">Confirmation Date</label>
@@ -105,7 +123,7 @@
                             </div>
                             <div class="col-sm-6">
                                 <label for="emp_working_hours" class="col-form-label mr-1">Working Hours</label><span class="text-danger">*</span>
-                                <input type="time" class="form-control" id="emp_working_hours" name="emp_working_hours" autocomplete="off" >
+                                <input type="time" class="form-control" id="emp_working_hours" name="emp_working_hours" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group">
@@ -135,11 +153,11 @@
     }
     $(document).ready(function() {
 
-        $("form[name='employeeForm']").validate({
+        $("#new_employee_form").validate({
             // Define validation rules
             rules: {
-                emp_code:"required",
-                emp_first_name:"required",
+                emp_code: "required",
+                emp_first_name: "required",
                 emp_last_name: "required",
                 emp_gender: "required",
                 emp_dob: "required",
@@ -172,16 +190,17 @@
                 },
                 emp_email: {
                     required: true,
-                    email: true
+                    email: true,
+                    pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/i
                 },
                 emp_department: {
                     required: true
                 },
                 emp_designation: {
-                    required: true
+                    required: true,
                 },
                 emp_joining_date: {
-                    required: true
+                    required: true,
                 },
                 emp_working_hours: {
                     required: true
@@ -189,8 +208,8 @@
             },
             // Specify validation error messages
             messages: {
-                emp_code:"Please provide a valid Code",
-                emp_first_name:"Please provide a valid first name",
+                emp_code: "Please provide a valid Code",
+                emp_first_name: "Please provide a valid first name",
                 emp_last_name: "Please provide a valid last name",
                 emp_gender: "Please select a valid gender",
                 emp_dob: "Please select a valid date",
@@ -201,7 +220,8 @@
                 },
                 emp_email: {
                     required: "Please enter your email",
-                    minlength: "Please enter a valid email address"
+                    email: "Please enter a valid email address",
+                    pattern: "Email is not valid"
                 },
                 emp_department: "Please select a valid department",
                 emp_designation: "Please select a valid designation",
@@ -209,31 +229,22 @@
                 emp_working_hours: "Please select a valid time",
             },
             submitHandler: function(form) {
-                form.submit();
-            }
-        });
-
-
-        $('#new_employee_form').submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: './php/actions.php?action=save_employee',
-                data: new FormData($(this)[0]),
-                cache: false,
-                contentType: false,
-                processData: false,
-                method: 'POST',
-                type: 'POST',
-                success: function(resp) {
-                    if (resp == 1) {
-                        setTimeout(() => {
-                            location.reload();
-                        }, 1000);
-                    } else {
+                $.ajax({
+                    url: './php/actions.php?action=save_employee',
+                    data: $("#new_employee_form").serialize(),
+                    type: 'POST',
+                    success: function(resp) {
                         console.log(resp);
+                        if (resp == 1) {
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                        } else {
+                            console.log(resp);
+                        }
                     }
-                }
-            })
+                });
+            }
         });
     });
 </script>

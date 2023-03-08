@@ -14,84 +14,125 @@
                 <span>Dashboard</span></a>
         </li>
         <hr class="sidebar-divider">
-        <!-- <div class="sidebar-heading">
-            Interface
-        </div> -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#employee_dashboard" aria-expanded="true" aria-controls="employee_controls">
-                <i class="fas fa-fw fa-users-gear"></i>
-                <span>Employee</span>
-            </a>
-            <div id="employee_dashboard" class="collapse" aria-labelledby="employee_lable" data-parent="#main_dashboard">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="./index.php?page=employee-dashboard">All Employees</a>
-                    <a class="collapse-item" href="./index.php?page=employee-new">New Employee</a>
+        <?php if ($_SESSION['login_user_access_type'] == 1 || $_SESSION['login_user_access_type'] == 4) { ?>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#employee_dashboard" aria-expanded="true" aria-controls="employee_controls">
+                    <i class="fas fa-fw fa-users-gear"></i>
+                    <span>Employee</span>
+                </a>
+                <div id="employee_dashboard" class="collapse" aria-labelledby="employee_lable" data-parent="#main_dashboard">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="./index.php?page=employee-dashboard">All Employees</a>
+                        <a class="collapse-item" href="./index.php?page=employee-new">New Employee</a>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user_dashboard" aria-expanded="true" aria-controls="employee_controls">
-                <i class="fa-solid fa-person-circle-check"></i>
-                <span>Application Users</span>
-            </a>
-            <div id="user_dashboard" class="collapse" aria-labelledby="employee_lable" data-parent="#main_dashboard">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="./index.php?page=user-dashboard">All User</a>
-                    <a class="collapse-item" href="./index.php?page=user-new">New User</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#user_dashboard" aria-expanded="true" aria-controls="employee_controls">
+                    <i class="fa-solid fa-person-circle-check"></i>
+                    <span>Application Users</span>
+                </a>
+                <div id="user_dashboard" class="collapse" aria-labelledby="employee_lable" data-parent="#main_dashboard">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="./index.php?page=user-dashboard">All User</a>
+                        <a class="collapse-item" href="./index.php?page=user-new">New User</a>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <hr class="sidebar-divider">
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#project_dashboard" aria-expanded="true" aria-controls="project_controls">
-                <i class="fa-solid fa-list-check"></i>
-                <span>Projects</span>
-            </a>
-            <div id="project_dashboard" class="collapse" aria-labelledby="project_lable" data-parent="#main_dashboard">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="./index.php?page=project-dashboard">Dashboard</a>
-                    <a class="collapse-item" href="./index.php?page=project-new">New Project</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#leave_type" aria-expanded="true" aria-controls="project_controls">
+                    <i class="fa-solid fa-t"></i>
+                    <!-- <i class="fa-solid fa-person-walking-arrow-right"></i> -->
+                    <span>Leave Types</span>
+                </a>
+                <div id="leave_type" class="collapse" aria-labelledby="project_lable" data-parent="#main_dashboard">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="./index.php?page=leave-types">Dashboard</a>
+                        <a class="collapse-item" href="./index.php?page=leaveType-new">New Leave Type</a>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#client_dashboard" aria-expanded="true" aria-controls="project_controls">
-                <i class="fa-solid fa-user-plus"></i>
-                <span>Clients</span>
-            </a>
-            <div id="client_dashboard" class="collapse" aria-labelledby="project_lable" data-parent="#main_dashboard">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item" href="./index.php?page=client-dashboard">Dashboard</a>
-                    <a class="collapse-item" href="./index.php?page=client-new">New Client</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#leave_management" aria-expanded="true" aria-controls="project_controls">
+                    <i class="fa-solid fa-person-walking-arrow-right"></i>
+                    <span>Leave Management</span>
+                </a>
+                <div id="leave_management" class="collapse" aria-labelledby="project_lable" data-parent="#main_dashboard">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="./index.php?page=leave-dashboard">Dashboard</a>
+                        <a class="collapse-item" href="./index.php?page=leave-new">Add Leave</a>
+                        <a class="collapse-item" href="./index.php?page=leave-pending">Pending Leaves</a>
+                        <a class="collapse-item" href="./index.php?page=leave-approved">Approved Leaves</a>
+                        <a class="collapse-item" href="./index.php?page=leave-declined">Declined Leaves</a>
+                    </div>
                 </div>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="./index.php?page=task-dashboard">
-                <i class="fa-solid fa-briefcase"></i>
-                <span>Work Collector</span>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="./index.php?page=project-report">
-                <i class="fa-solid fa-flag"></i>
-                <span>Project Progress Report</span>
-            </a>
-        </li>
-        <hr class="sidebar-divider">
-        <li class="nav-item">
-            <a class="nav-link" href="./index.php?page=hod-dashboard">
-                <i class="fa-solid fa-building-user"></i>
-                <span>Head Of Departments</span>
-            </a>
-        </li>
-        <hr class="sidebar-divider">
-        <li class="nav-item">
-            <a class="nav-link" href="./index.php?page=expenses-dashboard">
-                <i class="fa-solid fa-wallet"></i>
-                <span>Expenses</span>
-            </a>
-        </li>
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#project_dashboard" aria-expanded="true" aria-controls="project_controls">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>Projects</span>
+                </a>
+                <div id="project_dashboard" class="collapse" aria-labelledby="project_lable" data-parent="#main_dashboard">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="./index.php?page=project-dashboard">Dashboard</a>
+                        <a class="collapse-item" href="./index.php?page=project-new">New Project</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#client_dashboard" aria-expanded="true" aria-controls="project_controls">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>Clients</span>
+                </a>
+                <div id="client_dashboard" class="collapse" aria-labelledby="project_lable" data-parent="#main_dashboard">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="./index.php?page=client-dashboard">Dashboard</a>
+                        <a class="collapse-item" href="./index.php?page=client-new">New Client</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./index.php?page=task-dashboard">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span>Task Management</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./index.php?page=project-report">
+                    <i class="fa-solid fa-flag"></i>
+                    <span>Project Progress Report</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="./index.php?page=hod-dashboard">
+                    <i class="fa-solid fa-building-user"></i>
+                    <span>Head Of Departments</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="./index.php?page=expenses-dashboard">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Expenses</span>
+                </a>
+            </li>
+        <?php }else if($_SESSION['login_user_access_type'] == 2){ ?>
+            <li class="nav-item">
+                <a class="nav-link" href="./index.php?page=work-collector">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span>Work Collector</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="./index.php?page=project-dashboard">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <span>Projects</span>
+                </a>
+            </li>
+        <?php } ?>
         <hr class="sidebar-divider d-none d-md-block">
 
         <!-- Sidebar Toggler (Sidebar) -->

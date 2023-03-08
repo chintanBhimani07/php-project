@@ -275,7 +275,7 @@ class Controller
         $query =  $this->db->query("DELETE FROM clients WHERE client_id='$client_id'");
         if ($query) {
             return 1;
-        }else{
+        } else {
             return $query;
         }
     }
@@ -432,7 +432,7 @@ class Controller
                 }
             }
         }
-        if($para == 'update'){
+        if ($para == 'update') {
             $updateTask = $this->db->query("UPDATE task SET $task_data WHERE task_id='$task_id'");
             if ($updateTask) {
                 return $updateTask;
@@ -452,7 +452,8 @@ class Controller
     }
 
 
-    public function productivity_add($para){
+    public function productivity_add($para)
+    {
         extract($_POST);
         $pro_data = '';
         if ($para == 'insert') {
@@ -462,7 +463,7 @@ class Controller
             $pro_data = "productivity_id  ='$productivity_id'";
         }
         foreach ($_POST as $k => $v) {
-            if (!in_array($k, array('password', 'productivity_id','time_rendered')) && !is_numeric($k)) {
+            if (!in_array($k, array('password', 'productivity_id', 'time_rendered')) && !is_numeric($k)) {
                 if ($v != '0000-00-00' || !empty($v)) {
                     $pro_data .= ", $k='$v' ";
                 }
@@ -481,10 +482,107 @@ class Controller
                 }
             }
         }
-        if($para == 'update'){
+        if ($para == 'update') {
             $updatePro = $this->db->query("UPDATE productivity SET $pro_data WHERE productivity_id='$productivity_id'");
             if ($updatePro) {
                 return $updatePro;
+            } else {
+                return 2;
+            }
+        }
+    }
+
+    public function leaveType_add($para)
+    {
+        extract($_POST);
+        $leaveType_data = '';
+        if ($para == 'insert') {
+            $typeId = $this->guidV4();
+            $leaveType_data = "leave_type_id='$typeId'";
+        } else if ($para == 'update') {
+            $leaveType_data = "leave_type_id='$leave_type_id'";
+        }
+        foreach ($_POST as $k => $v) {
+            if (!in_array($k, array('password', 'leave_type_id')) && !is_numeric($k)) {
+                if ($v != '0000-00-00' || !empty($v)) {
+                    $leaveType_data .= ", $k='$v' ";
+                }
+            }
+        }
+
+        if ($para == 'insert') {
+            $checkType = $this->db->query("SELECT * FROM leavestype WHERE leave_type='$leave_type'")->num_rows;
+            if ($checkType == 0) {
+                $addType = $this->db->query("INSERT INTO leavestype SET $leaveType_data");
+                if ($addType) {
+                    return 1;
+                } else {
+                    return 2;
+                }
+            }
+        }
+        if ($para == 'update') {
+            $updateType = $this->db->query("UPDATE leavestype SET $leaveType_data WHERE leave_type_id='$leave_type_id'");
+            if ($updateType) {
+                return $updateType;
+            } else {
+                return 2;
+            }
+        }
+    }
+
+
+    public function leave_add()
+    {
+        extract($_POST);
+        $leave_data = '';
+        $leaveId = $this->guidV4();
+        $leave_data = "leave_id='$leaveId'";
+        $today = date("Y-m-d");
+        $leave_data .= ", posting_date='$today'";
+        foreach ($_POST as $k => $v) {
+            if (!in_array($k, array('password', 'leave_id')) && !is_numeric($k)) {
+                if ($v != '0000-00-00' || !empty($v)) {
+                    $leave_data .= ", $k='$v' ";
+                }
+            }
+        }
+        $checkType = $this->db->query("SELECT * FROM leaves WHERE from_date	='$from_date' OR to_date='$to_date'")->num_rows;
+        if ($checkType == 0) {
+            $addType = $this->db->query("INSERT INTO leaves SET $leave_data");
+            if ($addType) {
+                return 1;
+            } else {
+                return 2;
+            }
+        }
+    }
+
+    public function leave_action()
+    {
+        extract($_POST);
+        $updateLeave = $this->db->query("UPDATE leaves SET leave_status='$leave_status',admin_remarks='$admin_remarks' WHERE leave_id='$leave_id';");
+        if ($updateLeave) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
+    public function task_update()
+    {
+        extract($_POST);
+        if ($process == 'start') {
+            $changeStatus = $this->db->query("UPDATE task SET task_status=1 WHERE task_id='$taskId'");
+            if ($changeStatus) {
+                return 1;
+            } else {
+                return 2;
+            }
+        } else if ($process == 'submit') {
+            $changeStatus = $this->db->query("UPDATE task SET task_status=2 WHERE task_id='$taskId'");
+            if ($changeStatus) {
+                return 1;
             } else {
                 return 2;
             }

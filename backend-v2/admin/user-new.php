@@ -1,3 +1,17 @@
+<style>
+    .error {
+        color: #ff0000 !important;
+        position: relative !important;
+        line-height: 1 !important;
+        font-size: 1rem !important;
+        width: 100% !important;
+    }
+
+    .form-control.error {
+        border: 1px solid #ff0000;
+        color: #5a5c69 !important;
+    }
+</style>
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">New User</h1>
@@ -13,27 +27,28 @@
                     <form id="new_user_form">
                         <div class="form-group ">
                             <label for="user_email" class="col-form-label mr-1">Employee Name</label><span class="text-danger">*</span>
-                            <select class="form-control custom-select" id="user_email" name="user_email" autofocus required>
-                                <option value="0">Select Name</option>
+                            <select class="form-control custom-select" id="user_email" name="user_email" autofocus>
+                                <option value="" selected>Select Name</option>
                                 <?php
                                 $qry = $con->query("SELECT emp_email,emp_first_name,emp_last_name FROM employees ORDER BY emp_first_name ASC;");
                                 while ($row = $qry->fetch_assoc()) { ?>
-                                    <option value="<?php echo $row['emp_email'] ?>"><?php echo $row['emp_first_name']." ".$row['emp_last_name'] ?></option>
+                                    <option value="<?php echo $row['emp_email'] ?>"><?php echo $row['emp_first_name'] . " " . $row['emp_last_name'] ?></option>
                                 <?php } ?>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="user_password" class="col-form-label mr-1">Password</label><span class="text-danger">*</span>
-                            <input type="text" class="form-control" id="user_password" name="user_password" autocomplete="off" required>
+                            <input type="text" class="form-control" id="user_password" name="user_password" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label for="user_access_type" class="col-form-label mr-1">Access Type</label><span class="text-danger">*</span>
-                            <select class="form-control custom-select" id="user_access_type" name="user_access_type" required>
+                            <select class="form-control custom-select" id="user_access_type" name="user_access_type">
+                                <option value="" selected>Select Access Type</option>
                                 <option value="2">Employee</option>
                                 <option value="1">Admin</option>
-                                <option value="3">Engineer</option> 
+                                <option value="3">Engineer</option>
                                 <option value="4">HOD</option>
-                            </select>   
+                            </select>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
@@ -52,30 +67,50 @@
 </div>
 
 <script>
-    function preview() {
-        thumb.src = URL.createObjectURL(event.target.files[0]);
-    }
     $(document).ready(function() {
-        $('#new_user_form').submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-                url: './php/actions.php?action=save_user',
-                data: new FormData($(this)[0]),
-                cache: false,
-                contentType: false,
-                processData: false,
-                method: 'POST',
-                type: 'POST',
-                success: function(resp) {
-                    if (resp == 1) {
-                        setTimeout(() => {
-                            location.reload();
-                        }, 1000);
-                    } else {
+        $("#new_user_form").validate({
+            // Define validation rules
+            rules: {
+                user_email: "required",
+                user_password: "required",
+                user_access_type: "required",
+                user_email: {
+                    required: true,
+                },
+                user_password: {
+                    required: true,
+                },
+                user_access_type: {
+                    required: true
+                },
+            },
+            // Specify validation error messages
+            messages: {
+                user_email: {
+                    required: "Please Select a valid Name",
+                },
+                user_password: {
+                    required: "Please provide a valid password",
+                },
+                user_access_type: "Please Select a valid Access Type",
+            },
+            submitHandler: function(form) {
+                $.ajax({
+                    url: './php/actions.php?action=save_user',
+                    data: $("#new_user_form").serialize(),
+                    type: 'POST',
+                    success: function(resp) {
                         console.log(resp);
+                        if (resp == 1) {
+                            setTimeout(() => {
+                                location.reload();
+                            }, 1000);
+                        } else {
+                            console.log(resp);
+                        }
                     }
-                }
-            })
+                });
+            }
         });
     });
 </script>

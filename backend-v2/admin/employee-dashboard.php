@@ -129,7 +129,7 @@
                         console.log(resp);
                     }
                 },
-                error:function(resp){
+                error: function(resp) {
                     console.log(resp);
                 }
             });

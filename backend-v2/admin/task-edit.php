@@ -8,8 +8,9 @@ while ($row = $qry->fetch_assoc()) { ?>
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h5 mb-0 text-gray-600">Edit Task For
                 <?php
-                $projectNameQry = $con->query("SELECT project_name FROM projects WHERE project_id ='$projectId'");
+                $projectNameQry = $con->query("SELECT project_name,hod_id FROM projects WHERE project_id ='$projectId'");
                 while ($p = $projectNameQry->fetch_assoc()) {
+                    $hodId = $p['hod_id'];
                 ?> <span class="h3 text-gray-900">
                         <?php echo $p['project_name']; ?>
                     </span>
@@ -27,6 +28,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                     </div>
                     <div class="card-body">
                         <form id="new_task_form">
+                            <input type="hidden" class="form-control" id="task_assign_from" name="task_assign_from" value="<?php echo $hodId; ?>" autocomplete="off">
                             <input type="hidden" class="form-control" id="project_id" name="project_id" value="<?php echo $projectId; ?>" autocomplete="off">
                             <input type="hidden" class="form-control" id="task_id" name="task_id" value="<?php echo $taskId; ?>" autocomplete="off">
                             <div class="form-group ">
@@ -35,7 +37,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                             </div>
                             <div class="form-group">
                                 <label for="task_description" class="col-form-label mr-1">Task Description</label><span class="text-danger">*</span>
-                                <textarea type="text" class="form-control" id="task_description" name="task_description"  autocomplete="off" required><?php echo $row['task_description'] ?></textarea>
+                                <textarea type="text" class="form-control" id="task_description" name="task_description" autocomplete="off" required><?php echo $row['task_description'] ?></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="task_assign_to" class="col-form-label mr-1">Task Assign To</label><span class="text-danger">*</span>
@@ -47,7 +49,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                                     while ($r = $data->fetch_assoc()) {
                                         $arr = explode(",", $r['users_id']);
                                         foreach ($arr as $v) { ?>
-                                            <option value="<?php echo $v ?>" <?php echo($row['task_assign_to'] == $v ? 'selected' : '')?>>
+                                            <option value="<?php echo $v ?>" <?php echo ($row['task_assign_to'] == $v ? 'selected' : '') ?>>
                                                 <?php
                                                 $userName = $con->query("SELECT user_first_name,user_last_name FROM users WHERE user_id='$v';");
                                                 while ($u = $userName->fetch_assoc()) {
@@ -65,7 +67,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                                     while ($r = $data->fetch_assoc()) {
                                         $arr = explode(",", $r['engineers_id']);
                                         foreach ($arr as $v) { ?>
-                                            <option value="<?php echo $v ?>" <?php echo($row['task_assign_to'] == $v ? 'selected' : '')?>>
+                                            <option value="<?php echo $v ?>" <?php echo ($row['task_assign_to'] == $v ? 'selected' : '') ?>>
                                                 <?php
                                                 $userName = $con->query("SELECT user_first_name,user_last_name FROM users WHERE user_id='$v';");
                                                 while ($u = $userName->fetch_assoc()) {
@@ -82,9 +84,9 @@ while ($row = $qry->fetch_assoc()) { ?>
                             <div class="form-group">
                                 <label for="task_status" class="col-form-label mr-1">Task Status</label><span class="text-danger">*</span>
                                 <select class="form-control custom-select" id="task_status" name="task_status" required>
-                                    <option value="1" <?php echo($row['task_status'] == 1 ? 'selected' : '')?>>Pending</option>
-                                    <option value="2" <?php echo($row['task_status'] == 2 ? 'selected' : '')?>>On Progress</option>
-                                    <option value="3" <?php echo($row['task_status'] == 3 ? 'selected' : '')?>>Done</option>
+                                    <option value="1" <?php echo ($row['task_status'] == 1 ? 'selected' : '') ?>>Pending</option>
+                                    <option value="2" <?php echo ($row['task_status'] == 2 ? 'selected' : '') ?>>On Progress</option>
+                                    <option value="3" <?php echo ($row['task_status'] == 3 ? 'selected' : '') ?>>Done</option>
                                 </select>
                             </div>
                             <div class="form-group row">
