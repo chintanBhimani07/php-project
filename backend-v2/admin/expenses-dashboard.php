@@ -66,8 +66,14 @@
                                         <td><?php echo $row['exp_amount'] ?> <i class="fa-solid fa-indian-rupee-sign"></i></td>
                                         <td><?php echo $row['exp_date'] ?></td>
                                         <td class="d-flex align-items-center justify-content-center">
-                                            <a type="button" class="btn btn-warning  btn-circle mx-1" href="./index.php?page=expenses-edit&expId=<?php echo $row['exp_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
-                                            <a type="button" class="btn btn-danger  btn-circle deleteExp mx-1" href="#" data-id="<?php echo $row['exp_id'] ?>"><i class="fa-solid fa-trash"></i></a>
+                                            <div class="dropdown no-arrow">
+                                                <a class="nav-link dropdown-toggle text-dark" href="#" id="productDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated-grow-in" aria-labelledby="productDropdown">
+                                                    <a type="button" class="dropdown-item" href="./index.php?page=expenses-edit&expId=<?php echo $row['exp_id'] ?>">Edit</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a type="button" class="dropdown-item" id="deleteExp" href="#" data-id="<?php echo $row['exp_id'] ?>">Delete</a>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -81,10 +87,43 @@
 </div>
 
 
+
+<div class="modal" id="openModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0.5rem 1rem; background:#3e64d3;color:#fff">
+                <h5 class="modal-title" id="addStatusModalLabel">Delete Employee</h5>
+                <button type="button" class="close closeModal" style="color:#fff">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure want to remove employee permanently?</p>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary closeModal">No</button>
+                <button type="button" class="btn btn-primary" id="submitModel">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
-        $('.deleteExp').click(function() {
-            let id = $(this).attr('id');
+        let id = '';
+        $('#openModal').hide();
+        $(document).on('click', '#deleteExp', function(e) {
+            e.preventDefault();
+            id = $(this).data('id');
+            $('#openModal').show();
+        });
+        $('.closeModal').click(() => {
+            $('#openModal').hide();
+        });
+
+        $('#submitModel').click(() => {
+            $('#openModal').hide();
             $.ajax({
                 url: './php/actions.php?action=delete_exp',
                 method: 'POST',
@@ -94,11 +133,14 @@
                 success: function(resp) {
                     if (resp == 1) {
                         setTimeout(function() {
-                            location.reload()
+                            location.reload();
                         }, 1000);
                     } else {
                         console.log(resp);
                     }
+                },
+                error: function(resp) {
+                    console.log(resp);
                 }
             });
         });

@@ -242,19 +242,25 @@ while ($row = $qry->fetch_assoc()) { ?>
                                         </td>
                                         <td>
                                             <?php
-                                            if ($row['task_status'] == 1) {
-                                                echo "Pending";
-                                            } else if ($row['task_status'] == 2) {
-                                                echo "On Progress";
-                                            } else if ($row['task_status'] == 3) {
-                                                echo "Done";
-                                            }
-                                            ?>
+                                            if ($row['task_status'] == 2) { ?>
+                                                <span style="color: green">Complete</span>
+                                            <?php } else if ($row['task_status'] == 1) { ?>
+                                                <span style="color: blue">In Progress</span>
+                                            <?php } else { ?>
+                                                <span style="color: red">Not Started</span>
+                                            <?php } ?>
                                         </td>
                                         <td class="d-flex align-items-center justify-content-center">
-                                            <a type="button" class="btn btn-warning  btn-circle editTask mx-1" href="./index.php?page=task-edit&taskId=<?php echo $row['task_id'] ?>&projectId=<?php echo $id ?>"><i class="fa-solid fa-user-pen"></i></a>
-                                            <a type="button" class="btn btn-danger  btn-circle  deleteTask mx-1" href="#" data-id="<?php echo $row['task_id'] ?>"><i class="fa-solid fa-trash"></i></a>
-                                            <a type="button" class="btn btn-secondary btn-circle  mx-1" href="./index.php?page=productivity-new&taskId=<?php echo $row['task_id'] ?>&projectId=<?php echo $id ?>"><i class="fa-solid fa-list-check"></i></a>
+                                            <div class="dropdown no-arrow">
+                                                <a class="nav-link dropdown-toggle text-dark" href="#" id="productDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated-grow-in" aria-labelledby="productDropdown">
+                                                    <a type="button" class="dropdown-item" href="./index.php?page=productivity-new&taskId=<?php echo $row['task_id'] ?>&projectId=<?php echo $id ?>">Add Productivity</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a type="button" class="dropdown-item" href="./index.php?page=task-edit&taskId=<?php echo $row['task_id'] ?>&projectId=<?php echo $id ?>">Edit</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a type="button" class="dropdown-item" id="deleteTask" href="#" data-id="<?php echo $row['task_id'] ?>">Delete</a>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -271,7 +277,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                 </div>
                 <div class="card-body">
                     <?php
-                    $productivityData = $con->query("SELECT * FROM productivity;");
+                    $productivityData = $con->query("SELECT * FROM productivity WHERE project_id='$id';");
                     while ($p = $productivityData->fetch_assoc()) { ?>
                         <div class="d-flex flex-row comment-row ">
                             <?php
@@ -296,9 +302,9 @@ while ($row = $qry->fetch_assoc()) { ?>
                                     <div class="dropdown no-arrow">
                                         <a class="nav-link dropdown-toggle text-dark" href="#" id="productDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
                                         <div class="dropdown-menu dropdown-menu-right shadow animated-grow-in" aria-labelledby="productDropdown">
-                                            <a class="dropdown-item" href="./index.php?page=productivity-edit&productivityId=<?php echo $p['productivity_id'] ?>">Edit</a>
+                                            <a type="button" class="dropdown-item" href="./index.php?page=productivity-edit&productivityId=<?php echo $p['productivity_id'] ?>">Edit</a>
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" data-id="<?php echo $p['productivity_id'] ?>" href="#">Delete</a>
+                                            <a type="button" class="dropdown-item" id="deleteProductivity" href="#" data-id="<?php echo $p['productivity_id'] ?>">Delete</a>
                                         </div>
                                     </div>
                                 </div>
@@ -310,6 +316,9 @@ while ($row = $qry->fetch_assoc()) { ?>
                                         <span class="mr-2" style="font-size:12px !important;"><b>Start: </b> <?php echo date("h:i A", strtotime($p['start_time'])); ?></span>
                                         <span style="font-size:12px !important;"><b>End: </b><?php echo date("h:i A", strtotime($p['end_time'])); ?></span>
                                     </div>
+                                </div>
+                                <div>
+                                    <span class="mr-2" style="font-size:12px !important;"><b>Subject: </b> <?php echo $p['productivity_subject']; ?></span>
                                 </div>
                                 <p class="mt-2" style="font-size:14px !important;">
                                     <?php echo $p['productivity_comments'] ?>
@@ -323,3 +332,95 @@ while ($row = $qry->fetch_assoc()) { ?>
         </div>
     </div>
 <?php } ?>
+
+
+
+
+<div class="modal" id="openModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0.5rem 1rem; background:#3e64d3;color:#fff">
+                <h5 class="modal-title" id="addStatusModalLabel">Remove Task Or Productivity</h5>
+                <button type="button" class="close closeModal" style="color:#fff">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure want to remove permanently?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary closeModal">No</button>
+                <button type="button" class="btn btn-primary" id="submitModel">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        let id = '';
+        let deleteTask=false;
+        let deleteProductivity = false;
+        $('#openModal').hide();
+        $(document).on('click', '#deleteTask', function(e) {
+            e.preventDefault();
+            deleteTask = true;
+            id = $(this).data('id');
+            $('#openModal').show();
+        });
+        $(document).on('click', '#deleteProductivity', function(e) {
+            e.preventDefault();
+            deleteProductivity = true;
+            id = $(this).data('id');
+            $('#openModal').show();
+        });
+        $('.closeModal').click(() => {
+            $('#openModal').hide();
+        });
+
+        $('#submitModel').click(() => {
+            $('#openModal').hide();
+            if(deleteTask && !deleteTask){
+                $.ajax({
+                    url: './php/actions.php?action=delete_task',
+                    method: 'POST',
+                    data: {
+                        task_id: id
+                    },
+                    success: function(resp) {
+                        if (resp == 1) {
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+                        } else {
+                            console.log(resp);
+                        }
+                    },
+                    error: function(resp) {
+                        console.log(resp);
+                    }
+                });
+            }else if(deleteProductivity && !deleteTask){
+                $.ajax({
+                    url: './php/actions.php?action=delete_productivity',
+                    method: 'POST',
+                    data: {
+                        productivity_id: id
+                    },
+                    success: function(resp) {
+                        if (resp == 1) {
+                            setTimeout(function() {
+                                location.reload();
+                            }, 1000);
+                        } else {
+                            console.log(resp);
+                        }
+                    },
+                    error: function(resp) {
+                        console.log(resp);
+                    }
+                });
+            }
+        });
+    });
+</script>

@@ -8,34 +8,22 @@ include 'controller-class.php';
 
 $task = new Controller();
 
-
-// User 
+// Application User Login
 if ($action == 'login_application_user') {
     $login = $task->login_application_user();
     if ($login) {
         echo $login;
     }
 }
-if ($action == 'save_user') {
-    $para = "insert";
-    $save_user = $task->user_save($para);
-    if ($save_user) {
-        echo $save_user;
-    }
-}
-if ($action == 'delete_user') {
-    $delete_user = $task->user_delete();
-    if ($delete_user) {
-        echo $delete_user;
-    }
-}
+
+    
+// User Password Change
 if ($action == 'change_password') {
     $change_password = $task->change_password();
     if ($change_password) {
         echo $change_password;
     }
 }
-
 
 // Employees
 if ($action == 'save_employee') {
@@ -58,51 +46,66 @@ if ($action == 'delete_employee') {
         echo $delete_employee;
     }
 }
+if($action == 'upload_emp_profile'){
+    $upload_emp_profile = $task->upload_emp_profile();
+    if($upload_emp_profile){
+        echo $upload_emp_profile;
+    }
+}
 
 
-// Clients
-if ($action == 'save_client') {
+
+// User 
+if ($action == 'save_user') {
     $para = "insert";
-    $save_client = $task->client_add($para);
-    if ($save_client) {
-        echo $save_client;
+    $save_user = $task->user_save($para);
+    if ($save_user) {
+        echo $save_user;
     }
 }
-if ($action == 'edit_client') {
-    $para = "update";
-    $edit_client = $task->client_add($para);
-    if ($edit_client) {
-        echo $edit_client;
-    }
-}
-if ($action == 'delete_client') {
-    $delete_client = $task->client_delete();
-    if ($delete_client) {
-        echo $delete_client;
+if ($action == 'delete_user') {
+    $delete_user = $task->user_delete();
+    if ($delete_user) {
+        echo $delete_user;
     }
 }
 
 
-//Expenses
-if ($action == 'save_exp') {
+
+// Leave Types 
+if($action == 'save_leaveType'){
     $para = "insert";
-    $save_exp = $task->exp_add($para);
-    if ($save_exp) {
-        echo $save_exp;
+    $save_leaveType = $task->leaveType_add($para);
+    if ($save_leaveType) {
+        echo $save_leaveType;
     }
 }
-if ($action == 'edit_exp') {
+if($action == 'edit_leaveType'){
     $para = "update";
-    $edit_exp = $task->exp_add($para);
-    if ($edit_exp) {
-        echo $edit_exp;
+    $edit_leaveType = $task->leaveType_add($para);
+    if ($edit_leaveType) {
+        echo $edit_leaveType;
     }
 }
-if ($action == 'delete_exp') {
-    $para = "update";
-    $delete_exp = $task->exp_delete();
-    if ($delete_exp) {
-        echo $delete_exp;
+if ($action == 'delete_leaveType') {
+    $delete_leaveType = $task->leaveType_delete();
+    if ($delete_leaveType) {
+        echo $delete_leaveType;
+    }
+}
+
+
+// Leave Management
+if($action == 'save_leave'){
+    $save_leave = $task->leave_add();
+    if ($save_leave) {
+        echo $save_leave;
+    }
+}
+if($action == 'take_leave_action'){
+    $take_leave_action = $task->leave_action();
+    if ($take_leave_action) {
+        echo $take_leave_action;
     }
 }
 
@@ -122,6 +125,7 @@ if ($action == 'edit_project') {
         echo $edit_project;
     }
 }
+
 
 
 // Task
@@ -169,37 +173,63 @@ if($action == 'edit_productivity'){
         echo $edit_productivity;
     }
 }
+if($action == 'delete_productivity'){
+    $delete_productivity = $task->productivity_delete();
+    if ($delete_productivity) {
+        echo $delete_productivity;
+    }
+}
 
 
 
-// Leave Types 
-if($action == 'save_leaveType'){
+// Clients
+if ($action == 'save_client') {
     $para = "insert";
-    $save_leaveType = $task->leaveType_add($para);
-    if ($save_leaveType) {
-        echo $save_leaveType;
+    $save_client = $task->client_add($para);
+    if ($save_client) {
+        echo $save_client;
     }
 }
-if($action == 'edit_leaveType'){
+if ($action == 'edit_client') {
     $para = "update";
-    $edit_leaveType = $task->leaveType_add($para);
-    if ($edit_leaveType) {
-        echo $edit_leaveType;
+    $edit_client = $task->client_add($para);
+    if ($edit_client) {
+        echo $edit_client;
+    }
+}
+if ($action == 'delete_client') {
+    $delete_client = $task->client_delete();
+    if ($delete_client) {
+        echo $delete_client;
     }
 }
 
 
-// Leave 
-if($action == 'save_leave'){
-    $save_leave = $task->leave_add();
-    if ($save_leave) {
-        echo $save_leave;
+//Expenses
+if ($action == 'save_exp') {
+    $para = "insert";
+    $save_exp = $task->exp_add($para);
+    if ($save_exp) {
+        echo $save_exp;
     }
 }
-if($action == 'take_leave_action'){
-    $take_leave_action = $task->leave_action();
-    if ($take_leave_action) {
-        echo $take_leave_action;
+if ($action == 'edit_exp') {
+    $para = "update";
+    $edit_exp = $task->exp_add($para);
+    if ($edit_exp) {
+        echo $edit_exp;
     }
 }
-
+if ($action == 'delete_exp') {
+    $para = "update";
+    $delete_exp = $task->exp_delete();
+    if ($delete_exp) {
+        echo $delete_exp;
+    }
+}
+if($action == 'upload_exp_profile'){
+    $upload_exp_profile = $task->upload_exp_profile();
+    if($upload_exp_profile){
+        echo $upload_exp_profile;
+    }
+}

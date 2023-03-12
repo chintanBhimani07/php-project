@@ -30,7 +30,7 @@
                                 <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                     Running</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <?php echo $con->query("SELECT * FROM projects WHERE project_status='Running';")->num_rows . ' ' . 'Projects'; ?>
+                                    <?php echo $con->query("SELECT * FROM projects WHERE project_status=1;")->num_rows . ' ' . 'Projects'; ?>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +44,7 @@
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Completed</div>
                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                    <?php echo $con->query("SELECT * FROM projects WHERE project_status='Complete';")->num_rows . ' ' . 'Projects'; ?>
+                                    <?php echo $con->query("SELECT * FROM projects WHERE project_status=2;")->num_rows . ' ' . 'Projects'; ?>
                                 </div>
                             </div>
                         </div>
@@ -59,7 +59,7 @@
                                 <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                     Pending</div>
                                 <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    <?php echo $con->query("SELECT * FROM projects WHERE project_status='Hold';")->num_rows . ' ' . 'Projects'; ?>
+                                    <?php echo $con->query("SELECT * FROM projects WHERE project_status=0;")->num_rows . ' ' . 'Projects'; ?>
                                 </div>
                             </div>
                         </div>
@@ -87,8 +87,8 @@
                                     <th>Start</th>
                                     <th>Finish</th>
                                     <th>Status</th>
-                                    <?php 
-                                    if($_SESSION['login_user_access_type'] == 1){ ?>
+                                    <?php
+                                    if ($_SESSION['login_user_access_type'] == 1) { ?>
                                         <th>Action</th>
                                     <?php } ?>
                                 </tr>
@@ -100,16 +100,15 @@
                                 if ($_SESSION['login_user_access_type'] == 2) {
                                     $userId = $_SESSION['login_user_id'];
                                     $qry = $con->query("SELECT * FROM  projects WHERE FIND_IN_SET('$userId', users_id);");
-                                }else if($_SESSION['login_user_access_type'] == 4){
+                                } else if ($_SESSION['login_user_access_type'] == 4) {
                                     $empId = $_SESSION['login_emp_id'];
-                                    $hodQry= $con->query("SELECT hod_id FROM hod WHERE emp_id='$empId'");
-                                    while($h = $hodQry->fetch_assoc()){
+                                    $hodQry = $con->query("SELECT hod_id FROM hod WHERE emp_id='$empId'");
+                                    while ($h = $hodQry->fetch_assoc()) {
                                         $hodId = $h['hod_id'];
-                                        $qry = $con->query("SELECT * FROM projects WHERE hod_id='$hodId'"); 
+                                        $qry = $con->query("SELECT * FROM projects WHERE hod_id='$hodId'");
                                     }
-                                }else if($_SESSION['login_user_access_type'] == 3){
-
-                                }else if($_SESSION['login_user_access_type'] == 1){
+                                } else if ($_SESSION['login_user_access_type'] == 3) {
+                                } else if ($_SESSION['login_user_access_type'] == 1) {
                                     $qry = $con->query("SELECT * FROM  projects;");
                                 }
                                 while ($row = $qry->fetch_assoc()) { ?>
@@ -145,15 +144,27 @@
                                             <?php echo $row['expected_end_date'] ?>
                                         </td>
                                         <td>
-                                            <?php echo $row['project_status'] ?>
+                                            <?php
+                                            if ($row['project_status'] == 2) { ?>
+                                                <span style="color: green">Complete</span>
+                                            <?php } else if ($row['project_status'] == 1) { ?>
+                                                <span style="color: blue">Running</span>
+                                            <?php } else { ?>
+                                                <span style="color: red">Hold</span>
+                                            <?php } ?>
                                         </td>
                                         <?php
-                                        if($_SESSION['login_user_access_type'] == 1){ ?>
-                                        <td class="d-flex align-items-center justify-content-center">
-                                            <a type="button" class="btn btn-primary btn-circle mx-1" href="./index.php?page=project-viewer&projectId=<?php echo $row['project_id'] ?>"><i class="fa-solid fa-eye"></i></a>
-                                            <a type="button" class="btn btn-warning  btn-circle mx-1" href="./index.php?page=project-edit&projectId=<?php echo $row['project_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
-                                            <a type="button" class="btn btn-danger  btn-circle deleteProject  mx-1" href="#" data-id="<?php echo $row['project_id'] ?>"><i class="fa-solid fa-trash"></i></a>
-                                        </td>
+                                        if ($_SESSION['login_user_access_type'] == 1) { ?>
+                                            <td class="d-flex align-items-center justify-content-center">
+                                                <div class="dropdown no-arrow">
+                                                    <a class="nav-link dropdown-toggle text-dark" href="#" id="productDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                                                    <div class="dropdown-menu dropdown-menu-right shadow animated-grow-in" aria-labelledby="productDropdown">
+                                                        <a type="button" class="dropdown-item" href="./index.php?page=project-viewer&projectId=<?php echo $row['project_id'] ?>">View</a>
+                                                        <div class="dropdown-divider"></div>
+                                                        <a type="button" class="dropdown-item" href="./index.php?page=project-edit&projectId=<?php echo $row['project_id'] ?>">Edit</a>
+                                                    </div>
+                                                </div>
+                                            </td>
                                         <?php } ?>
                                     </tr>
                                 <?php } ?>
@@ -167,11 +178,42 @@
 </div>
 
 
+
+<div class="modal" id="openModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0.5rem 1rem; background:#3e64d3;color:#fff">
+                <h5 class="modal-title" id="addStatusModalLabel">Remove Project</h5>
+                <button type="button" class="close closeModal" style="color:#fff">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure want to remove project permanently?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary closeModal">No</button>
+                <button type="button" class="btn btn-primary" id="submitModel">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
-        $('.deleteProject').click(function() {
-            // console.log('click');
-            let id = $(this).attr('id');
+        let id = '';
+        $('#openModal').hide();
+        $(document).on('click', '#deleteProject', function(e) {
+            e.preventDefault();
+            id = $(this).data('id');
+            $('#openModal').show();
+        });
+        $('.closeModal').click(() => {
+            $('#openModal').hide();
+        });
+
+        $('#submitModel').click(() => {
+            $('#openModal').hide();
             $.ajax({
                 url: './php/actions.php?action=delete_project',
                 method: 'POST',
@@ -181,12 +223,14 @@
                 success: function(resp) {
                     if (resp == 1) {
                         setTimeout(function() {
-                            location.reload()
-                        }, 1000)
-
+                            location.reload();
+                        }, 1000);
                     } else {
                         console.log(resp);
                     }
+                },
+                error: function(resp) {
+                    console.log(resp);
                 }
             });
         });

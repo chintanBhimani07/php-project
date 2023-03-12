@@ -92,9 +92,16 @@
                                         <td><?php echo $row['emp_department'] ?></td>
                                         <td><?php echo $row['emp_designation'] ?></td>
                                         <td class="d-flex align-items-center justify-content-center">
-                                            <a type="button" class="btn btn-primary btn-circle mx-1" href="./index.php?page=employee-viewer&empId=<?php echo $row['emp_id'] ?>&content=employee"><i class="fa-solid fa-eye"></i></a>
-                                            <a type="button" class="btn btn-warning  btn-circle mx-1" href="./index.php?page=employee-edit&empId=<?php echo $row['emp_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
-                                            <a type="button" class="deleteEmployee btn btn-danger btn-circle mx-1" href="javascript:void(0)" data-id="<?php echo $row['emp_id'] ?>"><i class="fa-solid fa-trash"></i></a>
+                                            <div class="dropdown no-arrow">
+                                                <a class="nav-link dropdown-toggle text-dark" href="#" id="productDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated-grow-in" aria-labelledby="productDropdown">
+                                                    <a type="button" class="dropdown-item" href="./index.php?page=employee-viewer&empId=<?php echo $row['emp_id'] ?>&content=employee">View</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a type="button" class="dropdown-item" href="./index.php?page=employee-edit&empId=<?php echo $row['emp_id'] ?>">Edit</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a type="button" class="dropdown-item" id="deleteEmp" href="#" data-id="<?php echo $row['emp_id'] ?>">Delete</a>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -108,11 +115,41 @@
 </div>
 
 
+<div class="modal" id="openModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0.5rem 1rem; background:#3e64d3;color:#fff">
+                <h5 class="modal-title" id="addStatusModalLabel">Delete Employee</h5>
+                <button type="button" class="close closeModal" style="color:#fff">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure want to remove employee permanently?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary closeModal">No</button>
+                <button type="button" class="btn btn-primary" id="submitModel">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
-        $('.deleteEmployee').click(function() {
-            console.log('click');
-            let id = $(this).data('id');
+        let id = '';
+        $('#openModal').hide();
+        $(document).on('click', '#deleteEmp', function(e) {
+            e.preventDefault();
+            id = $(this).data('id');
+            $('#openModal').show();
+        });
+        $('.closeModal').click(() => {
+            $('#openModal').hide();
+        });
+
+        $('#submitModel').click(() => {
+            $('#openModal').hide();
             $.ajax({
                 url: './php/actions.php?action=delete_employee',
                 method: 'POST',
@@ -120,10 +157,9 @@
                     emp_id: id
                 },
                 success: function(resp) {
-                    console.log(resp);
                     if (resp == 1) {
                         setTimeout(function() {
-                            location.reload()
+                            location.reload();
                         }, 1000);
                     } else {
                         console.log(resp);

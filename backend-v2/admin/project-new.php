@@ -32,21 +32,9 @@
                             <label for="project_name" class="col-form-label mr-1">Project Name</label><span class="text-danger">*</span>
                             <input type="text" class="form-control" id="project_name" name="project_name" autocomplete="off" autofocus>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <label for="project_status" class="col-form-label mr-1">Project Status</label><span class="text-danger">*</span>
-                                <select class="form-control custom-select" id="project_status" name="project_status">
-                                    <option value="">Select Status</option>
-                                    <option value="Hold">Hold</option>
-                                    <option value="Running">Running</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Complete">Complete</option>
-                                </select>
-                            </div>
-                            <div class="col-sm-6">
-                                <label for="project_code" class="col-form-label mr-1">Project Code</label><span class="text-danger">*</span>
-                                <input type="text" class="form-control" id="project_code" name="project_code" autocomplete="off">
-                            </div>
+                        <div class="form-group">
+                            <label for="project_code" class="col-form-label mr-1">Project Code</label><span class="text-danger">*</span>
+                            <input type="text" class="form-control" id="project_code" name="project_code" autocomplete="off">
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-4 mb-3 mb-sm-0">

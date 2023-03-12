@@ -79,7 +79,6 @@
                                     <th>Task Description</th>
                                     <th>Task Assign To</th>
                                     <th>Task Status</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -108,17 +107,13 @@
                                         </td>
                                         <td>
                                             <?php
-                                            if ($row['task_status'] == 1) {
-                                                echo "Pending";
-                                            } else if ($row['task_status'] == 2) {
-                                                echo "On Progress";
-                                            } else if ($row['task_status'] == 3) {
-                                                echo "Done";
-                                            }
-                                            ?>
-                                        </td>
-                                        <td class="d-flex align-items-center justify-content-center">
-                                            <a type="button" class="btn btn-success btn-circle editTask mx-1" href="./index.php?page=productivity-new&taskId=<?php echo $row['task_id'] ?>&projectId=<?php echo $row['project_id'] ?>"><i class="fa-solid fa-user-pen"></i></a>
+                                            if ($row['task_status'] == 2) { ?>
+                                                <span style="color: green">Complete</span>
+                                            <?php } else if ($row['task_status'] == 1) { ?>
+                                                <span style="color: blue">In Progress</span>
+                                            <?php } else { ?>
+                                                <span style="color: red">Not Started</span>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -130,29 +125,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    $(document).ready(function() {
-        $('.deleteTask').click(function() {
-            console.log('click');
-            let id = $(this).data('id');
-            $.ajax({
-                url: './php/actions.php?action=delete_task',
-                method: 'POST',
-                data: {
-                    task_id: id
-                },
-                success: function(resp) {
-                    if (resp == 1) {
-                        setTimeout(function() {
-                            location.reload();
-                        }, 1000);
-                    } else {
-                        console.log(resp);
-                    }
-                }
-            });
-        });
-    });
-</script>

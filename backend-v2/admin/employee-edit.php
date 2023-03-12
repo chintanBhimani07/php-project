@@ -19,7 +19,10 @@ $qry = $con->query("SELECT * FROM  employees WHERE emp_id='$empId';");
 while ($row = $qry->fetch_assoc()) { ?>
     <div class="container-fluid">
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Employee Update</h1>
+            <div>
+                <h1 class="h3 mb-0 text-gray-800">Employee Update</h1>
+                <span class="h6">Employee Code: <?php echo $row['emp_code'] ?></span>
+            </div>
             <a href="./index.php?page=employee-dashboard" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-list fa-sm text-white mr-2"></i>Employee</a>
         </div>
         <div class="row add-employee-form">
@@ -31,8 +34,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                     <div class="card-body">
                         <form id="edit_employee_form">
                             <div class="form-group">
-                                <label for="emp_code" class="col-form-label mr-1">Employee Code</label><span class="text-danger">*</span>
-                                <input type="number" class="form-control" id="emp_code" name="emp_code" value="<?php echo $row['emp_code'] ?>" autocomplete="off" autofocus disabled>
+                                <input type="hidden" class="form-control" id="emp_code" name="emp_code" value="<?php echo $row['emp_code'] ?>" autocomplete="off">
                             </div>
                             <div class="form-group row">
                                 <input type="hidden" class="form-control" id="emp_id" name="emp_id" value="<?php echo $row['emp_id'] ?>" autocomplete="off">
@@ -169,6 +171,30 @@ while ($row = $qry->fetch_assoc()) { ?>
     function preview() {
         thumb.src = URL.createObjectURL(event.target.files[0]);
     }
+
+    function uploadImg() {
+        if ($('#emp_profile_pic').val()) {
+            let img = $('#emp_profile_pic').prop('files')[0];
+            let empCode = $('#emp_code').val();
+            var formData = new FormData();
+            formData.append('emp_profile_pic', img);
+            formData.append('emp_code', empCode);
+            $.ajax({
+                type: "POST",
+                url: "./php/actions.php?action=upload_emp_profile",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        } else {}
+    }
+
     $(document).ready(function() {
 
         $("#edit_employee_form").validate({
@@ -250,7 +276,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                     data: $("#edit_employee_form").serialize(),
                     type: 'POST',
                     success: function(resp) {
-                        console.log(resp);
+                        uploadImg();
                         if (resp == 1) {
                             setTimeout(() => {
                                 window.location = './index.php?page=employee-dashboard';

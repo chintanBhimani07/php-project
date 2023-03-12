@@ -17,7 +17,10 @@
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Leave Application</h1>
-        <a href="./index.php?page=leave-dashboard" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-list fa-sm text-white mr-2"></i>All Leave</a>
+        <?php
+        if ($_SESSION['login_user_access_type'] != 2) { ?>
+            <a href="./index.php?page=leave-dashboard" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-list fa-sm text-white mr-2"></i>All Leave</a>
+        <?php } ?>
     </div>
 
     <div class="row add-employee-form">

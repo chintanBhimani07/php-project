@@ -217,13 +217,15 @@ while ($row = $qry->fetch_assoc()) {
                     </div>
                 </div>
                 <?php
-                if ($isPending) { ?>
+                if ($isPending && $_SESSION['login_user_access_type'] == 1) { ?>
                     <div class="d-flex align-items-center justify-content-around ">
                         <div class="w-50">
                             <button class="btn btn-warning text-dark btn-user btn-block btnAction">Take Action</button>
                             <button class="btn btn-danger text-light btn-user btn-block btnRemove">Remove Action</button>
                         </div>
                     </div>
+
+                    ?>
                     <div class="row take_action mt-5">
                         <div class="col-xl-12 col-lg-7">
                             <div class="card shadow mb-4">
@@ -234,7 +236,7 @@ while ($row = $qry->fetch_assoc()) {
                                     <form id="new_leave_type">
                                         <input type="hidden" name="leave_id" value="<?php echo $leaveId; ?>">
                                         <div class="form-group">
-                                            <label for="leave_status" class="col-form-label mr-1">Leave Status</label>
+                                            <label for="leave_status" class="col-form-label mr-1">Leave Status</label><span class="text-danger">*</span>
                                             <select class="form-control custom-select" id="leave_status" name="leave_status">
                                                 <option value="" selected>Select Status</option>
                                                 <option value="2">Approved</option>
@@ -242,7 +244,7 @@ while ($row = $qry->fetch_assoc()) {
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="admin_remarks" class="col-form-label mr-1">Admin Remarks</label>
+                                            <label for="admin_remarks" class="col-form-label mr-1">Admin Remarks</label><span class="text-danger">*</span>
                                             <textarea type="text" class="form-control" id="admin_remarks" name="admin_remarks" autocomplete="off"></textarea>
                                         </div>
                                         <div class="form-group ">

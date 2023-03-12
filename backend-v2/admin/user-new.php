@@ -36,9 +36,15 @@
                                 <?php } ?>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group position-relative">
                             <label for="user_password" class="col-form-label mr-1">Password</label><span class="text-danger">*</span>
-                            <input type="text" class="form-control" id="user_password" name="user_password" autocomplete="off">
+                            <input type="password" class="form-control" id="user_password" name="user_password" autocomplete="off">
+                            <i type="button" class="fa-solid fa-eye position-absolute" id="showPassword" style="top:50px;right:10px"></i>
+                            <i type="button" class="fa-solid fa-eye-slash position-absolute" id="hidePassword" style="top:50px;right:10px"></i>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_confirm_password" class="col-form-label mr-1">Confirm Password</label><span class="text-danger">*</span>
+                            <input type="password" class="form-control" id="user_confirm_password" name="user_confirm_password" autocomplete="off">
                         </div>
                         <div class="form-group">
                             <label for="user_access_type" class="col-form-label mr-1">Access Type</label><span class="text-danger">*</span>
@@ -68,17 +74,59 @@
 
 <script>
     $(document).ready(function() {
+        $('#hidePassword').hide();
+        $('#showPassword').hide();
+
+        $('#showPassword').click(function() {
+            let passwordField = $('#user_password');
+            let fieldType = passwordField.attr('type');
+            if (fieldType === 'password') {
+                passwordField.attr('type', 'text');
+                $("#showPassword").hide();
+                $('#hidePassword').show();
+            }
+        });
+        $('#hidePassword').click(function() {
+            let passwordField = $('#user_password');
+            let fieldType = passwordField.attr('type');
+            if (fieldType === 'text') {
+                passwordField.attr('type', 'password');
+                $("#hidePassword").hide();
+                $('#showPassword').show();
+            }
+        });
+
+        $('#user_password').on('input', function() {
+            if ($(this).val().length > 0) {
+                $("#showPassword").show();
+                
+            } else {
+                $("#showPassword").hide();
+                $("#hidePassword").hide();
+            }
+        });
+
+
         $("#new_user_form").validate({
             // Define validation rules
             rules: {
                 user_email: "required",
                 user_password: "required",
+                user_confirm_password: "required",
                 user_access_type: "required",
                 user_email: {
                     required: true,
                 },
                 user_password: {
                     required: true,
+                    minlength: 6,
+                    maxlength: 16,
+                },
+                user_confirm_password: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 16,
+                    equalTo: '#user_password'
                 },
                 user_access_type: {
                     required: true
@@ -91,6 +139,14 @@
                 },
                 user_password: {
                     required: "Please provide a valid password",
+                    minlength: 'Password must be at least 6 characters long',
+                    maxlength: 'Password must not be more than 16 characters long'
+                },
+                user_confirm_password: {
+                    required: "Please provide a valid password",
+                    minlength: 'Password must be at least 6 characters long',
+                    maxlength: 'Password must not be more than 16 characters long',
+                    equalTo: 'Passwords do not match'
                 },
                 user_access_type: "Please Select a valid Access Type",
             },

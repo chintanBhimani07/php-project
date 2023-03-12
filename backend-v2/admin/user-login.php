@@ -57,8 +57,10 @@ include './head.components.php'
             <div class="form-group">
                 <input type="email" class="form-control " id="user_email" name="user_email" placeholder="name@example.com" autocomplete="off" autofocus>
             </div>
-            <div class="form-group ">
+            <div class="form-group position-relative">
                 <input type="password" class="form-control " id="user_password" name="user_password" placeholder="Enter Password" autocomplete="off">
+                <i type="button" class="fa-solid fa-eye position-absolute" id="showPassword" style="top:12px;right:10px"></i>
+                <i type="button" class="fa-solid fa-eye-slash position-absolute" id="hidePassword" style="top:12px;right:10px"></i>
             </div>
             <div class="form-group ">
                 <button class="btn btn-primary btn-user btn-block" id="loginBtn" type="submit">Log In</button>
@@ -70,6 +72,40 @@ include './head.components.php'
 </body>
 <script>
     $(document).ready(function() {
+        $('#hidePassword').hide();
+        $('#showPassword').hide();
+
+        $('#showPassword').click(function() {
+            let passwordField = $('#user_password');
+            let fieldType = passwordField.attr('type');
+            if (fieldType === 'password') {
+                passwordField.attr('type', 'text');
+                $("#showPassword").hide();
+                $('#hidePassword').show();
+            }
+        });
+        $('#hidePassword').click(function() {
+            let passwordField = $('#user_password');
+            let fieldType = passwordField.attr('type');
+            if (fieldType === 'text') {
+                passwordField.attr('type', 'password');
+                $("#hidePassword").hide();
+                $('#showPassword').show();
+            }
+        });
+
+        $('#user_password').on('input', function() {
+            if ($(this).val().length > 0) {
+                $("#showPassword").show();
+
+            } else {
+                $("#showPassword").hide();
+                $("#hidePassword").hide();
+            }
+        });
+
+
+
         $('.show').hide();
         $("#user_login").validate({
             // Define validation rules

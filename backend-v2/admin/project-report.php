@@ -1,7 +1,10 @@
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Projects Report</h1>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        <?php
+        if ($_SESSION['login_user_access_type'] == 1 || $_SESSION['login_user_access_type'] == 4) { ?>
+            <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+        <?php } ?>
     </div>
     <div class="row">
         <div class="col-xl-12 col-lg-7">
@@ -18,7 +21,6 @@
                                     <th width="20%">Project</th>
                                     <th width="5%">Total Task</th>
                                     <th width="5%">Completed Task</th>
-                                    <th width="5%">Work Duration</th>
                                     <th width="50%">Progress</th>
                                     <th width="10%">Status</th>
                                 </tr>
@@ -26,16 +28,28 @@
                             <tbody>
                                 <?php
                                 $i = 1;
-                                $qry = $con->query("SELECT * FROM  projects ORDER BY project_name;");
+                                if ($_SESSION['login_user_access_type'] == 2) {
+                                    $userId = $_SESSION['login_user_id'];
+                                    $qry = $con->query("SELECT * FROM  projects WHERE FIND_IN_SET('$userId', users_id);");
+                                } else if ($_SESSION['login_user_access_type'] == 4) {
+                                    $empId = $_SESSION['login_emp_id'];
+                                    $hodQry = $con->query("SELECT hod_id FROM hod WHERE emp_id='$empId'");
+                                    while ($h = $hodQry->fetch_assoc()) {
+                                        $hodId = $h['hod_id'];
+                                        $qry = $con->query("SELECT * FROM projects WHERE hod_id='$hodId'");
+                                    }
+                                } else if ($_SESSION['login_user_access_type'] == 3) {
+                                } else if ($_SESSION['login_user_access_type'] == 1) {
+                                    $qry = $con->query("SELECT * FROM  projects;");
+                                }
+
                                 while ($row = $qry->fetch_assoc()) {
                                     $projectId = $row['project_id'];
                                     $totalTask = $con->query("SELECT * FROM task where project_id='$projectId'")->num_rows;
-                                    $completeTask = $con->query("SELECT * FROM task where project_id ='$projectId' and task_status = 3")->num_rows;
+                                    $completeTask = $con->query("SELECT * FROM task where project_id ='$projectId' and task_status = 2")->num_rows;
                                     $progress = $totalTask > 0 ? ($completeTask / $totalTask) * 100 : 0;
                                     $progress = $progress > 0 ? number_format($progress, 2) : $progress;
                                     $productivity = $con->query("SELECT * FROM productivity WHERE project_id='$projectId'")->num_rows;
-                                    $duration = $con->query("SELECT sum(time_rendered) as duration FROM productivity WHERE project_id='$projectId'");
-                                    $duration = $duration->num_rows > 0 ? $duration->fetch_assoc()['duration'] : 0;
                                 ?>
                                     <tr>
                                         <th scope="row">
@@ -49,16 +63,22 @@
                                         </td>
                                         <td><?php echo number_format($totalTask) ?></td>
                                         <td><?php echo number_format($completeTask) ?></td>
-                                        <td><?php echo number_format($duration) . ' Hr/s.' ?></td>
 
                                         <td class="px-5">
-                                            <h4 class="small font-weight-bold">Complete<span class="float-right"><?php echo $progress?>%</span></h4>
+                                            <h4 class="small font-weight-bold">Complete<span class="float-right"><?php echo $progress ?>%</span></h4>
                                             <div class="progress">
                                                 <div class="progress-bar bg-success" role="progressbar" style="width: <?php echo $progress ?>%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                                             </div>
                                         </td>
                                         <td>
-                                            <?php echo $row['project_status'] ?>
+                                            <?php
+                                            if ($row['project_status'] == 2) { ?>
+                                                <span style="color: green">Complete</span>
+                                            <?php } else if ($row['project_status'] == 1) { ?>
+                                                <span style="color: blue">Running</span>
+                                            <?php } else { ?>
+                                                <span style="color: red">Hold</span>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -70,30 +90,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    $(document).ready(function() {
-        $('.deleteProject').click(function() {
-            // console.log('click');
-            let id = $(this).attr('id');
-            $.ajax({
-                url: './php/actions.php?action=delete_project',
-                method: 'POST',
-                data: {
-                    project_id: id
-                },
-                success: function(resp) {
-                    if (resp == 1) {
-                        setTimeout(function() {
-                            location.reload()
-                        }, 1000)
-
-                    } else {
-                        console.log(resp);
-                    }
-                }
-            });
-        });
-    });
-</script>

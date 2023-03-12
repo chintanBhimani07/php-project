@@ -92,13 +92,13 @@ $userId = $_SESSION['login_user_id'];
                             </thead>
                             <tbody>
                                 <?php
-                                $i = 0;
+                                $i = 1;
                                 $qry = $con->query("SELECT * FROM task WHERE task_assign_to='$userId';");
                                 while ($row = $qry->fetch_assoc()) {
                                 ?>
                                     <tr>
                                         <td scope="row">
-                                            <?php echo $i + 1 ?>
+                                            <?php echo $i++ ?>
                                         </td>
                                         <td>
                                             <?php echo $row['task_name']; ?>
@@ -117,26 +117,29 @@ $userId = $_SESSION['login_user_id'];
                                         </td>
                                         <td>
                                             <?php
-                                            if ($row['task_status'] == 0) {
-                                                echo "Pending";
-                                            } else if ($row['task_status'] == 1) {
-                                                echo "On Progress";
-                                            } else if ($row['task_status'] == 2) {
-                                                echo "Completed";
-                                            } else if ($row['task_status'] == 3) {
-                                                echo "Hold";
-                                            }
-                                            ?>
+                                            if ($row['task_status'] == 2) { ?>
+                                                <span style="color: green">Complete</span>
+                                            <?php } else if ($row['task_status'] == 1) { ?>
+                                                <span style="color: blue">In Progress</span>
+                                            <?php } else { ?>
+                                                <span style="color: red">Not Started</span>
+                                            <?php } ?>
                                         </td>
                                         <td class="d-flex align-items-center justify-content-center">
-                                            <?php
-                                            if ($row['task_status'] == 0) { ?>
-                                                <a type="button" class="btn btn-secondary btn-circle mx-1" id="startWork" data-id="<?php echo $row['task_id'] ?>" href="javascript:void(0)"><i class="fa-solid fa-play"></i></a>
-                                            <?php } else if ($row['task_status'] == 1) { ?>
-                                                <a type="button" class="btn btn-danger btn-circle editTask mx-1" id="submitWork" data-id="<?php echo $row['task_id']; ?>" href="javascript:void(0)"><i class="fa-solid fa-check"></i></a>
-                                            <?php } else if ($row['task_status'] == 2) { ?>
-                                                <a type="button" class="btn btn-primary btn-circle editTask mx-1" id="viewWork" data-id="<?php echo $row['task_id']; ?>" href="javascript:void(0)"><i class="fa-solid fa-eye"></i></a>
-                                            <?php } ?>
+                                            <div class="dropdown no-arrow">
+                                                <a class="nav-link dropdown-toggle text-dark" href="#" id="productDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated-grow-in" aria-labelledby="productDropdown">
+                                                    <?php if ($row['task_status'] == 0) { ?>
+                                                        <a type="button" class="dropdown-item" id="startWork" data-id="<?php echo $row['task_id'] ?>" href="#">Start Work</a>
+                                                        <div class="dropdown-divider"></div>
+                                                    <?php } else if ($row['task_status'] == 1) { ?>
+                                                        <a type="button" class="dropdown-item" id="submitWork" data-id="<?php echo $row['task_id'] ?>" data-project="<?php echo $row['project_id'] ?>" href="#">Submit Work</a>
+                                                        <div class="dropdown-divider"></div>
+                                                    <?php } ?>
+                                                    <a type="button" class="dropdown-item" id="viewWork" href="./index.php?page=work-view&taskId=<?php echo $row['task_id'] ?>">View Work</a>
+
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php
@@ -155,13 +158,13 @@ $userId = $_SESSION['login_user_id'];
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header" style="padding: 0.5rem 1rem; background:#3e64d3;color:#fff">
-                <h5 class="modal-title" id="addStatusModalLabel">Changes On Task</h5>
+                <h5 class="modal-title" id="addStatusModalLabel">Start or Submit Work</h5>
                 <button type="button" class="close closeModal" style="color:#fff">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Are you sure want to commit changes?</p>
+                <p id="bodyText">Are you sure want to commit changes?</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary closeModal">No</button>
@@ -177,6 +180,7 @@ $userId = $_SESSION['login_user_id'];
     $(document).ready(function() {
         let id = '';
         let process = '';
+        let projectId = '';
         $('#openModal').hide();
         $(document).on('click', '#startWork', function(e) {
             e.preventDefault();
@@ -185,11 +189,11 @@ $userId = $_SESSION['login_user_id'];
             $('#openModal').show();
         });
         $(document).on('click', '#submitWork', function(e) {
+            projectId = $('#submitWork').data('project');
             e.preventDefault();
             process = 'submit';
             id = $(this).data('id');
             $('#openModal').show();
-
         });
         $('.closeModal').click(() => {
             $('#openModal').hide();
@@ -202,7 +206,8 @@ $userId = $_SESSION['login_user_id'];
                 method: 'POST',
                 data: {
                     process: process,
-                    taskId: id
+                    taskId: id,
+                    projectId: projectId
                 },
                 success: function(resp) {
                     if (resp == 1) {

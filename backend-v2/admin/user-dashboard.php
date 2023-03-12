@@ -51,27 +51,16 @@
                                             ?>
                                         </td>
                                         <td class="d-flex align-items-center justify-content-center">
-                                            <a type="button" class="btn btn-primary btn-circle viewEmployee mx-1" href="./index.php?page=employee-viewer&empId=<?php echo $row['emp_id'] ?>&content=user"><i class="fa-solid fa-eye"></i></a>
-                                            <a type="button" class="btn btn-danger  btn-circle  mx-1" href="#" data-toggle="modal" data-target="#deleteUserModal"><i class="fa-solid fa-trash"></i></a>
-                                        </td>
-                                    </tr>
-                                    <div class="modal fade" id="deleteUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure want to delete?</h5>
-                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true"></span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">This field Permanently Deleted.</div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                                                    <button class="btn btn-danger deleteUser" data-dismiss="modal" id="<?php echo $row['user_id'] ?>">Delete</button>
+                                            <div class="dropdown no-arrow">
+                                                <a class="nav-link dropdown-toggle text-dark" href="#" id="productDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated-grow-in" aria-labelledby="productDropdown">
+                                                    <a type="button" class="dropdown-item" href="./index.php?page=employee-viewer&empId=<?php echo $row['emp_id'] ?>&content=user">View</a>
+                                                    <div class="dropdown-divider"></div>
+                                                    <a type="button" class="dropdown-item" id="deleteUser" href="#" data-id="<?php echo $row['user_id'] ?>">Delete</a>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
+                                        </td>
+                                    </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
@@ -80,30 +69,62 @@
             </div>
         </div>
     </div>
+</div>
 
+<div class="modal" id="openModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0.5rem 1rem; background:#3e64d3;color:#fff">
+                <h5 class="modal-title" id="addStatusModalLabel">Delete User</h5>
+                <button type="button" class="close closeModal" style="color:#fff">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure want to remove user permanently?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary closeModal">No</button>
+                <button type="button" class="btn btn-primary" id="submitModel">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <script>
-        $(document).ready(function() {
-            $('.deleteUser').click(function() {
-                // console.log('click');
-                let id = $(this).attr('id');
-                $.ajax({
-                    url: './php/actions.php?action=delete_user',
-                    method: 'POST',
-                    data: {
-                        user_id: id
-                    },
-                    success: function(resp) {
-                        if (resp == 1) {
-                            setTimeout(function() {
-                                location.reload()
-                            }, 1000)
+<script>
+    $(document).ready(function() {
+        let id = '';
+        $('#openModal').hide();
+        $(document).on('click', '#deleteUser', function(e) {
+            e.preventDefault();
+            id = $(this).data('id');
+            $('#openModal').show();
+        });
+        $('.closeModal').click(() => {
+            $('#openModal').hide();
+        });
 
-                        } else {
-                            console.log(resp);
-                        }
+        $('#submitModel').click(() => {
+            $('#openModal').hide();
+            $.ajax({
+                url: './php/actions.php?action=delete_user',
+                method: 'POST',
+                data: {
+                    user_id: id
+                },
+                success: function(resp) {
+                    if (resp == 1) {
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1000);
+                    } else {
+                        console.log(resp);
                     }
-                });
+                },
+                error: function(resp) {
+                    console.log(resp);
+                }
             });
         });
-    </script>
+    });
+</script>

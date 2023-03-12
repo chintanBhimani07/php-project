@@ -13,13 +13,20 @@
     }
 </style>
 
+<?php
+$l_emp_id = "";
+$lastInsert = $con->query("SELECT emp_code FROM employees ORDER BY emp_code DESC LIMIT 1;");
+while ($l = $lastInsert->fetch_assoc()) {
+    $l_emp_id = $l['emp_code'] + 1;
+} ?>
 <div class="container-fluid">
-
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">New Employee</h1>
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">New Employee</h1>
+            <span class="h6">Employee Code: <?php echo $l_emp_id ?></span>
+        </div>
         <a href="./index.php?page=employee-dashboard" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-list fa-sm text-white mr-2"></i>Employee</a>
     </div>
-
     <div class="row add-employee-form">
         <div class="col-xl-12 col-lg-7">
             <div class="card shadow mb-4">
@@ -29,13 +36,12 @@
                 <div class="card-body">
                     <form id="new_employee_form" name="employeeForm">
                         <div class="form-group">
-                            <label for="emp_code" class="col-form-label mr-1">Employee Code</label><span class="text-danger">*</span>
-                            <input type="number" class="form-control" id="emp_code" name="emp_code" autocomplete="off" autofocus>
+                            <input type="hidden" class="form-control" id="emp_code" name="emp_code" value="<?php echo $l_emp_id; ?>" autocomplete="off">
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <label for="emp_first_name" class="col-form-label mr-1">First Name</label><span class="text-danger">*</span>
-                                <input type="text" class="form-control" id="emp_first_name" name="emp_first_name" autocomplete="off">
+                                <input type="text" class="form-control" id="emp_first_name" name="emp_first_name" autocomplete="off" autofocus>
                             </div>
                             <div class="col-sm-6">
                                 <label for="emp_last_name" class="col-form-label mr-1">Last Name</label><span class="text-danger">*</span>
@@ -133,7 +139,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <button class="btn btn-primary btn-user btn-block">Submit Details</button>
+                                <button class="btn btn-primary btn-user btn-block" id="submitForm">Submit Details</button>
                             </div>
                             <div class="col-sm-6">
                                 <a href="./index.php?page=employee-dashboard" class="btn btn-warning btn-user btn-block text-dark">Back to Employees List</a>
@@ -151,12 +157,34 @@
     function preview() {
         thumb.src = URL.createObjectURL(event.target.files[0]);
     }
-    $(document).ready(function() {
 
+    function uploadImg() {
+        if ($('#emp_profile_pic').val()) {
+            let img = $('#emp_profile_pic').prop('files')[0];
+            let empCode = $('#emp_code').val();
+            var formData = new FormData();
+            formData.append('emp_profile_pic', img);
+            formData.append('emp_code', empCode);
+            console.log(formData);
+            $.ajax({
+                type: "POST",
+                url: "./php/actions.php?action=upload_emp_profile",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.log(xhr.responseText);
+                }
+            });
+        } else {}
+    }
+    $(document).ready(function() {
         $("#new_employee_form").validate({
             // Define validation rules
             rules: {
-                emp_code: "required",
                 emp_first_name: "required",
                 emp_last_name: "required",
                 emp_gender: "required",
@@ -167,9 +195,6 @@
                 emp_designation: "required",
                 emp_joining_date: "required",
                 emp_working_hours: "required",
-                emp_code: {
-                    required: true
-                },
                 emp_first_name: {
                     required: true
                 },
@@ -191,7 +216,6 @@
                 emp_email: {
                     required: true,
                     email: true,
-                    pattern: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/i
                 },
                 emp_department: {
                     required: true
@@ -208,7 +232,6 @@
             },
             // Specify validation error messages
             messages: {
-                emp_code: "Please provide a valid Code",
                 emp_first_name: "Please provide a valid first name",
                 emp_last_name: "Please provide a valid last name",
                 emp_gender: "Please select a valid gender",
@@ -221,7 +244,6 @@
                 emp_email: {
                     required: "Please enter your email",
                     email: "Please enter a valid email address",
-                    pattern: "Email is not valid"
                 },
                 emp_department: "Please select a valid department",
                 emp_designation: "Please select a valid designation",
@@ -231,11 +253,12 @@
             submitHandler: function(form) {
                 $.ajax({
                     url: './php/actions.php?action=save_employee',
-                    data: $("#new_employee_form").serialize(),
+                    data: $('#new_employee_form').serialize(),
                     type: 'POST',
                     success: function(resp) {
                         console.log(resp);
                         if (resp == 1) {
+                            uploadImg();
                             setTimeout(() => {
                                 location.reload();
                             }, 1000);

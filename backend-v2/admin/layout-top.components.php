@@ -53,21 +53,6 @@
                     </div>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#leave_management" aria-expanded="true" aria-controls="project_controls">
-                    <i class="fa-solid fa-person-walking-arrow-right"></i>
-                    <span>Leave Management</span>
-                </a>
-                <div id="leave_management" class="collapse" aria-labelledby="project_lable" data-parent="#main_dashboard">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="./index.php?page=leave-dashboard">Dashboard</a>
-                        <a class="collapse-item" href="./index.php?page=leave-new">Add Leave</a>
-                        <a class="collapse-item" href="./index.php?page=leave-pending">Pending Leaves</a>
-                        <a class="collapse-item" href="./index.php?page=leave-approved">Approved Leaves</a>
-                        <a class="collapse-item" href="./index.php?page=leave-declined">Declined Leaves</a>
-                    </div>
-                </div>
-            </li>
             <hr class="sidebar-divider">
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#project_dashboard" aria-expanded="true" aria-controls="project_controls">
@@ -99,12 +84,6 @@
                     <span>Task Management</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./index.php?page=project-report">
-                    <i class="fa-solid fa-flag"></i>
-                    <span>Project Progress Report</span>
-                </a>
-            </li>
             <hr class="sidebar-divider">
             <li class="nav-item">
                 <a class="nav-link" href="./index.php?page=hod-dashboard">
@@ -119,20 +98,42 @@
                     <span>Expenses</span>
                 </a>
             </li>
-        <?php }else if($_SESSION['login_user_access_type'] == 2){ ?>
+        <?php } else if ($_SESSION['login_user_access_type'] == 2) { ?>
             <li class="nav-item">
                 <a class="nav-link" href="./index.php?page=work-collector">
-                    <i class="fa-solid fa-briefcase"></i>
+                    <i class="fa-solid fa-laptop-file"></i>
                     <span>Work Collector</span>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="./index.php?page=project-dashboard">
-                    <i class="fa-solid fa-briefcase"></i>
+                    <i class="fa-solid fa-list-check"></i>
                     <span>Projects</span>
                 </a>
             </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link" href="./index.php?page=leave-new">
+                    <i class="fa-solid fa-arrow-right"></i>
+                    <span>Leave Application</span>
+                </a>
+            </li>
         <?php } ?>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#leave_management" aria-expanded="true" aria-controls="project_controls">
+                <i class="fa-solid fa-person-walking-arrow-right"></i>
+                <span>Leave Management</span>
+            </a>
+            <div id="leave_management" class="collapse" aria-labelledby="project_lable" data-parent="#main_dashboard">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item" href="./index.php?page=leave-dashboard">Dashboard</a>
+                    <a class="collapse-item" href="./index.php?page=leave-new">Add Leave</a>
+                    <a class="collapse-item" href="./index.php?page=leave-pending">Pending Leaves</a>
+                    <a class="collapse-item" href="./index.php?page=leave-approved">Approved Leaves</a>
+                    <a class="collapse-item" href="./index.php?page=leave-declined">Declined Leaves</a>
+                </div>
+            </div>
+        </li>
         <hr class="sidebar-divider d-none d-md-block">
 
         <!-- Sidebar Toggler (Sidebar) -->

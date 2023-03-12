@@ -1,3 +1,6 @@
+<?php
+$userId = $_SESSION['login_user_id'];
+?>
 <div class="container-fluid">
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">All Leaves</h1>
@@ -12,7 +15,13 @@
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Total</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php echo  $con->query("SELECT * FROM leaves;")->num_rows . ' ' . 'Leaves' ?>
+                                <?php
+                                if ($_SESSION['login_user_access_type'] == 1) {
+                                    echo  $con->query("SELECT * FROM leaves;")->num_rows . ' ' . 'Leaves';
+                                } else if ($_SESSION['login_user_access_type'] == 2) {
+                                    echo  $con->query("SELECT * FROM leaves WHERE user_id='$userId';")->num_rows . ' ' . 'Leaves';
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -27,7 +36,13 @@
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Approved</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php echo $con->query("SELECT * FROM leaves WHERE leave_status=2;")->num_rows . ' ' . 'Leaves'; ?>
+                                <?php
+                                if ($_SESSION['login_user_access_type'] == 1) {
+                                    echo $con->query("SELECT * FROM leaves WHERE leave_status=2;")->num_rows . ' ' . 'Leaves';
+                                } else if ($_SESSION['login_user_access_type'] == 2) {
+                                    echo  $con->query("SELECT * FROM leaves WHERE user_id='$userId' AND leave_status=2;")->num_rows . ' ' . 'Leaves';
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -41,7 +56,13 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Pending</div>
                             <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                <?php echo $con->query("SELECT * FROM leaves WHERE leave_status=0;")->num_rows . ' ' . 'Leaves'; ?>
+                                <?php
+                                if ($_SESSION['login_user_access_type'] == 1) {
+                                    echo $con->query("SELECT * FROM leaves WHERE leave_status=0;")->num_rows . ' ' . 'Leaves';
+                                } else if ($_SESSION['login_user_access_type'] == 2) {
+                                    echo  $con->query("SELECT * FROM leaves WHERE user_id='$userId' AND leave_status=0;")->num_rows . ' ' . 'Leaves';
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -56,7 +77,13 @@
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Declined</div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                <?php echo $con->query("SELECT * FROM leaves WHERE leave_status=1;")->num_rows . ' ' . 'Leaves'; ?>
+                            <?php
+                                if ($_SESSION['login_user_access_type'] == 1) {
+                                    echo $con->query("SELECT * FROM leaves WHERE leave_status=1;")->num_rows . ' ' . 'Leaves';
+                                } else if ($_SESSION['login_user_access_type'] == 2) {
+                                    echo  $con->query("SELECT * FROM leaves WHERE user_id='$userId' AND leave_status=1;")->num_rows . ' ' . 'Leaves';
+                                }
+                                ?>
                             </div>
                         </div>
                     </div>
@@ -85,7 +112,12 @@
                             </thead>
                             <tbody>
                                 <?php
-                                $qry = $con->query("SELECT * FROM  leaves;");
+                                if ($_SESSION['login_user_access_type'] == 2) {
+                                    $userId = $_SESSION['login_user_id'];
+                                    $qry = $con->query("SELECT * FROM  leaves WHERE user_id='$userId';");
+                                } else {
+                                    $qry = $con->query("SELECT * FROM  leaves;");
+                                }
                                 $i = 1;
                                 while ($row = $qry->fetch_assoc()) { ?>
                                     <tr>
@@ -121,7 +153,12 @@
                                             <?php } ?>
                                         </td>
                                         <td class="d-flex align-items-center justify-content-center">
-                                            <a type="button" class="btn btn-primary btn-circle mx-1" href="./index.php?page=leave-viewer&leaveId=<?php echo $row['leave_id'] ?>"><i class="fa-solid fa-eye"></i></a>
+                                            <div class="dropdown no-arrow">
+                                                <a class="nav-link dropdown-toggle text-dark" href="#" id="productDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical"></i></a>
+                                                <div class="dropdown-menu dropdown-menu-right shadow animated-grow-in" aria-labelledby="productDropdown">
+                                                    <a type="button" class="dropdown-item" href="./index.php?page=leave-viewer&leaveId=<?php echo $row['leave_id'] ?>">View</a>
+                                                </div>
+                                            </div>
                                         </td>
                                     </tr>
                                 <?php } ?>
@@ -133,33 +170,3 @@
         </div>
     </div>
 </div>
-
-
-<script>
-    $(document).ready(function() {
-        $('.deleteEmployee').click(function() {
-            console.log('click');
-            let id = $(this).data('id');
-            $.ajax({
-                url: './php/actions.php?action=delete_employee',
-                method: 'POST',
-                data: {
-                    emp_id: id
-                },
-                success: function(resp) {
-                    console.log(resp);
-                    if (resp == 1) {
-                        setTimeout(function() {
-                            location.reload()
-                        }, 1000);
-                    } else {
-                        console.log(resp);
-                    }
-                },
-                error: function(resp) {
-                    console.log(resp);
-                }
-            });
-        });
-    });
-</script>

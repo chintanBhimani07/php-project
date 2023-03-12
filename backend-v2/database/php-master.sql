@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2023 at 01:20 PM
+-- Generation Time: Mar 11, 2023 at 01:36 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.1.12
 
@@ -43,8 +43,7 @@ CREATE TABLE `clients` (
 
 INSERT INTO `clients` (`client_id`, `client_first_name`, `client_last_name`, `gender`, `client_address`, `client_email`, `client_contact`) VALUES
 ('029082380ee84a419aa42ec681709d1a', 'aman', 'Koshiya', '', 'This website uses a MD5 reverse dictionary containing several millions of entries, which you can use', 'aman111@gmail.com', '3442134242342'),
-('3834af95dc4b4a42b07d24f2ea3091a3', 'scsac', 'scdxsacd', 'Other', 'sdcasfcasxcf', 'client@gmail.com', '3424234'),
-('d9b4c603f33d42a9a70aa45ecadf2ef1', 'd', 'd', '', '', 'f@gmail.com', '');
+('3834af95dc4b4a42b07d24f2ea3091a3', 'scsac', 'scdxsacd', 'Other', 'sdcasfcasxcf', 'client@gmail.com', '3424234');
 
 -- --------------------------------------------------------
 
@@ -78,15 +77,17 @@ CREATE TABLE `employees` (
 --
 
 INSERT INTO `employees` (`emp_id`, `emp_first_name`, `emp_last_name`, `emp_code`, `emp_description`, `emp_gender`, `emp_dob`, `emp_mob`, `emp_email`, `emp_address`, `emp_department`, `emp_designation`, `emp_hod_name`, `emp_joining_date`, `emp_confirmation_date`, `emp_leaving_date`, `emp_working_hours`, `emp_profile_pic`) VALUES
-('00bcdc6a157a4f21927862a575234242', 'Dhruvik', 'Vekriya', 6, '', 'Male', '2002-01-01', 2147483647, 'dhukiii30@gmail.com', '', 'Architecture', 'HOD', '', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677577500_Final Print Files.jpg'),
 ('0b620ab029bd4b6786ec9435665406c4', 'hiren', 'Patel', 17, '', 'Male', '2000-01-01', 2147483647, 'hiren@gmail.com', '', 'Engineer', 'Engineer', 'Sneha Rathod', '2020-01-01', '2020-01-01', '0000-00-00', '09:30:00', '1677580860_Final Print Files.jpg'),
-('0bf2f38fb0694a5fbea599b85e876e8b', 'Dhruvi', 'Jasani', 8, '', 'Female', '2000-01-01', 2147483647, 'dhruvi@gmail.com', '', 'Architecture', 'Senior Architecture', 'Dhruvik Vekriya', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677577740_task-management.png'),
 ('13debf485bfc470dac5b82ddc64617c3', 'Nidhi', 'Ramani', 19, '', 'Female', '2000-01-01', 2147483647, 'nidhi@gmail.com', '', 'Interior', 'Senior Interior', '', '2020-01-01', '2020-01-01', '0000-00-00', '09:30:00', '1677581400_Final Print Files.jpg'),
+('1e008fb1bf4748f7ae2ba89098e4f5a0', 'dfsdf', 'sdfdsf', 42, '', 'Female', '1000-10-10', 2147483647, 'klujgy@gmail.com', '', 'Architecture', 'Junior Interior', '', '1000-10-10', '0000-00-00', '0000-00-00', '10:00:00', NULL),
+('1e077879e4fc4674a997b2d6b09a1aea', 'dsdsd', 'sdsdsd', 39, '', 'Male', '1111-01-11', 2147483647, 'dfdeg@gmail.com', '', 'IT', 'Junior Architecture', 'Ab cd', '1010-01-11', '0000-00-00', '0000-00-00', '10:00:00', NULL),
 ('210b513f4eab4dabb42d0720d34a292a', 'Khushbu', 'Jasani', 11, '', 'Female', '2000-01-01', 1332132323, 'khushbu@gmail.com', '', 'Architecture', 'Intern', 'Dhruvik Vekriya', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677580560_img4.png'),
-('4593bf0c87c3400b8edafbc27a4eedc1', 'Chirag', 'Jasani', 9, '', 'Male', '2000-01-01', 2147483647, 'chirag@gmail.com', '', 'IT', 'HOD', '', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677577800_download.jpg'),
+('49c4edfe92184d8e834c5b8f1919380b', 'g', 'g', 37, '', 'Male', '1021-02-11', 1111111111, '111@gmail.com', '', 'IT', 'Senior Developer', 'Ab cd', '1021-02-11', '1000-02-10', '0000-00-00', '10:00:00', '1678437000_'),
+('4e8c76fd87e6443e83b43148e235b185', 'dswdws', 'wsfdfs', 40, '', 'Other', '2000-10-22', 2147483647, 'fggd@gmail.com', '', 'Admin', 'Senior Architecture', '', '1000-10-10', '0000-00-00', '0000-00-00', '10:00:00', NULL),
 ('579b0d4bfcf04506ba2e86812c3b0f5f', 'mila', 'ghewala', 18, '', 'Female', '1999-01-01', 2147483647, 'mila@gmail.com', '', 'Engineer', 'Intern', 'Sneha Rathod', '2020-01-01', '2020-01-01', '0000-00-00', '09:30:00', '1677581040_img3.png'),
 ('712987250d844b5d9182f1e60aff37f5', 'Kiran', 'Manek', 22, '', 'Female', '2000-01-01', 2147483647, 'kiran@gmail.com', '', 'MDO', 'HOD', '', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677581700_task-management.png'),
 ('75d81402ff5c420098f719ff31297d8e', 'Hemisha', 'Patel', 32, '', 'Female', '2020-01-01', 1234567890, 'hemisha@gmail.com', '', 'Architecture', 'Junior Architecture', 'Dhruvik Vekriya', '2020-01-01', '0000-00-00', '0000-00-00', '10:00:00', NULL),
+('7865be08120a408cb5d5f03cc5435077', 'fsfdf', 'fdxgf', 41, '', 'Male', '1010-01-11', 2147483647, 'dfngtnf@gmail.com', '', 'IT', 'Senior Architecture', 'Ab cd', '1010-01-11', '0000-00-00', '0000-00-00', '10:00:00', NULL),
 ('79e2b1667cc24cc2a33e48ca2d614c3f', 'Aalok', 'Agarval', 20, '', 'Male', '2000-01-01', 2147483647, 'aalok@gmail.com', '', 'Interior', 'HOD', '', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677581460_img3.png'),
 ('7f7cfd7815e14312867fe303ff89a015', 'Mehul', 'Panchal', 16, '', 'Male', '2000-01-01', 2147483647, 'mehul@gmail.com', '', 'Engineer', 'Engineer', 'Sneha Rathod', '2020-01-01', '2020-01-01', '0000-00-00', '09:30:00', '1677580740_Final Print Files.jpg'),
 ('843d236dcb394d1b86c8b1496b9849dd', 'Ami', 'Bhalala', 24, '', 'Female', '2000-01-01', 2147483647, 'ami@gmail.com', '', 'MDO', 'Intern', 'Kiran Manek', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677581940_img6.jpg'),
@@ -94,13 +95,18 @@ INSERT INTO `employees` (`emp_id`, `emp_first_name`, `emp_last_name`, `emp_code`
 ('8adcb150dafe45a3b74f4aa454e08c0a', 'Pratiksha ', 'Chopra', 4, 'Ipsum consequat nisl vel pretium lectus quam. Aliquam etiam erat velit scelerisque. Lobortis feugiat vivamus at augue. Ut eu sem integer vitae.', 'Female', '2002-10-07', 2147483647, 'pari@gmail.com', 'Ipsum consequat nisl vel pretium lectus quam. Aliquam etiam erat velit scelerisque. Lobortis feugiat vivamus at augue. Ut eu sem integer vitae.', 'IT', 'Senior Developer', '', '2020-01-01', '2020-01-01', '0000-00-00', '09:30:00', '1677577320_img4.png'),
 ('8fdaf3c5a96740218efd159c0e4677db', 'Darshan', 'thummar', 7, '', 'Male', '2000-01-01', 2147483647, 'darshan@gmail.com', '', 'Interior', 'Junior Interior', 'Dhruvik Vekriya', '2020-01-01', '2020-01-01', '0000-00-00', '07:00:00', '1677577620_img6.jpg'),
 ('9c309268c57945e5a38dde5ec8d4069e', 'Rahul', 'Makvana', 5, '', 'Male', '2000-01-01', 2147483647, 'rahul111@gmail.com', '', 'MDO', 'MDO Staff', '', '2020-01-01', '2020-01-01', '0000-00-00', '09:30:00', '1677577440_img3.jpg'),
+('9e79a9c9bebc4bd2996568224f971eb0', 'Ab', 'cd', 33, 'fdfvdsgbvdfcvgdscxasdfesgfvd', 'Male', '2020-01-01', 2123232323, 'abcd@gmail.com', '', 'IT', 'HOD', '', '2020-01-01', '2020-01-01', '0000-00-00', '10:00:00', NULL),
 ('9eb64d31a3a84e1992225ab85246f68f', 'Mayank', 'Virani', 15, '', 'Male', '2000-01-01', 23442132, 'mayank@gmail.com', '', 'Engineer', 'Engineer', 'Sneha Rathod', '2020-10-09', '2020-10-09', '0000-00-00', '09:30:00', '1677580680_img5.jpg'),
 ('b7ab4f5ae37c46f5abec57b293b0baaa', 'Mayuri', 'Gami', 21, '', 'Female', '2000-01-01', 2147483647, 'mayu@gmail.com', '', 'Interior', 'Intern', 'Aalok Agarval', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677581580_img4.png'),
 ('be683a4f979d4c74a9816f7d98ef9a3a', 'Chintan', 'Bhimani', 3, 'facilisi nullam vehicula ipsum a. Nibh tellus molestie nunc non blandit massa enim. Vitae aliquet nec ullamcorper sit amet. Diam quis enim lobortis scelerisque fermentum dui faucibus in. Purus faucibus ornare suspendisse sed nisi lacus sed viverra. Pellentesque habitant morbi tristique senectus et netus et malesuada fames. Arcu non sodales neque sodales ut etiam.', 'Male', '2003-03-31', 2147483647, 'chintan@gmail.com', 'que aliquam vestibulum morbi blandit cursus. Purus in massa tempor nec feugiat nisl pretium. Nunc vel risus commodo viverra maecenas accumsan lacus vel.', 'IT', 'Junior Developer', 'Chirag Jasani', '2022-01-01', '2022-01-01', '2023-03-17', '10:00:00', '1677577200_img1.jpg'),
+('c0c0fdce69c14d59b3f821d489e5d506', 'f', 'f', 35, '', 'Female', '2020-10-10', 1234567890, 'hh@gmail.com', '', 'IT', 'Junior Developer', 'Ab cd', '2202-02-01', '0000-00-00', '0000-00-00', '10:00:00', NULL),
 ('c3a2ab11f5a24d63922a505e556ca730', 'Itisha', 'Padsala', 14, '', 'Female', '2000-01-09', 55684654, 'padsala@gmail.com', '', 'Engineer', 'Engineer', 'Sneha Rathod', '2020-01-01', '2020-01-01', '0000-00-00', '09:03:00', '1677580440_img2.jpg'),
-('cf6813320082414cb463ffd8aa34a55c', 'Nensi', 'Patel', 12, '', 'Female', '2000-01-01', 2147483647, 'nensi@gmail.com', '', 'Architecture', 'Junior Architecture', 'Dhruvik Vekriya', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677578460_img4.png'),
+('cbf1f09522604f6f9e0f0c2b1bb1dec6', 'd', 'd', 38, '', 'Male', '1010-02-11', 1111111111, 'asd@gmail.com', '', 'Admin', 'Driver', '', '1111-01-11', '1010-01-11', '0000-00-00', '10:00:00', '1678437120_'),
+('d551b62024284f568ffe9dae0a133b3e', 'Testing', 'User', 34, '', 'Male', '2020-01-01', 1234567890, 'test@gmail.com', '', 'Admin', 'Administrator', '', '2020-01-01', '2020-02-01', '0000-00-00', '10:00:00', NULL),
+('e5b361865e4140d19724c0f0e34dc2f4', 't', 't', 36, '', 'Male', '2002-10-10', 2147483647, 'fg@gmail.com', '', 'IT', 'Intern', 'Ab cd', '2022-10-10', '0000-00-00', '0000-00-00', '10:00:00', NULL),
 ('f1a92584b86745bfb89a9dbdba251082', 'Sneha', 'Rathod', 13, '', 'Female', '2000-01-01', 2147483647, 'sneha@gmail.com', '', 'Engineer', 'HOD', '', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677578640_download.jpg'),
-('f3d9c2c1b24b444fb463d506f135e7d4', 'Nirali', 'Patel', 23, '', 'Female', '2000-01-01', 2147483647, 'nirali@gmail.com', '', 'Finance', 'HOD', '', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677581820_img1.jpg');
+('f3d9c2c1b24b444fb463d506f135e7d4', 'Nirali', 'Patel', 23, '', 'Female', '2000-01-01', 2147483647, 'nirali@gmail.com', '', 'Finance', 'HOD', '', '2020-01-01', '2020-01-01', '0000-00-00', '08:00:00', '1677581820_img1.jpg'),
+('fd6ca751543e4b16affdcce8d27da5d1', 'ytryrty', 'tyry', 43, '', 'Female', '1100-10-10', 2147483647, 'yptry@gmail.com', '', 'Engineer', 'Senior Architecture', 'Sneha Rathod', '1000-10-10', '0000-00-00', '0000-00-00', '10:00:00', '1678531980_img6.jpg');
 
 -- --------------------------------------------------------
 
@@ -122,7 +128,16 @@ CREATE TABLE `expenses` (
 --
 
 INSERT INTO `expenses` (`exp_id`, `exp_name`, `exp_amount`, `exp_date`, `exp_bill_photo`, `exp_createdAt`) VALUES
-('f0592e606c574442b41b1c577be6243d', 'food', 1000.43, '2023-02-27', '1677750720_img1.jpg', '2023-02-27 05:20:16');
+('2094d404181c45cc87242af46c54d9bd', 'd', 1, '2022-10-10', '', '2023-03-10 08:10:26'),
+('5a660311cd1e4bdab216dccf3ded8546', 'gdfgdf', 551054615, '5255-05-08', '1678534140_img1.jpg', '2023-03-11 11:24:39'),
+('6fd51c7dfb4c477ca7f1288191b08cd5', 'jukyj', 5000, '2000-10-04', '', '2023-03-11 11:15:17'),
+('89f588b8fefa4cec83a36f0718d5c234', 'dfd', 122, '2222-05-20', '', '2023-03-11 11:14:49'),
+('90afe95932c045e395e456abe6a61142', 'dfdf', 866, '1200-02-05', '', '2023-03-11 11:21:08'),
+('a0fd1079d2394ed786514053cdeea602', 'yjyhj', 8000000, '2000-02-11', '', '2023-03-11 11:11:35'),
+('b6e5f68672cd4117ae7c8e260194cd99', 'fdfd', 852, '1111-03-06', '', '2023-03-11 11:20:26'),
+('b7cf53912b4d4be5ab3d745eeeaafec2', 'grfg', 522222, '5222-01-10', '', '2023-03-11 11:22:22'),
+('c4ceac957fea495e9a57ad9739027222', 'dsfsdf', 963, '1010-02-05', '', '2023-03-11 11:19:48'),
+('f0e7537b83bc461ab44e0d556605cf42', 'scscs', 122, '1000-02-11', '', '2023-03-11 11:07:41');
 
 -- --------------------------------------------------------
 
@@ -143,12 +158,11 @@ CREATE TABLE `hod` (
 --
 
 INSERT INTO `hod` (`hod_id`, `hod_first_name`, `hod_last_name`, `department_name`, `emp_id`) VALUES
+('25ed6616e3bc43028a6c8c28cb9fac9d', 'Ab', 'cd', 'IT', '9e79a9c9bebc4bd2996568224f971eb0'),
 ('27c01417d131402491993b096f1f23f6', 'Aalok', 'Agarval', 'Interior', '79e2b1667cc24cc2a33e48ca2d614c3f'),
 ('2afb31b6175342cf8bad67b83fe71232', 'Kiran', 'Manek', 'MDO', '712987250d844b5d9182f1e60aff37f5'),
 ('2efac22e7ea245e5a22ee1eef323253f', 'Sneha', 'Rathod', 'Engineer', 'f1a92584b86745bfb89a9dbdba251082'),
-('6afb638d2f28469ca15ab50cd3e6386c', 'Dhruvik', 'Vekriya', 'Architecture', '00bcdc6a157a4f21927862a575234242'),
-('88b6fe5892e444a485d0c117e96292bf', 'Nirali', 'Patel', 'Finance', 'f3d9c2c1b24b444fb463d506f135e7d4'),
-('9505ea29ee8e4034b4a8530a813a5051', 'Chirag', 'Jasani', 'IT', '4593bf0c87c3400b8edafbc27a4eedc1');
+('88b6fe5892e444a485d0c117e96292bf', 'Nirali', 'Patel', 'Finance', 'f3d9c2c1b24b444fb463d506f135e7d4');
 
 -- --------------------------------------------------------
 
@@ -175,6 +189,9 @@ CREATE TABLE `leaves` (
 --
 
 INSERT INTO `leaves` (`leave_id`, `leave_type`, `from_date`, `to_date`, `posting_date`, `admin_remarks`, `admin_remarks_date`, `leave_status`, `is_read`, `user_id`, `leave_description`) VALUES
+('29cbbc9d3ea84ae2ba45a57f37d0b62f', 'e9523548d9464074a4513407f6b551e2', '2020-01-04', '2020-01-01', '2023-03-10', 'VGRDFGRDFGRDFGRFD', NULL, 1, 0, 'f5fd5f8b94084bfb81c96dd254f35bed', 'FVMBRFH EGRMFOGHPR MORPDFSGDFG'),
+('642bf9cb64d94db6b94ceec4bdf387dc', 'e9523548d9464074a4513407f6b551e2', '2023-11-10', '2023-12-10', '2023-03-10', NULL, NULL, 0, 0, '13b66688ef2f4d798f1de813f5f7d774', 'dgndrfibnoDGBROHFMOF MBORGMEP[GKEORWHM RGKREWHOQEGHKEP[B MRGBMHEQKTGP[QAEW'),
+('75fabd16236b436a8fdd8b41c98eae6e', 'e9523548d9464074a4513407f6b551e2', '2020-01-01', '2020-02-10', '2023-03-10', NULL, NULL, 0, 0, '13b66688ef2f4d798f1de813f5f7d774', ''),
 ('a398859fbd354b799932306fe9b04388', '67efd3bafb2a42e89e7ba7e03b032cb6', '2023-02-04', '2023-03-01', '2023-03-06', NULL, NULL, 1, 0, 'eca99ee2ef484eea94e99d4fc81f23ec', 'sadcsafcdasfcdasfcdafdasf'),
 ('acc273565bb94a65afe514a6bcd0f7a8', '67efd3bafb2a42e89e7ba7e03b032cb6', '2023-03-05', '2023-03-16', '0000-00-00', NULL, NULL, 0, 0, 'eca99ee2ef484eea94e99d4fc81f23ec', 'sdfs'),
 ('b22c3eba95894a5b8514637d0e307782', 'e882e8477c144e0989a300d64a9c0f64', '2023-03-26', '2023-03-27', '2023-03-06', NULL, NULL, 2, 0, 'eca99ee2ef484eea94e99d4fc81f23ec', 'sdcasfdasfvdsafv'),
@@ -198,8 +215,8 @@ CREATE TABLE `leavestype` (
 --
 
 INSERT INTO `leavestype` (`leave_type_id`, `leave_type`, `leave_description`, `createdAt`) VALUES
-('67efd3bafb2a42e89e7ba7e03b032cb6', 'Festival', 'Create a CSS class that will display the popup when its display property is set to block. Add styles to the class to position the popup in the center of the screen and add a border, box shadow', '2023-03-06 06:25:46'),
-('e882e8477c144e0989a300d64a9c0f64', 'Holy', 'box shadow, and other styles to make it look like a modal.', '2023-03-06 06:29:08');
+('67efd3bafb2a42e89e7ba7e03b032cb6', 'Festival', 'Create a CSS class that will display the popup when its display property is set to block.', '2023-03-06 06:25:46'),
+('e9523548d9464074a4513407f6b551e2', 'diwali', 'sasdsdsdsdsdsdssdsdsd', '2023-03-09 11:58:08');
 
 -- --------------------------------------------------------
 
@@ -226,10 +243,9 @@ CREATE TABLE `productivity` (
 --
 
 INSERT INTO `productivity` (`productivity_id`, `project_id`, `task_id`, `productivity_comments`, `productivity_subject`, `productivity_date`, `start_time`, `end_time`, `user_id`, `time_rendered`, `date_created`) VALUES
-('82b57ede26bc417c9be2a5cf094ba647', '64e8b426e6524f4da497aec90f62880f', '0d56f3fe5f5b4e22980f8d74adbca299', 'sdsawcdfadesfvasfc', 'd', '2023-03-03', '12:00:00', '19:00:00', 'eca99ee2ef484eea94e99d4fc81f23ec', 0, '2023-03-03 12:50:29'),
+('82b57ede26bc417c9be2a5cf094ba647', '64e8b426e6524f4da497aec90f62880f', '0d56f3fe5f5b4e22980f8d74adbca299', 'sdsawcdfadesfvasfc', 'Data User', '2023-03-03', '12:00:00', '19:00:00', 'eca99ee2ef484eea94e99d4fc81f23ec', 25200, '2023-03-03 12:50:29'),
 ('9c70588ee40349ee800ec6b7e3c2dad6', '64e8b426e6524f4da497aec90f62880f', '659e0b8902bd4601b20ab3379bff82d0', 'rfgbfdhbdfh dvdxvgfd', 'zxzc ', '2023-03-03', '10:00:00', '23:00:00', 'eca99ee2ef484eea94e99d4fc81f23ec', 0, '2023-03-03 14:50:10'),
-('9e427fdbb2e945eea6a77f92727b2215', '64e8b426e6524f4da497aec90f62880f', '0d56f3fe5f5b4e22980f8d74adbca299', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum', 'Create Badroom Layout', '2023-03-03', '10:00:00', '18:00:00', 'eca99ee2ef484eea94e99d4fc81f23ec', 0, '2023-03-03 12:10:00'),
-('e31fe0595eec4ebfa54124c4d0a425ce', '64e8b426e6524f4da497aec90f62880f', 'acba0842fd494c32994d9ca3f14a283d', 'SAFDESGVDSGBHTGJTGRF FGHNDFHGJNGHFN DGNGHNDFGHNJMHF DGNDGFBHNDGFBHN', 'DFVDFV', '2023-03-02', '18:04:00', '19:05:00', 'eca99ee2ef484eea94e99d4fc81f23ec', 0, '2023-03-02 18:05:10');
+('9e427fdbb2e945eea6a77f92727b2215', '64e8b426e6524f4da497aec90f62880f', '0d56f3fe5f5b4e22980f8d74adbca299', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of \"de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum', 'Create Badroom Layout', '2023-03-03', '10:00:00', '18:00:00', 'eca99ee2ef484eea94e99d4fc81f23ec', 0, '2023-03-03 12:10:00');
 
 -- --------------------------------------------------------
 
@@ -240,7 +256,6 @@ INSERT INTO `productivity` (`productivity_id`, `project_id`, `task_id`, `product
 CREATE TABLE `projects` (
   `project_id` text NOT NULL,
   `project_name` varchar(100) NOT NULL,
-  `project_status` varchar(100) NOT NULL,
   `project_code` varchar(100) NOT NULL,
   `client_id` text NOT NULL,
   `start_date` date NOT NULL,
@@ -251,6 +266,7 @@ CREATE TABLE `projects` (
   `project_location` varchar(100) NOT NULL,
   `engineers_id` text DEFAULT NULL,
   `users_id` text DEFAULT NULL,
+  `project_status` int(10) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -258,11 +274,12 @@ CREATE TABLE `projects` (
 -- Dumping data for table `projects`
 --
 
-INSERT INTO `projects` (`project_id`, `project_name`, `project_status`, `project_code`, `client_id`, `start_date`, `expected_end_date`, `hod_id`, `nature_of_project`, `reference_by`, `project_location`, `engineers_id`, `users_id`, `created_at`) VALUES
-('64e8b426e6524f4da497aec90f62880f  ', 'House Of Rare Flat', 'Complete', 'H-201', '615e5f0d-8954-447d-bbfc-cb22cea62d83', '2020-01-01', '2020-01-01', '6afb638d2f28469ca15ab50cd3e6386c', 'Flat', 'Aman Baldaniya', 'Mumbai,  Juhu Beach', '544a98699fbd4919ba6c98c3f72927ae,965e28fbb3ad49338ad08136182a7069', 'b2acb0caf2d54195a6077bbfcbb15302,6808dc7cce0346bab87a2eb6b8b647ba,d5f19b6a5c214da497de76773dca8f13', '2023-03-01 09:55:30'),
-('8199bbcf48a0494d9f5eae5f99c96d8f', 'Home Villa', 'Running', 'H-101', '615e5f0d-8954-447d-bbfc-cb22cea62d83', '2020-01-01', '2020-01-01', '27c01417d131402491993b096f1f23f6', 'Bungalow', 'Rahul Jain', 'Surat', '544a98699fbd4919ba6c98c3f72927ae,ce05d9bd9fd649f983b3a87adb51c604', '324adbc533654140a9e27e7131187da0,ae7bdef771fd4290804b49c210ab1db0,eca99ee2ef484eea94e99d4fc81f23ec', '2023-03-01 08:56:51'),
-('81b39f17abc54973bb71b5794ba992ee', 'Riman Tower', 'Pending', 'R-101', '615e5f0d-8954-447d-bbfc-cb22cea62d83', '2020-01-01', '2020-01-01', '88b6fe5892e444a485d0c117e96292bf', 'Project', 'Atul Pathk', 'Ahemdhabad', 'a9b502ce6e8941fb8fecc99f541738f2,965e28fbb3ad49338ad08136182a7069', '6808dc7cce0346bab87a2eb6b8b647ba,d5f19b6a5c214da497de76773dca8f13,8364e15ef4f749ee95b3391df8732d5f', '2023-03-01 09:35:47'),
-('ae7ee190840f471ab9211820ff28e7f8', 'Union Heights', 'Hold', 'U-201', '615e5f0d-8954-447d-bbfc-cb22cea62d83', '2020-01-01', '2020-01-01', '6afb638d2f28469ca15ab50cd3e6386c', 'Project', 'Chintan Vekariya', 'Pipload, Vesu road, Surat', '965e28fbb3ad49338ad08136182a7069', '8364e15ef4f749ee95b3391df8732d5f,8aac5b0612ae494082a12d3d56838f57', '2023-03-01 09:30:38');
+INSERT INTO `projects` (`project_id`, `project_name`, `project_code`, `client_id`, `start_date`, `expected_end_date`, `hod_id`, `nature_of_project`, `reference_by`, `project_location`, `engineers_id`, `users_id`, `project_status`, `created_at`) VALUES
+('64e8b426e6524f4da497aec90f62880f  ', 'House Of Rare Flat', 'H-201', '029082380ee84a419aa42ec681709d1a', '2020-01-01', '2020-01-01', '2afb31b6175342cf8bad67b83fe71232', 'Flat', 'Aman Baldaniya', 'Mumbai,  Juhu Beach', '544a98699fbd4919ba6c98c3f72927ae,965e28fbb3ad49338ad08136182a7069', 'eca99ee2ef484eea94e99d4fc81f23ec,b2acb0caf2d54195a6077bbfcbb15302,6808dc7cce0346bab87a2eb6b8b647ba,d5f19b6a5c214da497de76773dca8f13', 2, '2023-03-01 09:55:30'),
+('8199bbcf48a0494d9f5eae5f99c96d8f', 'Home Villa', 'H-101', '615e5f0d-8954-447d-bbfc-cb22cea62d83', '2020-01-01', '2020-01-01', '27c01417d131402491993b096f1f23f6', 'Bungalow', 'Rahul Jain', 'Surat', '544a98699fbd4919ba6c98c3f72927ae,ce05d9bd9fd649f983b3a87adb51c604', '324adbc533654140a9e27e7131187da0,ae7bdef771fd4290804b49c210ab1db0,eca99ee2ef484eea94e99d4fc81f23ec', 2, '2023-03-01 08:56:51'),
+('81b39f17abc54973bb71b5794ba992ee', 'Riman Tower', 'R-101', '615e5f0d-8954-447d-bbfc-cb22cea62d83', '2020-01-01', '2020-01-01', '88b6fe5892e444a485d0c117e96292bf', 'Project', 'Atul Pathk', 'Ahemdhabad', 'a9b502ce6e8941fb8fecc99f541738f2,965e28fbb3ad49338ad08136182a7069', '6808dc7cce0346bab87a2eb6b8b647ba,d5f19b6a5c214da497de76773dca8f13,8364e15ef4f749ee95b3391df8732d5f', 1, '2023-03-01 09:35:47'),
+('ae7ee190840f471ab9211820ff28e7f8', 'Union Heights', 'U-201', '615e5f0d-8954-447d-bbfc-cb22cea62d83', '2020-01-01', '2020-01-01', '6afb638d2f28469ca15ab50cd3e6386c', 'Project', 'Chintan Vekariya', 'Pipload, Vesu road, Surat', '965e28fbb3ad49338ad08136182a7069', '8364e15ef4f749ee95b3391df8732d5f,8aac5b0612ae494082a12d3d56838f57', 0, '2023-03-01 09:30:38'),
+('ce7b652e5c87436caddc325127dea2df', 'Santi Villa', 'S-122', 'd9b4c603f33d42a9a70aa45ecadf2ef1', '2020-01-01', '0000-00-00', '2afb31b6175342cf8bad67b83fe71232', 'Bungalow', '', 'Surat, piplod road', '544a98699fbd4919ba6c98c3f72927ae,ce05d9bd9fd649f983b3a87adb51c604', '324adbc533654140a9e27e7131187da0,ae7bdef771fd4290804b49c210ab1db0,eca99ee2ef484eea94e99d4fc81f23ec', 0, '2023-03-10 04:52:27');
 
 -- --------------------------------------------------------
 
@@ -286,11 +303,18 @@ CREATE TABLE `task` (
 --
 
 INSERT INTO `task` (`task_id`, `project_id`, `task_name`, `task_description`, `task_assign_from`, `task_assign_to`, `task_status`, `createdAt`) VALUES
-('0d56f3fe5f5b4e22980f8d74adbca299', '64e8b426e6524f4da497aec90f62880f', 'Floor Work', 'DFGDRE FBMFDNMDGVDRFBH MFB DSFCASWFGVEPADFKWGQPOEM OBGKAP[DEGM MFAEOFEWDRKFQWPM FMBDEOFKEWPRFKEGBVMO MOFGEOFKEDGFV', '', '6808dc7cce0346bab87a2eb6b8b647ba', 3, '2023-03-03 10:09:48'),
-('659e0b8902bd4601b20ab3379bff82d0', '64e8b426e6524f4da497aec90f62880f', 'new Form', 'Create New with all features', '', '544a98699fbd4919ba6c98c3f72927ae', 3, '2023-03-03 09:19:22'),
-('acba0842fd494c32994d9ca3f14a283d', '64e8b426e6524f4da497aec90f62880f', 'fvgdsgvdxcbv ', 'xcdbvdcxd', '', 'b2acb0caf2d54195a6077bbfcbb15302', 2, '2023-03-07 08:00:14'),
-('b7cd2c3cf76749d8bfa3db69dccbaa62', '64e8b426e6524f4da497aec90f62880f', 'Where It is', 'FKGRDSIFN FBDGBKPRFH[KN MBFGKFDEGB', '6afb638d2f28469ca15ab50cd3e6386c', 'b2acb0caf2d54195a6077bbfcbb15302', 2, '2023-03-07 08:00:19'),
-('f89e3005dbdc4aed840e09f5bfbe3cb8', '64e8b426e6524f4da497aec90f62880f', 'dfgdvfbvg', 'dsfgvdxvgfdsxz', '', 'd5f19b6a5c214da497de76773dca8f13', 1, '2023-03-02 09:59:42');
+('015ceb960d9543aaa855c8eecfba75a8', '64e8b426e6524f4da497aec90f62880f', 'Unknown', 'Unknown Task Inserted. Unknown Task Inserted. Unknown Task Inserted', '6afb638d2f28469ca15ab50cd3e6386c', '965e28fbb3ad49338ad08136182a7069', 2, '2023-03-10 07:24:49'),
+('0bcac34103344107b291f575cfbd8ea9', '64e8b426e6524f4da497aec90f62880f', 'Data', 'FDFDEFEDFDEFD', '6afb638d2f28469ca15ab50cd3e6386c', 'b2acb0caf2d54195a6077bbfcbb15302', 2, '2023-03-10 07:24:53'),
+('0d56f3fe5f5b4e22980f8d74adbca299', '64e8b426e6524f4da497aec90f62880f', 'Floor Work', 'DFGDRE FBMFDNMDGVDRFBH MFB DSFCASWFGVEPADFKWGQPOEM OBGKAP[DEGM MFAEOFEWDRKFQWPM FMBDEOFKEWPRFKEGBVMO MOFGEOFKEDGFV', '2afb31b6175342cf8bad67b83fe71232', 'eca99ee2ef484eea94e99d4fc81f23ec', 2, '2023-03-10 11:35:57'),
+('128ecbe492ce4f13af8205b00d6b95f2', '8199bbcf48a0494d9f5eae5f99c96d8f', 'SOMETHING NEW', 'DFVDGBRFB GNTGHNGFBNV', '27c01417d131402491993b096f1f23f6', 'eca99ee2ef484eea94e99d4fc81f23ec', 2, '2023-03-10 10:49:17'),
+('659e0b8902bd4601b20ab3379bff82d0', '64e8b426e6524f4da497aec90f62880f', 'new Form', 'Create New with all features', '', '544a98699fbd4919ba6c98c3f72927ae', 2, '2023-03-10 07:24:58'),
+('7f1f0527511145178376bad4121ef081', '64e8b426e6524f4da497aec90f62880f', 'None', 'sdfmposgdeogfades[bg[sbhkfomnbofn', '6afb638d2f28469ca15ab50cd3e6386c', '544a98699fbd4919ba6c98c3f72927ae', 2, '2023-03-10 07:25:00'),
+('8c4e87e3a38547df96449e6b5f9d42c2', '8199bbcf48a0494d9f5eae5f99c96d8f', 'GDFSGVDFS', 'BVGFGBFGBGBVFCXDHBTGYDN HB NGYHMJTHEWRWASEGRT6KIOIUTDGDFSEDGRGFDASZF', '27c01417d131402491993b096f1f23f6', 'eca99ee2ef484eea94e99d4fc81f23ec', 2, '2023-03-10 10:57:34'),
+('93c71065e4bb484da639d722fca305e9', '8199bbcf48a0494d9f5eae5f99c96d8f', 'dsd', 'sdsdswdswdswdswdw', '27c01417d131402491993b096f1f23f6', 'eca99ee2ef484eea94e99d4fc81f23ec', 2, '2023-03-10 11:53:59'),
+('996c39a76f8947b19ce9e47458f18f30', '8199bbcf48a0494d9f5eae5f99c96d8f', 'sdxsd', 'sdsddsdswdsd', '27c01417d131402491993b096f1f23f6', 'eca99ee2ef484eea94e99d4fc81f23ec', 2, '2023-03-10 11:45:57'),
+('b7cd2c3cf76749d8bfa3db69dccbaa62', '64e8b426e6524f4da497aec90f62880f', 'Where It is', 'FKGRDSIFN FBDGBKPRFH[KN MBFGKFDEGB', '6afb638d2f28469ca15ab50cd3e6386c', 'b2acb0caf2d54195a6077bbfcbb15302', 2, '2023-03-10 07:25:03'),
+('f485ca7b94f74e07bbc36ce0f0e1164d', '81b39f17abc54973bb71b5794ba992ee', 'gnhgfvhbn', 'gfbhxdbhdfc', '88b6fe5892e444a485d0c117e96292bf', '8364e15ef4f749ee95b3391df8732d5f', 0, '2023-03-11 12:32:57'),
+('f89e3005dbdc4aed840e09f5bfbe3cb8', '64e8b426e6524f4da497aec90f62880f', 'dfgdvfbvg', 'dsfgvdxvgfdsxz', '', 'd5f19b6a5c214da497de76773dca8f13', 2, '2023-03-10 07:25:05');
 
 -- --------------------------------------------------------
 
@@ -314,7 +338,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `user_email`, `user_password`, `emp_id`, `user_first_name`, `user_last_name`, `user_access_type`) VALUES
 ('07b2442d3a13471f87f75f80efdc1435', 'nirali@gmail.com', 'bd658eebfb7bfe3e19505b94a75c69d9', 'f3d9c2c1b24b444fb463d506f135e7d4', 'Nirali', 'Patel', 4),
-('13b66688ef2f4d798f1de813f5f7d774', 'test@gmail.com', 'e6e061838856bf47e1de730719fb2609', '8fed41bd22e94edb82420479122c4f11', 'Testing', 'User', 1),
+('0ed34c02c5a3413a89eb6597c57f96fc', 'yptry@gmail.com', '18413044ec6bde3a7ff899a9c0f0ea9b', 'fd6ca751543e4b16affdcce8d27da5d1', 'ytryrty', 'tyry', 2),
 ('324adbc533654140a9e27e7131187da0', 'akshay@gmail.com', '83862d1e9449aee54ad8bb3a11632bbe', '874483034c5c473bb5bc2c9267681737', 'Akshay', 'Kaneriya', 2),
 ('439bc45381884234abad0e6350a4f9f6', 'aalok@gmail.com', '377e5a6e298f214c21f1e44b57725c63', '79e2b1667cc24cc2a33e48ca2d614c3f', 'Aalok', 'Agarval', 4),
 ('544a98699fbd4919ba6c98c3f72927ae', 'hiren@gmail.com', 'a029664fd4ad20185dc1acc714d48bca', '0b620ab029bd4b6786ec9435665406c4', 'hiren', 'Patel', 3),
@@ -336,7 +360,8 @@ INSERT INTO `users` (`user_id`, `user_email`, `user_password`, `emp_id`, `user_f
 ('db3ac7e251f1424187f7cdea66bfab9f', 'hemisha@gmail.com', '85e7bcbc95cec09b30435b1c5c14952a', '75d81402ff5c420098f719ff31297d8e', 'Hemisha', 'Patel', 2),
 ('de8f6ca0819c4fa9ab3f2f2f3d851318', 'dhruvi@gmail.com', 'd13eb1f5a4340a779b57229bbfc0d957', '0bf2f38fb0694a5fbea599b85e876e8b', 'Dhruvi', 'Jasani', 2),
 ('e568b77d8dd942f98180b71de17f7ae4', 'sneha@gmail.com', '76281d4a9faf68bbce161cb21c3ce1f4', 'f1a92584b86745bfb89a9dbdba251082', 'Sneha', 'Rathod', 4),
-('eca99ee2ef484eea94e99d4fc81f23ec', 'chintan@gmail.com', '4dc322395edd7f1a6a5a5d9d5cfe8b62', 'be683a4f979d4c74a9816f7d98ef9a3a', 'Chintan', 'Bhimani', 2);
+('eca99ee2ef484eea94e99d4fc81f23ec', 'chintan@gmail.com', '4dc322395edd7f1a6a5a5d9d5cfe8b62', 'be683a4f979d4c74a9816f7d98ef9a3a', 'Chintan', 'Bhimani', 2),
+('f5fd5f8b94084bfb81c96dd254f35bed', 'test@gmail.com', 'ceb6c970658f31504a901b89dcd3e461', 'd551b62024284f568ffe9dae0a133b3e', 'Testing', 'User', 1);
 
 --
 -- Indexes for dumped tables

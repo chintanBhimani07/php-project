@@ -33,15 +33,15 @@ while ($row = $qry->fetch_assoc()) { ?>
                             <input type="hidden" class="form-control" id="task_id" name="task_id" value="<?php echo $taskId; ?>" autocomplete="off">
                             <div class="form-group ">
                                 <label for="task_name" class="col-form-label mr-1">Task Name</label><span class="text-danger">*</span>
-                                <input type="text" class="form-control" id="task_name" name="task_name" value="<?php echo $row['task_name'] ?>" autocomplete="off" autofocus required>
+                                <input type="text" class="form-control" id="task_name" name="task_name" value="<?php echo $row['task_name'] ?>" autocomplete="off" autofocus >
                             </div>
                             <div class="form-group">
                                 <label for="task_description" class="col-form-label mr-1">Task Description</label><span class="text-danger">*</span>
-                                <textarea type="text" class="form-control" id="task_description" name="task_description" autocomplete="off" required><?php echo $row['task_description'] ?></textarea>
+                                <textarea type="text" class="form-control" id="task_description" name="task_description" autocomplete="off" ><?php echo $row['task_description'] ?></textarea>
                             </div>
                             <div class="form-group">
                                 <label for="task_assign_to" class="col-form-label mr-1">Task Assign To</label><span class="text-danger">*</span>
-                                <select class="form-control custom-select" id="task_assign_to" name="task_assign_to" required>
+                                <select class="form-control custom-select" id="task_assign_to" name="task_assign_to" >
                                     <option value="0">Select Employee</option>
                                     <option disabled style="font-weight:900;">Architecture & Interiors</option>
                                     <?php
@@ -81,14 +81,6 @@ while ($row = $qry->fetch_assoc()) { ?>
                                     ?>
                                 </select>
                             </div>
-                            <div class="form-group">
-                                <label for="task_status" class="col-form-label mr-1">Task Status</label><span class="text-danger">*</span>
-                                <select class="form-control custom-select" id="task_status" name="task_status" required>
-                                    <option value="1" <?php echo ($row['task_status'] == 1 ? 'selected' : '') ?>>Pending</option>
-                                    <option value="2" <?php echo ($row['task_status'] == 2 ? 'selected' : '') ?>>On Progress</option>
-                                    <option value="3" <?php echo ($row['task_status'] == 3 ? 'selected' : '') ?>>Done</option>
-                                </select>
-                            </div>
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <button class="btn btn-primary btn-user btn-block">Submit Details</button>
@@ -105,6 +97,8 @@ while ($row = $qry->fetch_assoc()) { ?>
         </div>
     </div>
 <?php } ?>
+
+
 <script>
     $(document).ready(function() {
         $('#new_task_form').submit(function(e) {
@@ -120,7 +114,7 @@ while ($row = $qry->fetch_assoc()) { ?>
                 success: function(resp) {
                     if (resp == 1) {
                         setTimeout(() => {
-                            window.location = './index.php?page=task-dashboard';
+                            window.location = './index.php?page=project-viewer&projectId=<?php echo $projectId; ?>';
                         }, 1000);
                     } else {
                         console.log(resp);
